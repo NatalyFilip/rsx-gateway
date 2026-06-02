@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en" class="dark" style="color-scheme: dark;">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSX Alliance — Migration Portal</title>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Orbitron', 'system-ui', 'sans-serif'],
+            body: ['Rajdhani', 'system-ui', 'sans-serif'],
+          },
+          animation: {
+            'terminal-in': 'terminalIn 0.42s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+            'success-in': 'successIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+            'transmit-pulse': 'transmitPulse 1.1s ease-in-out infinite',
+          },
+          keyframes: {
+            terminalIn: {
+              from: { opacity: '0', transform: 'translateY(24px) scale(0.97)' },
+              to: { opacity: '1', transform: 'translateY(0) scale(1)' },
+            },
+            successIn: {
+              from: { opacity: '0', transform: 'scale(0.92)' },
+              to: { opacity: '1', transform: 'scale(1)' },
+            },
+            transmitPulse: {
+              '0%, 100%': { opacity: '0.8' },
+              '50%': { opacity: '1' },
+            },
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0; min-height: 100%;
+      background: #080312;
+      background-image: linear-gradient(160deg, #080312 0%, #0e051f 55%, #080312 100%);
+      color: #e2d9f3;
+    }
+    body { font-family: 'Rajdhani', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    
+    .cyber-noise {
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(168, 85, 247, 0.1), transparent),
+        linear-gradient(rgba(168, 85, 247, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(168, 85, 247, 0.025) 1px, transparent 1px);
+      background-size: 100% 100%, 36px 36px, 36px 36px;
+    }
+
+    .banner-hero { position: relative; width: 100%; height: 16rem; overflow: hidden; }
+    @media (min-width: 640px) { .banner-hero { height: 18rem; } }
+    .banner-img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+    .banner-type-overlay { background: linear-gradient(180deg, rgba(8, 3, 18, 0.02) 0%, rgba(8, 3, 18, 0.35) 50%, rgba(8, 3, 18, 0.88) 100%); }
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #fef3c7 0%, #fbbf24 50%, #d97706 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    
+    .back-system-btn {
+      background: rgba(8, 3, 18, 0.75); backdrop-filter: blur(12px); border: 1px solid rgba(168, 85, 247, 0.25);
+      color: rgba(196, 181, 253, 0.8); transition: all 0.25s ease;
+    }
+    .back-system-btn:hover { border-color: rgba(251, 191, 36, 0.45); color: #fde68a; box-shadow: 0 0 16px rgba(168, 85, 247, 0.25); }
+
+    .terminal-glass {
+      background: rgba(18, 9, 32, 0.72); backdrop-filter: blur(20px); border: 1px solid rgba(168, 85, 247, 0.32);
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(232, 121, 249, 0.07), inset 0 0 60px rgba(88, 28, 135, 0.06);
+    }
+    .terminal-header-bar { background: rgba(8, 3, 18, 0.65); border-bottom: 1px solid rgba(168, 85, 247, 0.18); }
+
+    .field-label {
+      font-family: 'Orbitron', system-ui, sans-serif; font-size: 0.625rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(196, 181, 253, 0.6);
+    }
+    
+    .form-field { background: rgba(8, 3, 18, 0.92); border: 1.5px solid rgba(88, 28, 135, 0.45); color: #f3eefc; transition: all 0.2s ease; }
+    .form-field::placeholder { color: rgba(196, 181, 253, 0.28); }
+    .form-field:focus {
+      outline: none; border-color: rgba(168, 85, 247, 0.85);
+      box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.35), 0 0 24px rgba(168, 85, 247, 0.25), inset 0 0 10px rgba(168, 85, 247, 0.05);
+    }
+    .form-field:disabled { opacity: 0.45; cursor: not-allowed; }
+
+    select.form-field {
+      appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23a78bfa'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 0.85rem center; background-size: 1rem; padding-right: 2.5rem;
+    }
+
+    .transmit-btn {
+      background: linear-gradient(135deg, rgba(76, 29, 149, 0.9) 0%, rgba(67, 20, 90, 0.85) 50%, rgba(88, 28, 135, 0.9) 100%);
+      border: 2px solid rgba(168, 85, 247, 0.7); color: #faf5ff; box-shadow: 0 0 28px rgba(168, 85, 247, 0.4), inset 0 1px 0 rgba(232, 213, 255, 0.12);
+      transition: all 0.3s ease;
+    }
+    .transmit-btn:hover:not(:disabled) { border-color: rgba(196, 181, 253, 0.95); box-shadow: 0 0 40px rgba(168, 85, 247, 0.65); transform: translateY(-2px); }
+    .transmit-btn:disabled { cursor: wait; animation: transmitPulse 1.1s ease-in-out infinite; }
+
+    .form-error { background: rgba(50, 8, 20, 0.55); border: 1px solid rgba(244, 63, 94, 0.5); color: #fb7185; }
+
+    .success-overlay {
+      position: fixed; inset: 0; z-index: 200; display: flex; align-items: center; justify-content: center; padding: 1.5rem;
+      background: rgba(4, 1, 10, 0.92); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    }
+    .success-card {
+      width: 100%; max-width: 36rem; padding: 2.5rem 2rem; text-align: center; background: rgba(6, 50, 30, 0.35);
+      border: 2px solid rgba(52, 211, 153, 0.75); border-radius: 1.25rem;
+      animation: successAura 2.8s ease-in-out infinite alternate, successIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes successAura {
+      from { box-shadow: 0 0 30px rgba(16, 185, 129, 0.35), inset 0 0 30px rgba(16, 185, 129, 0.06); }
+      to { box-shadow: 0 0 50px rgba(52, 211, 153, 0.75), inset 0 0 50px rgba(16, 185, 129, 0.14); }
+    }
+    
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #080312; }
+    ::-webkit-scrollbar-thumb { background: #6b21a8; border-radius: 4px; }
+  </style>
+</head>
+<body class="cyber-noise min-h-screen font-body antialiased">
+
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 pb-12">
+    <div class="banner-hero">
+      <img src="season_banner.jpg" alt="Season Banner" class="banner-img" onerror="this.style.display='none'; document.getElementById('banner-fallback').classList.remove('hidden');" />
+      <div id="banner-fallback" class="hidden absolute inset-0 bg-gradient-to-b from-[#1a0a2e] via-[#0e051f] to-[#080312]"></div>
+      <div class="absolute inset-0 banner-type-overlay pointer-events-none"></div>
+      <div class="absolute inset-0 flex flex-col items-center justify-end pb-6 sm:pb-8 px-4 pointer-events-none">
+        <img src="logo.png" alt="RSX Alliance Logo" class="w-12 h-12 sm:w-16 sm:h-16 object-contain drop-shadow-[0_0_16px_rgba(251,191,36,0.5)] mb-2 sm:mb-3" onerror="this.style.display='none'" />
+        <h1 class="font-display font-black text-xl sm:text-3xl md:text-4xl tracking-[0.22em] gold-gradient-text">RSX ALLIANCE</h1>
+        <p class="font-display text-[10px] sm:text-xs tracking-widest uppercase text-purple-200/75 mt-1.5 sm:mt-2">MIGRATION PORTAL</p>
+      </div>
+    </div>
+
+    <div class="mt-5 space-y-5">
+      <a href="index.html" class="back-system-btn inline-flex items-center gap-2 px-4 py-2 rounded-lg font-display text-[11px] sm:text-xs tracking-[0.16em] uppercase font-semibold">
+        ← <span data-i18n="lbl_back">Back to System</span>
+      </a>
+
+      <section id="form-section" class="terminal-glass rounded-2xl overflow-hidden animate-terminal-in">
+        <div class="terminal-header-bar px-5 sm:px-7 py-4">
+          <p data-i18n="title_sub" class="font-display text-[10px] tracking-[0.35em] uppercase text-amber-400/65">Secure Channel</p>
+          <h2 data-i18n="title_main" class="font-display text-sm sm:text-base tracking-[0.14em] uppercase text-purple-100 mt-1">Migration Application Terminal</h2>
+        </div>
+
+        <div class="px-5 sm:px-7 py-6 sm:py-8">
+          <p data-i18n="desc_main" class="text-sm text-purple-400/50 mb-6 leading-relaxed">
+            Complete all fields below. Your dossier will be transmitted directly to RSX High Command for officer review.
+          </p>
+
+          <form id="migration-form" class="space-y-6 max-w-4xl mx-auto" novalidate>
+            
+            <div class="space-y-1.5">
+              <label for="player-id" data-i18n="lbl_1" class="field-label block">1. In-Game Player ID</label>
+              <input id="player-id" name="playerId" type="number" required inputmode="numeric" data-i18n="ph_1" placeholder="e.g. 23483165" class="form-field w-full px-4 py-3 rounded-lg text-[15px] font-medium tabular-nums" />
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="character-name" data-i18n="lbl_2" class="field-label block">2. Character Name / Nickname</label>
+              <input id="character-name" name="characterName" type="text" required autocomplete="nickname" data-i18n="ph_2" placeholder="Enter your current in-game name" class="form-field w-full px-4 py-3 rounded-lg text-[15px] font-medium" />
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="last-server" data-i18n="lbl_3" class="field-label block">3. Last Server Number Played On</label>
+              <input id="last-server" name="lastServer" type="number" required inputmode="numeric" data-i18n="ph_3" placeholder="The most recent server number where you active" class="form-field w-full px-4 py-3 rounded-lg text-[15px] font-medium" />
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="max-power" data-i18n="lbl_4" class="field-label block">4. Maximum Power Reached</label>
+              <input id="max-power" name="maxPower" type="number" required inputmode="numeric" data-i18n="ph_4" placeholder="Your peak power stat level" class="form-field w-full px-4 py-3 rounded-lg text-[15px] font-medium" />
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="war-merits" data-i18n="lbl_5" class="field-label block">5. Previous Season War Merits</label>
+              <input id="war-merits" name="previousWarMerits" type="number" required min="0" inputmode="numeric" data-i18n="ph_5" placeholder="Total historical combat achievements and war merits" class="form-field w-full px-4 py-3 rounded-lg text-[15px] font-medium tabular-nums" />
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="utc-offset" data-i18n="lbl_6" class="field-label block">6. Local Time Zone Difference from UTC</label>
+              <select id="utc-offset" name="utcOffset" required class="form-field w-full px-4 py-3 rounded-lg text-[15px] font-medium">
+                <option value="" disabled selected data-i18n="opt_6_def">Select your UTC time offset...</option>
+                <option value="UTC-11">UTC -11</option><option value="UTC-10">UTC -10</option>
+                <option value="UTC-9">UTC -9</option><option value="UTC-8">UTC -8</option>
+                <option value="UTC-7">UTC -7</option><option value="UTC-6">UTC -6</option>
+                <option value="UTC-5">UTC -5</option><option value="UTC-4">UTC -4</option>
+                <option value="UTC-3">UTC -3</option><option value="UTC-2">UTC -2</option>
+                <option value="UTC-1">UTC -1</option><option value="UTC+0">UTC +0</option>
+                <option value="UTC+1">UTC +1</option><option value="UTC+2">UTC +2</option>
+                <option value="UTC+3">UTC +3</option><option value="UTC+4">UTC +4</option>
+                <option value="UTC+5">UTC +5</option><option value="UTC+6">UTC +6</option>
+                <option value="UTC+7">UTC +7</option><option value="UTC+8">UTC +8</option>
+                <option value="UTC+9">UTC +9</option><option value="UTC+10">UTC +10</option>
+                <option value="UTC+11">UTC +11</option><option value="UTC+12">UTC +12</option>
+              </select>
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="playtime" data-i18n="lbl_7" class="field-label block">7. Estimated Daily Playtime Availability (Hours)</label>
+              <input id="playtime" name="playtime" type="number" required min="1" max="24" data-i18n="ph_7" placeholder="How many hours can you commit to active gameplay per day" class="form-field w-full px-4 py-3 rounded-lg text-[15px] font-medium" />
+            </div>
+
+            <div class="space-y-1.5">
+              <label data-i18n="lbl_8" class="field-label block">8. Preferred Daily Activity Windows</label>
+              <div class="form-field w-full px-4 py-3 rounded-lg grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <label class="flex items-center gap-2 cursor-pointer text-sm text-purple-100"><input type="checkbox" name="activityWindows" value="Morning" class="accent-purple-500 rounded"> <span data-i18n="cb_morn">Morning</span></label>
+                <label class="flex items-center gap-2 cursor-pointer text-sm text-purple-100"><input type="checkbox" name="activityWindows" value="Afternoon" class="accent-purple-500 rounded"> <span data-i18n="cb_aft">Afternoon</span></label>
+                <label class="flex items-center gap-2 cursor-pointer text-sm text-purple-100"><input type="checkbox" name="activityWindows" value="Evening" class="accent-purple-500 rounded"> <span data-i18n="cb_eve">Evening</span></label>
+                <label class="flex items-center gap-2 cursor-pointer text-sm text-purple-100"><input type="checkbox" name="activityWindows" value="Anytime" class="accent-purple-500 rounded"> <span data-i18n="cb_any">Anytime</span></label>
+              </div>
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="discord" data-i18n="lbl_9" class="field-label block">9. Discord Username</label>
+              <input id="discord" name="discord" type="text" required data-i18n="ph_9" placeholder="e.g. username (Required for coordination)" class="form-field w-full px-4 py-3 rounded-lg text-[15px] font-medium" />
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="dead-units" data-i18n="lbl_10" class="field-label block">10. Dead Units Accumulated</label>
+              <input id="dead-units" name="deadUnits" type="number" required min="0" data-i18n="ph_10" placeholder="Total number of permanently lost forces" class="form-field w-full px-4 py-3 rounded-lg text-[15px] font-medium" />
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="unit-type" data-i18n="lbl_11" class="field-label block">11. Primary Specialized Unit Type</label>
+              <select id="unit-type" name="unitType" required class="form-field w-full px-4 py-3 rounded-lg text-[15px] font-medium">
+                <option value="" disabled selected data-i18n="opt_11_def">Select your main combat army type...</option>
+                <option value="Cavalry" data-i18n="opt_11_cav">Cavalry</option>
+                <option value="Mages" data-i18n="opt_11_mag">Mages</option>
+                <option value="Infantry" data-i18n="opt_11_inf">Infantry</option>
+                <option value="Marksmen" data-i18n="opt_11_mrk">Marksmen</option>
+              </select>
+            </div>
+
+            <div class="space-y-1.5">
+              <label data-i18n="lbl_12" class="field-label block">12. Active March Queues Available</label>
+              <div class="form-field w-full px-4 py-2.5 rounded-lg flex items-center justify-around gap-2">
+                <label class="flex items-center gap-1.5 cursor-pointer text-sm font-medium text-purple-100"><input type="radio" name="marchQueues" value="1" required class="accent-purple-500"> 1</label>
+                <label class="flex items-center gap-1.5 cursor-pointer text-sm font-medium text-purple-100"><input type="radio" name="marchQueues" value="2" class="accent-purple-500"> 2</label>
+                <label class="flex items-center gap-1.5 cursor-pointer text-sm font-medium text-purple-100"><input type="radio" name="marchQueues" value="3" class="accent-purple-500"> 3</label>
+                <label class="flex items-center gap-1.5 cursor-pointer text-sm font-medium text-purple-100"><input type="radio" name="marchQueues" value="4" class="accent-purple-500"> 4</label>
+                <label class="flex items-center gap-1.5 cursor-pointer text-sm font-medium text-purple-100"><input type="radio" name="marchQueues" value="5" class="accent-purple-500"> 5</label>
+              </div>
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="decor-attack" data-i18n="lbl_13" class="field-label block">13. City Decoration Attack Bonus (%)</label>
+              <input id="decor-attack" name="decorAttack" type="number" required min="0" step="0.1" data-i18n="ph_13" placeholder="Enter your total city layout decoration offensive bonus percentage" class="form-field w-full px-4 py-3 rounded-lg text-[15px] font-medium" />
+            </div>
+
+            <p id="form-error" class="form-error hidden rounded-lg px-4 py-3 text-sm font-medium"></p>
+
+            <button type="submit" id="transmit-btn" data-i18n="btn_submit" class="transmit-btn w-full mt-3 py-4 sm:py-5 rounded-xl font-display font-black text-xs sm:text-sm tracking-[0.14em] sm:tracking-[0.18em] uppercase">
+              Transmit Application to High Command
+            </button>
+          </form>
+        </div>
+      </section>
+      <footer class="text-center pt-2"><span class="font-display text-[10px] tracking-[0.4em] uppercase text-purple-500/25">RSX · Call of Dragons</span></footer>
+    </div>
+  </div>
+
+  <div id="success-overlay" class="success-overlay hidden">
+    <div class="success-card">
+      <div class="inline-flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 rounded-full mb-7 mx-auto" style="background: rgba(6, 78, 59, 0.45); border: 2px solid rgba(52, 211, 153, 0.8); box-shadow: 0 0 30px rgba(16, 185, 129, 0.4);">
+        <svg class="w-10 h-10 sm:w-12 sm:h-12 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+      </div>
+      <p data-i18n="msg_success_sub" class="font-display text-[10px] sm:text-xs tracking-[0.4em] uppercase text-emerald-400/75 mb-4">Secure Uplink Confirmed</p>
+      <h2 data-i18n="msg_success_title" class="font-display font-black text-base sm:text-xl md:text-2xl tracking-[0.1em] uppercase text-emerald-300 leading-relaxed">
+        Transmission Successful.<br />Profile Logged.<br />Awaiting Officer Review.
+      </h2>
+      <p data-i18n="msg_success_desc" class="text-purple-300/55 mt-5 text-sm sm:text-base max-w-sm mx-auto leading-relaxed">
+        Your application has been received. An RSX officer will contact you via in-game mail or Discord.
+      </p>
+      <a href="index.html" class="back-system-btn inline-flex items-center gap-2 mt-8 px-6 py-3 rounded-lg font-display text-xs tracking-[0.14em] uppercase font-semibold">
+        ← <span data-i18n="btn_success_back">Return to System</span>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    const i18nTokens = {
+      en: {
+        lbl_back: "Back to System", title_sub: "Secure Channel", title_main: "Migration Application Terminal", desc_main: "Complete all fields below. Your dossier will be transmitted directly to RSX High Command for officer review.",
+        lbl_1: "1. In-Game Player ID", ph_1: "e.g. 23483165", lbl_2: "2. Character Name / Nickname", ph_2: "Enter your current in-game name", lbl_3: "3. Last Server Number Played On", ph_3: "The most recent server number where you active", lbl_4: "4. Maximum Power Reached", ph_4: "Your peak power stat level", lbl_5: "5. Previous Season War Merits", ph_5: "Total historical combat achievements and war merits", lbl_6: "6. Local Time Zone Difference from UTC", opt_6_def: "Select your UTC time offset...", lbl_7: "7. Estimated Daily Playtime Availability (Hours)", ph_7: "How many hours can you commit to active gameplay per day", lbl_8: "8. Preferred Daily Activity Windows", cb_morn: "Morning", cb_aft: "Afternoon", cb_eve: "Evening", cb_any: "Anytime", lbl_9: "9. Discord Username", ph_9: "e.g. username (Required for coordination)", lbl_10: "10. Dead Units Accumulated", ph_10: "Total number of permanently lost forces", lbl_11: "11. Primary Specialized Unit Type", opt_11_def: "Select your main combat army type...", opt_11_cav: "Cavalry", opt_11_mag: "Mages", opt_11_inf: "Infantry", opt_11_mrk: "Marksmen", lbl_12: "12. Active March Queues Available", lbl_13: "13. City Decoration Attack Bonus (%)", ph_13: "Enter your total city layout decoration offensive bonus percentage",
+        btn_submit: "Transmit Application to High Command", btn_loading: "Transmitting...", msg_success_sub: "Secure Uplink Confirmed", msg_success_title: "Transmission Successful. Profile Logged. Awaiting Officer Review.", msg_success_desc: "Your application has been received. An RSX officer will contact you via in-game mail or Discord.", btn_success_back: "Return to System"
+      },
+      ru: {
+        lbl_back: "Вернуться в систему", title_sub: "Защищенный канал", title_main: "Терминал заявки на миграцию", desc_main: "Заполните все поля ниже. Ваше досье будет передано напрямую Командованию RSX.",
+        lbl_1: "1. Внутриигровой ID", ph_1: "напр. 23483165", lbl_2: "2. Имя персонажа / Никнейм", ph_2: "Введите ваше текущее имя в игре", lbl_3: "3. Номер последнего сервера", ph_3: "Последний сервер, на котором вы играли", lbl_4: "4. Максимальная мощь", ph_4: "Ваш максимальный уровень мощи", lbl_5: "5. Военные заслуги за прошлый сезон", ph_5: "Общее количество заслуг (War Merits)", lbl_6: "6. Ваш часовой пояс (от UTC)", opt_6_def: "Выберите смещение от UTC...", lbl_7: "7. Ежедневный онлайн (в часах)", ph_7: "Сколько часов в день вы готовы играть", lbl_8: "8. Предпочтительное время активности", cb_morn: "Утро", cb_aft: "День", cb_eve: "Вечер", cb_any: "Любое", lbl_9: "9. Имя пользователя в Discord", ph_9: "напр. ваш_ник (Обязательно для связи)", lbl_10: "10. Количество мертвых войск", ph_10: "Количество безвозвратно потерянных войск", lbl_11: "11. Основной тип войск", opt_11_def: "Выберите ваш основной тип войск...", opt_11_cav: "Кавалерия", opt_11_mag: "Маги", opt_11_inf: "Пехота", opt_11_mrk: "Стрелки", lbl_12: "12. Количество боевых очередей", lbl_13: "13. Бонус атаки от декораций (%)", ph_13: "Введите процент бонуса атаки",
+        btn_submit: "Отправить заявку в Командование", btn_loading: "Отправка...", msg_success_sub: "Связь подтверждена", msg_success_title: "Передача успешна. Профиль сохранен. Ожидайте решения.", msg_success_desc: "Ваша заявка получена. Офицер RSX свяжется с вами через игру или Discord.", btn_success_back: "Вернуться в систему"
+      },
+      tr: {
+        lbl_back: "Sisteme Dön", title_sub: "Güvenli Kanal", title_main: "Göç Başvuru Terminali", desc_main: "Aşağıdaki tüm alanları doldurun. Dosyanız subay incelemesi için doğrudan RSX Yüksek Komutanlığına iletilecektir.",
+        lbl_1: "1. Oyun İçi Oyuncu ID'si", ph_1: "örn. 23483165", lbl_2: "2. Karakter Adı / Takma Ad", ph_2: "Mevcut oyun içi adınızı girin", lbl_3: "3. Oynanan Son Sunucu Numarası", ph_3: "Aktif olduğunuz en son sunucu", lbl_4: "4. Ulaşılan Maksimum Güç", ph_4: "En yüksek güç seviyeniz", lbl_5: "5. Önceki Sezon Savaş Liyakatleri", ph_5: "Toplam geçmiş savaş başarıları", lbl_6: "6. UTC'den Yerel Saat Dilimi Farkı", opt_6_def: "UTC saat farkınızı seçin...", lbl_7: "7. Tahmini Günlük Oynama Süresi (Saat)", ph_7: "Günde kaç saat aktif oynayabilirsiniz", lbl_8: "8. Tercih Edilen Günlük Aktivite Saatleri", cb_morn: "Sabah", cb_aft: "Öğleden Sonra", cb_eve: "Akşam", cb_any: "Her Zaman", lbl_9: "9. Discord Kullanıcı Adı", ph_9: "örn. kullanıcı adınız", lbl_10: "10. Biriken Ölü Birimler", ph_10: "Kalıcı olarak kaybedilen kuvvetler", lbl_11: "11. Birincil Uzmanlaşmış Birim Türü", opt_11_def: "Ana savaş ordusu türünüzü seçin...", opt_11_cav: "Süvari", opt_11_mag: "Büyücü", opt_11_inf: "Piyade", opt_11_mrk: "Nişancı", lbl_12: "12. Kullanılabilir Aktif İntikal Kuyrukları", lbl_13: "13. Şehir Dekorasyonu Saldırı Bonusu (%)", ph_13: "Saldırı bonusu yüzdenizi girin",
+        btn_submit: "Başvuruyu İlet", btn_loading: "İletiliyor...", msg_success_sub: "Güvenli Bağlantı", msg_success_title: "İletim Başarılı. İnceleme Bekleniyor.", msg_success_desc: "Başvurunuz alındı. Bir RSX subayı sizinle iletişime geçecektir.", btn_success_back: "Sisteme Dön"
+      },
+      vi: {
+        lbl_back: "Quay Lại Hệ Thống", title_sub: "Kênh Bảo Mật", title_main: "Trạm Gửi Đơn Di Cư", desc_main: "Hoàn thành tất cả các trường dưới đây. Hồ sơ của bạn sẽ được gửi đến Bộ Chỉ Huy Tối Cao RSX.",
+        lbl_1: "1. ID Người Chơi Trong Game", ph_1: "vd: 23483165", lbl_2: "2. Tên Nhân Vật / Biệt Danh", ph_2: "Nhập tên trong game của bạn", lbl_3: "3. Số Server Chơi Gần Nhất", ph_3: "Số server gần nhất bạn hoạt động", lbl_4: "4. Sức Mạnh Tối Đa Đạt Được", ph_4: "Mức sức mạnh cao nhất của bạn", lbl_5: "5. Công Huân Mùa Trước", ph_5: "Tổng thành tích chiến đấu", lbl_6: "6. Chênh Lệch Múi Giờ (UTC)", opt_6_def: "Chọn múi giờ UTC của bạn...", lbl_7: "7. Thời Gian Chơi Ước Tính (Giờ)", ph_7: "Bạn có thể chơi bao nhiêu giờ mỗi ngày", lbl_8: "8. Thời Gian Hoạt Động Ưa Thích", cb_morn: "Sáng", cb_aft: "Chiều", cb_eve: "Tối", cb_any: "Bất cứ lúc nào", lbl_9: "9. Tên Discord", ph_9: "vd: username", lbl_10: "10. Số Lính Chết Tích Lũy", ph_10: "Tổng số lính bị mất vĩnh viễn", lbl_11: "11. Loại Lính Chính", opt_11_def: "Chọn loại quân chiến đấu chính...", opt_11_cav: "Kỵ binh", opt_11_mag: "Pháp sư", opt_11_inf: "Bộ binh", opt_11_mrk: "Xạ thủ", lbl_12: "12. Số Đội Hình Tối Đa", lbl_13: "13. Buff Tấn Công Từ Trang Trí (%)", ph_13: "Nhập phần trăm buff tấn công",
+        btn_submit: "Gửi Đơn Lên Bộ Chỉ Huy", btn_loading: "Đang gửi...", msg_success_sub: "Xác Nhận Kết Nối", msg_success_title: "Gửi Thành Công. Đang Chờ Xét Duyệt.", msg_success_desc: "Đơn đã được nhận. Sĩ quan RSX sẽ liên hệ với bạn.", btn_success_back: "Quay Lại Hệ Thống"
+      },
+      de: {
+        lbl_back: "Zurück zum System", title_sub: "Sicherer Kanal", title_main: "Migrationsantrags-Terminal", desc_main: "Füllen Sie alle untenstehenden Felder aus. Ihr Dossier wird an das RSX-Oberkommando weitergeleitet.",
+        lbl_1: "1. In-Game Spieler-ID", ph_1: "z.B. 23483165", lbl_2: "2. Charaktername / Spitzname", ph_2: "Geben Sie Ihren Namen ein", lbl_3: "3. Letzter Server", ph_3: "Ihre aktuellste Servernummer", lbl_4: "4. Maximale Macht", ph_4: "Ihre höchste Machtstufe", lbl_5: "5. Kriegsverdienste", ph_5: "Gesamte Kampferfolge", lbl_6: "6. Zeitzonendifferenz (UTC)", opt_6_def: "Wählen Sie Ihre UTC-Zeit...", lbl_7: "7. Tägliche Spielzeit (Stunden)", ph_7: "Wie viele Stunden pro Tag spielen Sie", lbl_8: "8. Bevorzugte Aktivitätszeit", cb_morn: "Morgen", cb_aft: "Nachmittag", cb_eve: "Abend", cb_any: "Jederzeit", lbl_9: "9. Discord-Benutzername", ph_9: "z.B. benutzername", lbl_10: "10. Tote Einheiten", ph_10: "Dauerhaft verlorene Truppen", lbl_11: "11. Haupttruppentyp", opt_11_def: "Wählen Sie Ihren Truppentyp...", opt_11_cav: "Kavallerie", opt_11_mag: "Magier", opt_11_inf: "Infanterie", opt_11_mrk: "Schützen", lbl_12: "12. Aktive Marsch-Warteschlangen", lbl_13: "13. Stadtdekorations-Bonus (%)", ph_13: "Angriffsbonus eingeben",
+        btn_submit: "Antrag übermitteln", btn_loading: "Wird übermittelt...", msg_success_sub: "Verbindung bestätigt", msg_success_title: "Erfolgreich. Warten auf Überprüfung.", msg_success_desc: "Antrag eingegangen. Ein RSX-Offizier kontaktiert Sie.", btn_success_back: "Zurück zum System"
+      },
+      it: {
+        lbl_back: "Torna al Sistema", title_sub: "Canale Sicuro", title_main: "Terminale di Migrazione", desc_main: "Compila tutti i campi. Il tuo dossier sarà trasmesso all'Alto Comando RSX.",
+        lbl_1: "1. ID Giocatore", ph_1: "es. 23483165", lbl_2: "2. Nome Personaggio", ph_2: "Inserisci il tuo nome in-game", lbl_3: "3. Ultimo Server", ph_3: "Il server più recente", lbl_4: "4. Potere Massimo", ph_4: "Il tuo livello massimo di potere", lbl_5: "5. Meriti di Guerra", ph_5: "Totale dei successi in combattimento", lbl_6: "6. Fuso Orario (UTC)", opt_6_def: "Seleziona il tuo fuso orario...", lbl_7: "7. Tempo di Gioco (Ore)", ph_7: "Quante ore al giorno puoi giocare", lbl_8: "8. Orario Preferito", cb_morn: "Mattina", cb_aft: "Pomeriggio", cb_eve: "Sera", cb_any: "Sempre", lbl_9: "9. Discord Username", ph_9: "es. username", lbl_10: "10. Unità Morte", ph_10: "Forze perse permanentemente", lbl_11: "11. Tipo di Truppa Principale", opt_11_def: "Seleziona il tuo tipo di truppa...", opt_11_cav: "Cavalleria", opt_11_mag: "Maghi", opt_11_inf: "Fanteria", opt_11_mrk: "Tiratori", lbl_12: "12. Code di Marcia", lbl_13: "13. Bonus Decorazione (%)", ph_13: "Inserisci il bonus di attacco",
+        btn_submit: "Trasmetti Richiesta", btn_loading: "Trasmissione...", msg_success_sub: "Connessione Confermata", msg_success_title: "Trasmissione Avvenuta. In Attesa.", msg_success_desc: "Richiesta ricevuta. Un ufficiale ti contatterà.", btn_success_back: "Torna al Sistema"
+      },
+      es: {
+        lbl_back: "Volver al Sistema", title_sub: "Canal Seguro", title_main: "Terminal de Migración", desc_main: "Complete todos los campos a continuación. Su expediente será transmitido al Alto Mando de RSX.",
+        lbl_1: "1. ID de Jugador", ph_1: "ej. 23483165", lbl_2: "2. Nombre del Personaje", ph_2: "Ingrese su nombre en el juego", lbl_3: "3. Último Servidor", ph_3: "El servidor más reciente", lbl_4: "4. Poder Máximo", ph_4: "Su nivel máximo de poder", lbl_5: "5. Méritos de Guerra", ph_5: "Total de logros de combate", lbl_6: "6. Zona Horaria (UTC)", opt_6_def: "Seleccione su zona horaria...", lbl_7: "7. Tiempo de Juego Diario (Horas)", ph_7: "Cuántas horas diarias puede dedicar al juego", lbl_8: "8. Horario Preferido", cb_morn: "Mañana", cb_aft: "Tarde", cb_eve: "Noche", cb_any: "Siempre", lbl_9: "9. Usuario de Discord", ph_9: "ej. username", lbl_10: "10. Unidades Muertas", ph_10: "Fuerzas perdidas permanentemente", lbl_11: "11. Tipo de Tropa Principal", opt_11_def: "Seleccione su tipo de tropa...", opt_11_cav: "Caballería", opt_11_mag: "Magos", opt_11_inf: "Infantería", opt_11_mrk: "Tiradores", lbl_12: "12. Colas de Marcha", lbl_13: "13. Bono de Decoración (%)", ph_13: "Ingrese el bono de ataque",
+        btn_submit: "Transmitir Solicitud", btn_loading: "Transmitiendo...", msg_success_sub: "Conexión Confirmada", msg_success_title: "Transmisión Exitosa. En Espera.", msg_success_desc: "Solicitud recibida. Un oficial se contactará con usted.", btn_success_back: "Volver al Sistema"
+      },
+      ko: {
+        lbl_back: "시스템으로 돌아가기", title_sub: "보안 채널", title_main: "이주 신청 터미널", desc_main: "아래 모든 필드를 작성하십시오. 귀하의 서류는 RSX 최고 사령부로 직접 전송됩니다.",
+        lbl_1: "1. 게임 내 플레이어 ID", ph_1: "예: 23483165", lbl_2: "2. 캐릭터 이름 / 닉네임", ph_2: "현재 게임 내 이름을 입력하세요", lbl_3: "3. 마지막으로 플레이한 서버", ph_3: "가장 최근에 활동한 서버 번호", lbl_4: "4. 도달한 최대 전투력", ph_4: "최대 전투력 레벨", lbl_5: "5. 이전 시즌 전쟁 공로", ph_5: "총 전투 업적 및 전쟁 공로", lbl_6: "6. UTC 기준 시간대 차이", opt_6_def: "UTC 시간대를 선택하세요...", lbl_7: "7. 예상 일일 플레이 시간(시간)", ph_7: "하루에 몇 시간 플레이할 수 있습니까", lbl_8: "8. 선호하는 활동 시간", cb_morn: "아침", cb_aft: "오후", cb_eve: "저녁", cb_any: "언제든지", lbl_9: "9. Discord 사용자 이름", ph_9: "예: username (필수)", lbl_10: "10. 누적 사망 유닛", ph_10: "영구적으로 손실된 총 병력", lbl_11: "11. 주력 특수 유닛", opt_11_def: "주력 부대 유형을 선택하세요...", opt_11_cav: "기병", opt_11_mag: "마법사", opt_11_inf: "보병", opt_11_mrk: "사수", lbl_12: "12. 사용 가능한 활성 부대 대기열", lbl_13: "13. 도시 장식 공격력 보너스 (%)", ph_13: "도시 장식 공격력 보너스 비율 입력",
+        btn_submit: "최고 사령부에 신청서 전송", btn_loading: "전송 중...", msg_success_sub: "보안 업링크 확인됨", msg_success_title: "전송 성공. 프로필 기록됨. 대기 중.", msg_success_desc: "신청서가 접수되었습니다. RSX 장교가 연락드릴 것입니다.", btn_success_back: "시스템으로 돌아가기"
+      }
+    };
+
+    function switchLanguage(lang) {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const token = el.getAttribute('data-i18n');
+        
+        if (i18nTokens[lang] && i18nTokens[lang][token]) {
+          // Если это input, меняем placeholder. Иначе меняем сам текст.
+          if (el.hasAttribute('placeholder')) {
+            el.setAttribute('placeholder', i18nTokens[lang][token]);
+          } else {
+            el.innerHTML = i18nTokens[lang][token];
+          }
+        }
+      });
+    }
+
+    // Запускается сразу при загрузке страницы
+    document.addEventListener('DOMContentLoaded', () => {
+      // Достаем язык из localStorage. Если пусто, по умолчанию ставим 'en'
+      const savedLang = localStorage.getItem('selected_lang') || 'en';
+      
+      // Применяем переводы
+      switchLanguage(savedLang);
+      
+      // Здесь можно добавить логику обработки отправки формы (submit), если нужно
+    });
+    (function () {
+      'use strict';
+
+      const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz7P25FPuQuGlt-AxB8rlCvAlTfPDxC-QhYolr7w7H19BZcc2hMN07TY8NIdOV3OJkr1Q/exec';
+
+      const form = document.getElementById('migration-form');
+      const formSection = document.getElementById('form-section');
+      const successOverlay = document.getElementById('success-overlay');
+      const transmitBtn = document.getElementById('transmit-btn');
+      const errorEl = document.getElementById('form-error');
+      const formFields = form.querySelectorAll('.form-field, input[name="marchQueues"], input[name="activityWindows"]');
+
+      const SUBMIT_LABEL = 'Transmit Application to High Command';
+      const LOADING_LABEL = 'Transmitting…';
+
+      function showError(message) {
+        errorEl.textContent = message;
+        errorEl.classList.remove('hidden');
+      }
+
+      function hideError() {
+        errorEl.textContent = '';
+        errorEl.classList.add('hidden');
+      }
+
+      function setFormLocked(isLocked) {
+        formFields.forEach(function (field) { field.disabled = isLocked; });
+        transmitBtn.disabled = isLocked;
+        transmitBtn.textContent = isLocked ? LOADING_LABEL : SUBMIT_LABEL;
+      }
+
+      function collectPayload() {
+        var checkedActivities = [];
+        form.querySelectorAll('input[name="activityWindows"]:checked').forEach(function (cb) {
+          checkedActivities.push(cb.value);
+        });
+
+        var selectedMarch = form.querySelector('input[name="marchQueues"]:checked');
+
+        return {
+          playerId: document.getElementById('player-id').value.trim(),
+          characterName: document.getElementById('character-name').value.trim(),
+          lastServer: document.getElementById('last-server').value.trim(),
+          maxPower: document.getElementById('max-power').value.trim(),
+          previousWarMerits: document.getElementById('war-merits').value.trim(),
+          utcOffset: document.getElementById('utc-offset').value,
+          playtime: document.getElementById('playtime').value.trim(),
+          activityWindows: checkedActivities.join(', '),
+          discord: document.getElementById('discord').value.trim(),
+          deadUnits: document.getElementById('dead-units').value.trim(),
+          unitType: document.getElementById('unit-type').value,
+          marchQueues: selectedMarch ? selectedMarch.value : '',
+          decorAttack: document.getElementById('decor-attack').value.trim(),
+          submittedAt: new Date().toISOString(),
+        };
+      }
+
+      function validatePayload(data) {
+        if (!data.playerId) return 'In-game player ID is required.';
+        if (!data.characterName) return 'Character name is required.';
+        if (!data.lastServer) return 'Last server number is required.';
+        if (!data.maxPower) return 'Maximum power is required.';
+        if (data.previousWarMerits === '') return 'Previous season war merits are required.';
+        if (!data.utcOffset) return 'Please select your UTC time offset.';
+        if (!data.playtime) return 'Please enter your daily playtime hours.';
+        if (!data.activityWindows) return 'Please select at least one activity window.';
+        if (!data.discord) return 'Discord username is required.';
+        if (!data.deadUnits) return 'Dead units count is required.';
+        if (!data.unitType) return 'Please select your main unit type.';
+        if (!data.marchQueues) return 'Please select your amount of march queues.';
+        if (!data.decorAttack) return 'City decoration attack bonus is required.';
+        return null;
+      }
+
+      function showSuccess() {
+        formSection.classList.add('hidden');
+        successOverlay.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+
+      async function submitApplication(payload) {
+        return fetch(APPS_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+      }
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        hideError();
+
+        const payload = collectPayload();
+        const validationError = validatePayload(payload);
+        if (validationError) {
+          showError(validationError);
+          return;
+        }
+
+        setFormLocked(true);
+
+        try {
+          if (APPS_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+            console.warn('APPS_SCRIPT_URL not configured — simulating transmission for demo.');
+            await new Promise(function (resolve) { setTimeout(resolve, 2000); });
+          } else {
+            await submitApplication(payload);
+          }
+          showSuccess();
+        } catch (err) {
+          console.error('Transmission failed:', err);
+          showError('Transmission failed. Check your connection and try again.');
+          setFormLocked(false);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
