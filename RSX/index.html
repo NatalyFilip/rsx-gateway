@@ -33,16 +33,17 @@
     <!-- Глоу-эффект вокруг кнопки (сделан тоньше) -->
     <div class="absolute -inset-0.5 bg-gradient-to-r from-purple-500 to-amber-500 rounded-lg blur opacity-30 group-hover:opacity-60 transition duration-300"></div>
     
-    <select id="language-switcher" class="relative bg-[#080312] border border-purple-500/40 text-amber-200 pl-3 pr-7 py-1.5 rounded-lg text-[10px] font-display font-bold tracking-wider uppercase focus:outline-none focus:border-amber-400 cursor-pointer appearance-none shadow-[0_0_10px_rgba(147,51,234,0.15)]">
-      <option value="en">🇺🇸 EN</option>
-      <option value="ru">🇷🇺 RU</option>
-      <option value="tr">🇹🇷 TR</option>
-      <option value="vi">🇻🇳 VI</option>
-      <option value="de">🇩🇪 DE</option>
-      <option value="it">🇮🇹 IT</option>
-      <option value="es">🇪🇸 ES</option>
-      <option value="ko">🇰🇷 KO</option>
-    </select>
+<select id="language-switcher" class="relative bg-[#080312] border border-purple-500/40 text-amber-200 pl-3 pr-7 py-1.5 rounded-lg text-[10px] font-display font-bold tracking-wider uppercase focus:outline-none focus:border-amber-400 cursor-pointer appearance-none shadow-[0_0_10px_rgba(147,51,234,0.15)]">
+  <option value="en">🇺🇸 EN</option>
+  <option value="ru">🇷🇺 RU</option>
+  <option value="tr">🇹🇷 TR</option>
+  <option value="vi">🇻🇳 VI</option>
+  <option value="de">🇩🇪 DE</option>
+  <option value="it">🇮🇹 IT</option>
+  <option value="es">🇪🇸 ES</option>
+  <option value="fr">🇫🇷 FR</option>
+  <option value="ko">🇰🇷 KO</option>
+</select>
     
     <!-- Кастомная sci-fi стрелочка (уменьшена) -->
     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-amber-400/80">
@@ -173,7 +174,7 @@
 
 <script>
  const i18nTokens = {
-  en: {
+en: {
     motto: "Warriors of infernal path shows flaming wrath",
     role_ldr: "Queen", role_cns: "Recruitment manager", role_prn: "Data manager",
     c1_badge: "Secure Access", c1_title: "War Merits Command Center", c1_desc: "Monitor your personal metrics, current war merit distributions, and overall alliance leaderboards. Access restricted to verified RSX operational personnel only.", 
@@ -208,7 +209,7 @@
   tr: {
     motto: "Cehennem yolunun Savaşçıları yanan öfkeyi gösterir", 
     role_ldr: "Kraliçe", role_cns: "İşe Alım Müdürü", role_prn: "Veri Analisti",
-    c1_badge: "Güvenli Erişim", c1_title: "Savaş Liyakat Komuta Merkezi", c1_desc: "Kişisel metriklerinizi, savaş liyakat dağılımlarını ve ittifak liderlik tablolarını izleyin. Erişim yalnızca doğrulanmış RSX personeli ile sınırlıdır.", 
+    c1_badge: "Güvenli Erişim", c1_title: "Savaş Liyakat Komuta Merkezi", c1_desc: "Kişisel metriklerinizi, savaş liyakat dağılımlarını og ittifak liderlik tablolarını izleyin. Erişim yalnızca doğrulanmış RSX personeli ile sınırlıdır.", 
     c1_btn: "Erişim Terminalini Aç",
     c2_badge: "Açık Portal", c2_title: "İşe Alım ve Göç", c2_desc: "Yeni asker veya geri dönen gazi misiniz? Ön cephe kuvvetlerine başvurmak için resmi göç başvuru formunu doldurun.", c2_btn: "İttifaka Başvur",
     mod_title: "Şifreleme Gerekli", 
@@ -260,7 +261,7 @@
     c1_btn: "Apri Terminale di Accesso",
     c2_badge: "Portale Aperto", c2_title: "Reclutamento e Migrazione", c2_desc: "Nuova recluta o veterano di ritorno? Compila la domanda ufficiale di migrazione per unirti alle forze in prima linea.", c2_btn: "Candidati all'Alleanza",
     mod_title: "Crittografia Richiesta", 
-    mod_desc: "Inserisci il tuo ID Terminale e la Cifratura Stagionale corrente per verificare il livello di autorizzazione.", 
+    mod_desc: "Inserisci il tuo ID Terminale e la Cifratura Stagionale corrente per verificar il livello di autorizzazione.", 
     mod_ph_id: "(es. 23407159)", 
     mod_ph_code: "••••••••", 
     mod_btn: "Decrittografa Terminale",
@@ -284,6 +285,22 @@
     msg_granted: "ACCESO CONCEDIDO. ¡Bienvenido de nuevo, Guerrero!", 
     msg_denied: "ACCESO DENEGADO: ID de Jugador no válido o Cifrado Estacional expirado.", 
     msg_error: "ERROR: Tiempo de conexión agotado."
+  },
+  fr: {
+    motto: "Les guerriers du chemin infernal montrent une colère enflammée", 
+    role_ldr: "Reine", role_cns: "Responsable du recrutement", role_prn: "Analyste de données",
+    c1_badge: "Accès Sécurisé", c1_title: "Centre de Commandement des Mérites", c1_desc: "Suivez vos indicateurs personnels, la distribution des mérites de guerre et les classements généraux de l'alliance. Accès restreint au personnel opérationnel RSX vérifié.", 
+    c1_btn: "Ouvrir le Terminal d'Accès",
+    c2_badge: "Portail Ouvert", c2_title: "Recrutement & Migration", c2_desc: "Nouvelle recrue ou vétéran de retour ? Remplissez la demande de migration officielle pour soumettre vos dossiers tactiques et postuler.", c2_btn: "Postuler à l'Alliance",
+    mod_title: "Chiffrement Requis", 
+    mod_desc: "Veuillez saisir votre ID de Terminal et le code saisonnier actuel pour vérifier votre niveau d'habilitation.", 
+    mod_ph_id: "(ex. 23407159)", 
+    mod_ph_code: "••••••••", 
+    mod_btn: "Décrypter le Terminal",
+    msg_loading: "Connexion à la base de données RSX... Veuillez patienter.", 
+    msg_granted: "ACCÈS AUTORISÉ. Bon retour, Guerrier !", 
+    msg_denied: "ACCÈS REFUSÉ : ID de joueur invalide ou code saisonnier expiré.", 
+    msg_error: "ERREUR DE PASSERELLE : Connexion expirée."
   },
   ko: {
     motto: "지옥의 길을 걷는 전사들이 타오르는 분노를 보여준다", 
