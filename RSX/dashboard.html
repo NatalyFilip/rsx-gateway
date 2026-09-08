@@ -436,30 +436,33 @@
             class="search-field w-full pl-11 pr-4 py-3 rounded-xl text-[15px] font-medium transition-all duration-200" />
         </div>
 
-        <div class="flex flex-col sm:flex-row gap-2 sm:items-stretch">
-          <div class="filter-segment rounded-xl p-1 flex flex-col sm:flex-row gap-1 flex-1" role="group" aria-label="Filter by goal status">
-            <button type="button" data-status-filter="all" id="filter-all"
-              class="filter-btn filter-active-all flex-1 px-3 py-2.5 rounded-lg font-display text-[11px] sm:text-xs tracking-[0.12em] uppercase font-semibold">
-              All
-            </button>
-            <button type="button" data-status-filter="achieved" id="filter-achieved"
-              class="filter-btn flex-1 px-3 py-2.5 rounded-lg font-display text-[11px] sm:text-xs tracking-[0.12em] uppercase font-semibold">
-              Goal Achieved
-            </button>
-            <button type="button" data-status-filter="progress" id="filter-progress"
-              class="filter-btn flex-1 px-3 py-2.5 rounded-lg font-display text-[11px] sm:text-xs tracking-[0.12em] uppercase font-semibold">
-              In Progress
-            </button>
-          </div>
-          <button type="button" id="export-image-btn" class="export-btn rounded-xl px-4 py-2.5 sm:py-0 flex items-center justify-center gap-2 font-display text-[11px] sm:text-xs tracking-[0.14em] uppercase font-semibold shrink-0 sm:min-w-[160px]"
-            aria-label="Export filtered player list as PNG image">
-            <svg class="w-4 h-4 text-amber-400/90 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
-            </svg>
-            Export Image
-          </button>
-        </div>
-      </div>
+  <div class="flex flex-col sm:flex-row gap-2 sm:items-stretch">
+  <div class="filter-segment rounded-xl p-1 flex flex-col sm:flex-row gap-1 flex-1" role="group" aria-label="Filter by goal status">
+    <button type="button" data-status-filter="all" id="filter-all"
+      class="filter-btn filter-active-all flex-1 px-3 py-2.5 rounded-lg font-display text-[11px] sm:text-xs tracking-[0.12em] uppercase font-semibold">
+      All
+    </button>
+    <button type="button" data-status-filter="achieved" id="filter-achieved"
+      class="filter-btn flex-1 px-3 py-2.5 rounded-lg font-display text-[11px] sm:text-xs tracking-[0.12em] uppercase font-semibold">
+      Goal Achieved
+    </button>
+    <button type="button" data-status-filter="progress" id="filter-progress"
+      class="filter-btn flex-1 px-3 py-2.5 rounded-lg font-display text-[11px] sm:text-xs tracking-[0.12em] uppercase font-semibold">
+      In Progress
+    </button>
+    <button type="button" data-status-filter="under10" id="filter-under10"
+      class="filter-btn flex-1 px-3 py-2.5 rounded-lg font-display text-[11px] sm:text-xs tracking-[0.12em] uppercase font-semibold">
+      &lt; 10% Goal
+    </button>
+  </div>
+  <button type="button" id="export-image-btn" class="export-btn rounded-xl px-4 py-2.5 sm:py-0 flex items-center justify-center gap-2 font-display text-[11px] sm:text-xs tracking-[0.14em] uppercase font-semibold shrink-0 sm:min-w-[160px]"
+    aria-label="Export filtered player list as PNG image">
+    <svg class="w-4 h-4 text-amber-400/90 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+    </svg>
+    Export Image
+  </button>
+</div>
 
       <div id="leaderboard-export-area" class="leaderboard-export-wrap rounded-xl p-4 sm:p-5 space-y-4">
         <div id="export-capture-header" class="border-b border-purple-500/15 pb-3">
@@ -573,11 +576,12 @@
         renderGrid(getFilteredPlayers());
       }
 
-      function getFilterLabel() {
-        if (activeStatusFilter === 'achieved') return 'GOAL ACHIEVED';
-        if (activeStatusFilter === 'progress') return 'IN PROGRESS';
-        return 'ALL PLAYERS';
-      }
+function getFilterLabel() {
+  if (activeStatusFilter === 'achieved') return 'GOAL ACHIEVED';
+  if (activeStatusFilter === 'progress') return 'IN PROGRESS';
+  if (activeStatusFilter === 'under10') return '< 10% GOAL';
+  return 'ALL PLAYERS';
+}
 
       function updateExportMeta() {
         const list = getFilteredPlayers();
