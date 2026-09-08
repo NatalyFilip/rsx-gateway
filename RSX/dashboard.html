@@ -537,11 +537,12 @@
 
       const FILTER_BTN_BASE = 'filter-btn flex-1 px-3 py-2.5 rounded-lg font-display text-[11px] sm:text-xs tracking-[0.12em] uppercase font-semibold';
 
-      function matchesStatusFilter(player) {
-        if (activeStatusFilter === 'achieved') return player.progress >= 100;
-        if (activeStatusFilter === 'progress') return player.progress < 100;
-        return true;
-      }
+function matchesStatusFilter(player) {
+  if (activeStatusFilter === 'achieved') return player.progress >= 100;
+  if (activeStatusFilter === 'progress') return player.progress < 100;
+  if (activeStatusFilter === 'under10') return player.progress < 10;
+  return true;
+}
 
       function getFilteredPlayers() {
         const q = document.getElementById('search-input').value.trim().toLowerCase();
@@ -552,18 +553,19 @@
         });
       }
 
-      function updateFilterButtons() {
-        document.querySelectorAll('[data-status-filter]').forEach(function (btn) {
-          const filter = btn.getAttribute('data-status-filter');
-          btn.className = FILTER_BTN_BASE;
-          if (filter === activeStatusFilter) {
-            if (filter === 'all') btn.classList.add('filter-active-all');
-            else if (filter === 'achieved') btn.classList.add('filter-active-achieved');
-            else if (filter === 'progress') btn.classList.add('filter-active-progress');
-          }
-          btn.setAttribute('aria-pressed', filter === activeStatusFilter ? 'true' : 'false');
-        });
-      }
+function updateFilterButtons() {
+  document.querySelectorAll('[data-status-filter]').forEach(function (btn) {
+    const filter = btn.getAttribute('data-status-filter');
+    btn.className = FILTER_BTN_BASE;
+    if (filter === activeStatusFilter) {
+      if (filter === 'all') btn.classList.add('filter-active-all');
+      else if (filter === 'achieved') btn.classList.add('filter-active-achieved');
+      else if (filter === 'progress') btn.classList.add('filter-active-progress');
+      else if (filter === 'under10') btn.classList.add('filter-active-progress'); // или укажите 'filter-active-under10', если для неё есть отдельный цвет
+    }
+    btn.setAttribute('aria-pressed', filter === activeStatusFilter ? 'true' : 'false');
+  });
+}
 
       function setStatusFilter(filter) {
         activeStatusFilter = filter;
