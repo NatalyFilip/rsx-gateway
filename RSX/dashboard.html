@@ -964,7 +964,7 @@
 
         document.getElementById('modal-stats').innerHTML =
           modalRow('Power max.', fmtNum(p.powerMax), 'text-amber-400 font-bold tabular-nums text-right') +
-          modalRow('Goal (12%)', fmtNum(p.goalTenPct), 'text-purple-100 tabular-nums text-right') +
+          modalRow('Goal', fmtNum(p.goalTenPct), 'text-purple-100 tabular-nums text-right') +
           modalRow('Merits (Current) vs CLEAR WAR MERITS', meritsLine, 'text-amber-300 font-bold tabular-nums text-right') +
           modalRow('Progress %', progressStr, 'font-display font-bold ' + progressColor(p.progress) + ' text-right') +
           modalRow('Units Healed (Current)', fmtNum(p.unitsHealed)) +
