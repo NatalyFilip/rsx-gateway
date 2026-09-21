@@ -452,7 +452,7 @@
     </button>
     <button type="button" data-status-filter="under10" id="filter-under10"
       class="filter-btn flex-1 px-3 py-2.5 rounded-lg font-display text-[11px] sm:text-xs tracking-[0.12em] uppercase font-semibold">
-      &lt; 10% Goal
+      &lt; 35% Goal
     </button>
   </div>
   <button type="button" id="export-image-btn" class="export-btn rounded-xl px-4 py-2.5 sm:py-0 flex items-center justify-center gap-2 font-display text-[11px] sm:text-xs tracking-[0.14em] uppercase font-semibold shrink-0 sm:min-w-[160px]"
@@ -581,7 +581,7 @@ function updateFilterButtons() {
 function getFilterLabel() {
   if (activeStatusFilter === 'achieved') return 'GOAL ACHIEVED';
   if (activeStatusFilter === 'progress') return 'IN PROGRESS';
-  if (activeStatusFilter === 'under10') return '< 10% GOAL';
+  if (activeStatusFilter === 'under10') return '< 35% GOAL';
   return 'ALL PLAYERS';
 }
 
