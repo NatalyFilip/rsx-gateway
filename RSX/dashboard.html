@@ -450,7 +450,7 @@
       class="filter-btn flex-1 px-3 py-2.5 rounded-lg font-display text-[11px] sm:text-xs tracking-[0.12em] uppercase font-semibold">
       In Progress
     </button>
-    <button type="button" data-status-filter="below35" id="filter-below35"
+    <button type="button" data-status-filter="under35" id="filter-under35"
       class="filter-btn flex-1 px-3 py-2.5 rounded-lg font-display text-[11px] sm:text-xs tracking-[0.12em] uppercase font-semibold">
       &lt; 35% Goal
     </button>
@@ -540,7 +540,7 @@
 function matchesStatusFilter(player) {
   if (activeStatusFilter === 'achieved') return player.progress >= 100;
   if (activeStatusFilter === 'progress') return player.progress < 100;
-  if (activeStatusFilter === 'under10') return player.progress < 10;
+  if (activeStatusFilter === 'under35') return player.progress < 35;
   return true;
 }
 
@@ -561,7 +561,7 @@ function updateFilterButtons() {
       if (filter === 'all') btn.classList.add('filter-active-all');
       else if (filter === 'achieved') btn.classList.add('filter-active-achieved');
       else if (filter === 'progress') btn.classList.add('filter-active-progress');
-      else if (filter === 'under10') btn.classList.add('filter-active-progress'); // или укажите 'filter-active-under10', если для неё есть отдельный цвет
+      else if (filter === 'under35') btn.classList.add('filter-active-progress'); // или укажите 'filter-active-unde35', если для неё есть отдельный цвет
     }
     btn.setAttribute('aria-pressed', filter === activeStatusFilter ? 'true' : 'false');
   });
@@ -581,7 +581,7 @@ function updateFilterButtons() {
 function getFilterLabel() {
   if (activeStatusFilter === 'achieved') return 'GOAL ACHIEVED';
   if (activeStatusFilter === 'progress') return 'IN PROGRESS';
-  if (activeStatusFilter === 'under10') return '< 35% GOAL';
+  if (activeStatusFilter === 'under35') return '< 35% GOAL';
   return 'ALL PLAYERS';
 }
 
