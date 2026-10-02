@@ -673,138 +673,137 @@ const i18nTokens = {
 
     const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz7P25FPuQuGlt-AxB8rlCvAlTfPDxC-QhYolr7w7H19BZcc2hMN07TY8NIdOV3OJkr1Q/exec';
 
-    const form = document.getElementById('r4-form') || document.getElementById('migration-form');
-    const formSection = document.getElementById('form-section');
-    const successOverlay = document.getElementById('success-overlay');
-    const transmitBtn = document.getElementById('transmit-btn');
-    const errorEl = document.getElementById('form-error');
-    const formFields = form.querySelectorAll('.form-field, input[type="radio"], input[type="checkbox"], select, textarea, button');
+    // Ожидаем полной загрузки DOM-дерева
+    document.addEventListener('DOMContentLoaded', function () {
+      const form = document.getElementById('r4-form') || document.getElementById('migration-form');
+      const formSection = document.getElementById('form-section');
+      const successOverlay = document.getElementById('success-overlay');
+      const transmitBtn = document.getElementById('transmit-btn');
+      const errorEl = document.getElementById('form-error');
 
-    function showError(message) {
-      if (errorEl) {
-        errorEl.textContent = message;
-        errorEl.classList.remove('hidden');
-      }
-    }
-
-    function hideError() {
-      if (errorEl) {
-        errorEl.textContent = '';
-        errorEl.classList.add('hidden');
-      }
-    }
-
-    function getI18nText(key, fallback) {
-      const lang = localStorage.getItem('selected_lang') || 'en';
-      return (i18nTokens[lang] && i18nTokens[lang][key]) || fallback;
-    }
-
-    // Состояние загрузки: блокируем форму и меняем текст на кнопке
-    function setFormLocked(isLocked) {
-      formFields.forEach(function (field) { field.disabled = isLocked; });
-      transmitBtn.disabled = isLocked;
-      
-      const submitText = getI18nText('btn_submit_r4', 'Submit Application for R4 Officer');
-      const loadingText = getI18nText('btn_loading', 'Transmitting…');
-      
-      // Меняем текст кнопки на "Отправка..." / "Transmitting..."
-      transmitBtn.textContent = isLocked ? loadingText : submitText;
-      
-      if (isLocked) {
-        transmitBtn.classList.add('opacity-75', 'cursor-not-allowed');
-      } else {
-        transmitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
-      }
-    }
-
-    function collectPayload() {
-      var checkedResponsibilities = [];
-      form.querySelectorAll('input[name="r4Responsibilities"]:checked').forEach(function (cb) {
-        checkedResponsibilities.push(cb.value);
-      });
-
-      var r4Exp = form.querySelector('input[name="r4Experience"]:checked');
-
-      return {
-        playerName: (document.getElementById('r4-player-name')?.value || '').trim(),
-        playerId: (document.getElementById('r4-player-id')?.value || '').trim(),
-        onlineHours: (document.getElementById('r4-online-hours')?.value || '').trim(),
-        onlineTimes: (document.getElementById('r4-online-times')?.value || '').trim(),
-        hasR4Experience: r4Exp ? r4Exp.value : '',
-        responsibilities: checkedResponsibilities.join(', '),
-        interestArea: document.getElementById('r4-interest-area')?.value || '',
-        playDuration: (document.getElementById('r4-play-duration')?.value || '').trim(),
-        previousServers: (document.getElementById('r4-previous-servers')?.value || '').trim(),
-        submittedAt: new Date().toISOString()
-      };
-    }
-
-    function validatePayload(data) {
-      if (!data.playerName) return 'Player Name / Nickname is required.';
-      if (!data.playerId) return 'Player ID is required.';
-      if (!data.onlineHours) return 'Daily online hours are required.';
-      if (!data.onlineTimes) return 'Usual online times are required.';
-      if (!data.hasR4Experience) return 'Please select whether you have R4 experience.';
-      if (!data.interestArea) return 'Please select your preferred R4 management area.';
-      if (!data.playDuration) return 'Game play duration is required.';
-      if (!data.previousServers) return 'Previous servers list is required.';
-      return null;
-    }
-
-    // Показываем всплывающее окно успеха с переведенным текстом
-    function showSuccess() {
-      // Принудительно обновляем переводы в модальном окне перед показом
-      const lang = localStorage.getItem('selected_lang') || 'en';
-      if (typeof switchLanguage === 'function') {
-        switchLanguage(lang);
-      }
-
-      if (formSection) formSection.classList.add('hidden');
-      if (successOverlay) {
-        successOverlay.classList.remove('hidden');
-        successOverlay.classList.add('flex'); // Показываем флекс-контейнер модалки
-      }
-      document.body.style.overflow = 'hidden';
-    }
-
-    async function submitApplication(payload) {
-      return fetch(APPS_SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-    }
-
-    form.addEventListener('submit', async function (e) {
-      e.preventDefault();
-      hideError();
-
-      const payload = collectPayload();
-      const validationError = validatePayload(payload);
-      if (validationError) {
-        showError(validationError);
+      if (!form) {
+        console.error('Ошибка: форма r4-form или migration-form не найдена в DOM!');
         return;
       }
 
-      // 1. Включаем загрузку
-      setFormLocked(true);
-
-      try {
-        if (APPS_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
-          // Имитация задержки сети (2 секунды) для демонстрации
-          await new Promise(function (resolve) { setTimeout(resolve, 2000); });
-        } else {
-          await submitApplication(payload);
+      function showError(message) {
+        if (errorEl) {
+          errorEl.textContent = message;
+          errorEl.classList.remove('hidden');
         }
-        
-        // 2. Показываем окно успеха
-        showSuccess();
-      } catch (err) {
-        console.error('Transmission failed:', err);
-        showError('Transmission failed. Check your connection and try again.');
-        setFormLocked(false);
       }
+
+      function hideError() {
+        if (errorEl) {
+          errorEl.textContent = '';
+          errorEl.classList.add('hidden');
+        }
+      }
+
+      function getI18nText(key, fallback) {
+        const lang = localStorage.getItem('selected_lang') || 'en';
+        return (typeof i18nTokens !== 'undefined' && i18nTokens[lang] && i18nTokens[lang][key]) || fallback;
+      }
+
+      function setFormLocked(isLocked) {
+        const formFields = form.querySelectorAll('input, select, textarea, button');
+        formFields.forEach(function (field) { field.disabled = isLocked; });
+        
+        if (transmitBtn) {
+          transmitBtn.disabled = isLocked;
+          const submitText = getI18nText('btn_submit_r4', 'Submit Application for R4 Officer');
+          const loadingText = getI18nText('btn_loading', 'Transmitting…');
+          
+          transmitBtn.textContent = isLocked ? loadingText : submitText;
+          
+          if (isLocked) {
+            transmitBtn.classList.add('opacity-75', 'cursor-not-allowed');
+          } else {
+            transmitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+          }
+        }
+      }
+
+      function collectPayload() {
+        var checkedResponsibilities = [];
+        form.querySelectorAll('input[name="r4Responsibilities"]:checked').forEach(function (cb) {
+          checkedResponsibilities.push(cb.value);
+        });
+
+        var r4Exp = form.querySelector('input[name="r4Experience"]:checked');
+
+        return {
+          playerName: (document.getElementById('r4-player-name')?.value || '').trim(),
+          playerId: (document.getElementById('r4-player-id')?.value || '').trim(),
+          onlineHours: (document.getElementById('r4-online-hours')?.value || '').trim(),
+          onlineTimes: (document.getElementById('r4-online-times')?.value || '').trim(),
+          hasR4Experience: r4Exp ? r4Exp.value : '',
+          responsibilities: checkedResponsibilities.join(', '),
+          interestArea: document.getElementById('r4-interest-area')?.value || '',
+          playDuration: (document.getElementById('r4-play-duration')?.value || '').trim(),
+          previousServers: (document.getElementById('r4-previous-servers')?.value || '').trim(),
+          submittedAt: new Date().toISOString()
+        };
+      }
+
+      function validatePayload(data) {
+        if (!data.playerName) return 'Player Name / Nickname is required.';
+        if (!data.playerId) return 'Player ID is required.';
+        if (!data.onlineHours) return 'Daily online hours are required.';
+        if (!data.onlineTimes) return 'Usual online times are required.';
+        if (!data.hasR4Experience) return 'Please select whether you have R4 experience.';
+        if (!data.interestArea) return 'Please select your preferred R4 management area.';
+        if (!data.playDuration) return 'Game play duration is required.';
+        if (!data.previousServers) return 'Previous servers list is required.';
+        return null;
+      }
+
+      function showSuccess() {
+        const lang = localStorage.getItem('selected_lang') || 'en';
+        if (typeof switchLanguage === 'function') {
+          switchLanguage(lang);
+        }
+
+        if (formSection) formSection.classList.add('hidden');
+        if (successOverlay) {
+          successOverlay.classList.remove('hidden');
+          successOverlay.classList.add('flex');
+        }
+        document.body.style.overflow = 'hidden';
+      }
+
+      async function submitApplication(payload) {
+        // Для no-cors отправляем text/plain, чтобы избежать блокировки CORS браузером
+        return fetch(APPS_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload),
+        });
+      }
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        hideError();
+
+        const payload = collectPayload();
+        const validationError = validatePayload(payload);
+        if (validationError) {
+          showError(validationError);
+          return;
+        }
+
+        setFormLocked(true);
+
+        try {
+          await submitApplication(payload);
+          showSuccess();
+        } catch (err) {
+          console.error('Transmission failed:', err);
+          showError('Transmission failed. Check your connection and try again.');
+          setFormLocked(false);
+        }
+      });
     });
   })();
 </script>
