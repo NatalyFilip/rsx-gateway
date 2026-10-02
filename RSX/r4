@@ -1,1 +1,834 @@
+<!DOCTYPE html>
+<html lang="en" class="dark" style="color-scheme: dark;">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSX Alliance — R4 OFFICCER </title>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Orbitron', 'system-ui', 'sans-serif'],
+            body: ['Rajdhani', 'system-ui', 'sans-serif'],
+          },
+          animation: {
+            'terminal-in': 'terminalIn 0.42s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+            'success-in': 'successIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+            'transmit-pulse': 'transmitPulse 1.1s ease-in-out infinite',
+          },
+          keyframes: {
+            terminalIn: {
+              from: { opacity: '0', transform: 'translateY(24px) scale(0.97)' },
+              to: { opacity: '1', transform: 'translateY(0) scale(1)' },
+            },
+            successIn: {
+              from: { opacity: '0', transform: 'scale(0.92)' },
+              to: { opacity: '1', transform: 'scale(1)' },
+            },
+            transmitPulse: {
+              '0%, 100%': { opacity: '0.8' },
+              '50%': { opacity: '1' },
+            },
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0; min-height: 100%;
+      background: #080312;
+      background-image: linear-gradient(160deg, #080312 0%, #0e051f 55%, #080312 100%);
+      color: #e2d9f3;
+    }
+    body { font-family: 'Rajdhani', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    
+    .cyber-noise {
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(168, 85, 247, 0.1), transparent),
+        linear-gradient(rgba(168, 85, 247, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(168, 85, 247, 0.025) 1px, transparent 1px);
+      background-size: 100% 100%, 36px 36px, 36px 36px;
+    }
 
+    .banner-hero { position: relative; width: 100%; height: 16rem; overflow: hidden; }
+    @media (min-width: 640px) { .banner-hero { height: 18rem; } }
+    .banner-img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+    .banner-type-overlay { background: linear-gradient(180deg, rgba(8, 3, 18, 0.02) 0%, rgba(8, 3, 18, 0.35) 50%, rgba(8, 3, 18, 0.88) 100%); }
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #fef3c7 0%, #fbbf24 50%, #d97706 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    
+    .back-system-btn {
+      background: rgba(8, 3, 18, 0.75); backdrop-filter: blur(12px); border: 1px solid rgba(168, 85, 247, 0.25);
+      color: rgba(196, 181, 253, 0.8); transition: all 0.25s ease;
+    }
+    .back-system-btn:hover { border-color: rgba(251, 191, 36, 0.45); color: #fde68a; box-shadow: 0 0 16px rgba(168, 85, 247, 0.25); }
+
+    .terminal-glass {
+      background: rgba(18, 9, 32, 0.72); backdrop-filter: blur(20px); border: 1px solid rgba(168, 85, 247, 0.32);
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(232, 121, 249, 0.07), inset 0 0 60px rgba(88, 28, 135, 0.06);
+    }
+    .terminal-header-bar { background: rgba(8, 3, 18, 0.65); border-bottom: 1px solid rgba(168, 85, 247, 0.18); }
+
+    .field-label {
+      font-family: 'Orbitron', system-ui, sans-serif; font-size: 0.625rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(196, 181, 253, 0.6);
+    }
+    
+    .form-field { background: rgba(8, 3, 18, 0.92); border: 1.5px solid rgba(88, 28, 135, 0.45); color: #f3eefc; transition: all 0.2s ease; }
+    .form-field::placeholder { color: rgba(196, 181, 253, 0.28); }
+    .form-field:focus {
+      outline: none; border-color: rgba(168, 85, 247, 0.85);
+      box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.35), 0 0 24px rgba(168, 85, 247, 0.25), inset 0 0 10px rgba(168, 85, 247, 0.05);
+    }
+    .form-field:disabled { opacity: 0.45; cursor: not-allowed; }
+
+    select.form-field {
+      appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23a78bfa'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 0.85rem center; background-size: 1rem; padding-right: 2.5rem;
+    }
+
+    .transmit-btn {
+      background: linear-gradient(135deg, rgba(76, 29, 149, 0.9) 0%, rgba(67, 20, 90, 0.85) 50%, rgba(88, 28, 135, 0.9) 100%);
+      border: 2px solid rgba(168, 85, 247, 0.7); color: #faf5ff; box-shadow: 0 0 28px rgba(168, 85, 247, 0.4), inset 0 1px 0 rgba(232, 213, 255, 0.12);
+      transition: all 0.3s ease;
+    }
+    .transmit-btn:hover:not(:disabled) { border-color: rgba(196, 181, 253, 0.95); box-shadow: 0 0 40px rgba(168, 85, 247, 0.65); transform: translateY(-2px); }
+    .transmit-btn:disabled { cursor: wait; animation: transmitPulse 1.1s ease-in-out infinite; }
+
+    .form-error { background: rgba(50, 8, 20, 0.55); border: 1px solid rgba(244, 63, 94, 0.5); color: #fb7185; }
+
+    .success-overlay {
+      position: fixed; inset: 0; z-index: 200; display: flex; align-items: center; justify-content: center; padding: 1.5rem;
+      background: rgba(4, 1, 10, 0.92); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    }
+    .success-card {
+      width: 100%; max-width: 36rem; padding: 2.5rem 2rem; text-align: center; background: rgba(6, 50, 30, 0.35);
+      border: 2px solid rgba(52, 211, 153, 0.75); border-radius: 1.25rem;
+      animation: successAura 2.8s ease-in-out infinite alternate, successIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes successAura {
+      from { box-shadow: 0 0 30px rgba(16, 185, 129, 0.35), inset 0 0 30px rgba(16, 185, 129, 0.06); }
+      to { box-shadow: 0 0 50px rgba(52, 211, 153, 0.75), inset 0 0 50px rgba(16, 185, 129, 0.14); }
+    }
+    
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #080312; }
+    ::-webkit-scrollbar-thumb { background: #6b21a8; border-radius: 4px; }
+  </style>
+</head>
+<body class="cyber-noise min-h-screen font-body antialiased">
+
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 pb-12">
+    <div class="banner-hero">
+      <img src="season_banner.jpg" alt="Season Banner" class="banner-img" onerror="this.style.display='none'; document.getElementById('banner-fallback').classList.remove('hidden');" />
+      <div id="banner-fallback" class="hidden absolute inset-0 bg-gradient-to-b from-[#1a0a2e] via-[#0e051f] to-[#080312]"></div>
+      <div class="absolute inset-0 banner-type-overlay pointer-events-none"></div>
+      <div class="absolute inset-0 flex flex-col items-center justify-end pb-6 sm:pb-8 px-4 pointer-events-none">
+        <img src="logo.png" alt="RSX Alliance Logo" class="w-12 h-12 sm:w-16 sm:h-16 object-contain drop-shadow-[0_0_16px_rgba(251,191,36,0.5)] mb-2 sm:mb-3" onerror="this.style.display='none'" />
+        <h1 class="font-display font-black text-xl sm:text-3xl md:text-4xl tracking-[0.22em] gold-gradient-text">RSX ALLIANCE</h1>
+        <p class="font-display text-[10px] sm:text-xs tracking-widest uppercase text-purple-200/75 mt-1.5 sm:mt-2">PORTAL FOR NEW R4</p>
+      </div>
+    </div>
+
+    <div class="mt-5 space-y-5">
+      <a href="index.html" class="back-system-btn inline-flex items-center gap-2 px-4 py-2 rounded-lg font-display text-[11px] sm:text-xs tracking-[0.16em] uppercase font-semibold">
+        ← <span data-i18n="lbl_back">Back to System</span>
+      </a>
+
+      <section id="form-section" class="terminal-glass rounded-2xl overflow-hidden animate-terminal-in">
+        <div class="terminal-header-bar px-5 sm:px-7 py-4">
+          <p data-i18n="r4_title_sub" class="font-display text-[10px] tracking-[0.35em] uppercase text-amber-400/65">Secure Channel</p>
+          <h2 data-i18n="r4_title_main" class="font-display text-sm sm:text-base tracking-[0.14em] uppercase text-purple-100 mt-1">R4 Application Terminal</h2>
+        </div>
+
+        <div class="px-5 sm:px-7 py-6 sm:py-8">
+          <p data-i18n="r4_desc_main" class="text-sm text-purple-400/50 mb-6 leading-relaxed">
+            Complete all fields below. Your dossier will be transmitted directly to RSX High Command for officer review.
+          </p>
+
+          <form id="r4-form" class="space-y-6 max-w-4xl mx-auto" novalidate>
+            
+            <!-- 1. Player Name -->
+            <div class="space-y-1.5">
+              <label for="player-name" data-i18n="r4_lbl_1" class="field-label block">1. Player Name</label>
+              <input id="player-name" name="playerName" type="text" required data-i18n="r4_ph_1" placeholder="Enter your in-game nickname" class="form-field w-full px-4 py-3 rounded-lg text-[15px] font-medium" />
+            </div>
+
+            <!-- 2. Player ID -->
+            <div class="space-y-1.5">
+              <label for="player-id" data-i18n="r4_lbl_2" class="field-label block">2. Player ID</label>
+              <input id="player-id" name="playerId" type="number" required inputmode="numeric" data-i18n="r4_ph_2" placeholder="e.g. 23483165" class="form-field w-full px-4 py-3 rounded-lg text-[15px] font-medium tabular-nums" />
+            </div>
+
+            <!-- 3. Hours Online -->
+            <div class="space-y-1.5">
+              <label for="hours-online" data-i18n="r4_lbl_3" class="field-label block">3. How many hours are you online per day?</label>
+              <input id="hours-online" name="hoursOnline" type="number" required min="1" max="24" data-i18n="r4_ph_3" placeholder="e.g. 6" class="form-field w-full px-4 py-3 rounded-lg text-[15px] font-medium" />
+            </div>
+
+            <!-- 4. Usual Online Times -->
+            <div class="space-y-1.5">
+              <label for="online-times" data-i18n="r4_lbl_4" class="field-label block">4. What times are you usually online?</label>
+              <input id="online-times" name="onlineTimes" type="text" required data-i18n="r4_ph_4" placeholder="e.g. 14:00 - 20:00 UTC / Evenings" class="form-field w-full px-4 py-3 rounded-lg text-[15px] font-medium" />
+            </div>
+
+            <!-- 5. Previous R4 Experience -->
+            <div class="space-y-1.5">
+              <label data-i18n="r4_lbl_5" class="field-label block">5. Do you have any previous R4 experience?</label>
+              <div class="form-field w-full px-4 py-3 rounded-lg flex items-center gap-6">
+                <label class="flex items-center gap-2 cursor-pointer text-sm font-medium text-purple-100">
+                  <input type="radio" name="r4Experience" value="Yes" required class="accent-amber-500">
+                  <span data-i18n="r4_opt_yes">Yes</span>
+                </label>
+                <label class="flex items-center gap-2 cursor-pointer text-sm font-medium text-purple-100">
+                  <input type="radio" name="r4Experience" value="No" class="accent-amber-500">
+                  <span data-i18n="r4_opt_no">No</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- 6. Responsibilities (Checkboxes) -->
+            <div class="space-y-1.5">
+              <label data-i18n="r4_lbl_6" class="field-label block">6. If yes, what were your responsibilities?</label>
+              <div class="form-field w-full p-4 rounded-lg grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-purple-100">
+                <label class="flex items-center gap-2.5 cursor-pointer hover:text-amber-300 transition-colors">
+                  <input type="checkbox" name="responsibilities" value="Behemoth Manager" class="accent-amber-500 rounded">
+                  <span data-i18n="r4_resp_behemoth">Behemoth Manager</span>
+                </label>
+                <label class="flex items-center gap-2.5 cursor-pointer hover:text-amber-300 transition-colors">
+                  <input type="checkbox" name="responsibilities" value="Event Manager" class="accent-amber-500 rounded">
+                  <span data-i18n="r4_resp_event">Event Manager</span>
+                </label>
+                <label class="flex items-center gap-2.5 cursor-pointer hover:text-amber-300 transition-colors">
+                  <input type="checkbox" name="responsibilities" value="Discord Manager" class="accent-amber-500 rounded">
+                  <span data-i18n="r4_resp_discord">Discord Manager</span>
+                </label>
+                <label class="flex items-center gap-2.5 cursor-pointer hover:text-amber-300 transition-colors">
+                  <input type="checkbox" name="responsibilities" value="R4 / Roster Manager" class="accent-amber-500 rounded">
+                  <span data-i18n="r4_resp_row">R4 / Roster Manager</span>
+                </label>
+                <label class="flex items-center gap-2.5 cursor-pointer hover:text-amber-300 transition-colors">
+                  <input type="checkbox" name="responsibilities" value="Statistician" class="accent-amber-500 rounded">
+                  <span data-i18n="r4_resp_statistician">Statistician</span>
+                </label>
+                <label class="flex items-center gap-2.5 cursor-pointer hover:text-amber-300 transition-colors">
+                  <input type="checkbox" name="responsibilities" value="Diplomat" class="accent-amber-500 rounded">
+                  <span data-i18n="r4_resp_diplomat">Diplomat</span>
+                </label>
+                <label class="flex items-center gap-2.5 cursor-pointer hover:text-amber-300 transition-colors">
+                  <input type="checkbox" name="responsibilities" value="Internal Manager" class="accent-amber-500 rounded">
+                  <span data-i18n="r4_resp_internal">Internal Manager</span>
+                </label>
+                <label class="flex items-center gap-2.5 cursor-pointer hover:text-amber-300 transition-colors">
+                  <input type="checkbox" name="responsibilities" value="War Master" class="accent-amber-500 rounded">
+                  <span data-i18n="r4_resp_warmaster">War Master</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- 7. Interested Area -->
+            <div class="space-y-1.5">
+              <label for="interested-area" data-i18n="r4_lbl_7" class="field-label block">7. Which area of R4 management are you most interested in?</label>
+              <select id="interested-area" name="interestedArea" required class="form-field w-full px-4 py-3 rounded-lg text-[15px] font-medium">
+                <option value="" disabled selected data-i18n="r4_opt_7_def">Select area of interest...</option>
+                <option value="Behemoth Management" data-i18n="r4_area_behemoth">Behemoth Management</option>
+                <option value="Event Management" data-i18n="r4_area_event">Event Management</option>
+                <option value="Discord & Community" data-i18n="r4_area_discord">Discord & Community</option>
+                <option value="Row / Roster Management" data-i18n="r4_area_row">Row / Roster Management</option>
+                <option value="Statistics & Data Analysis" data-i18n="r4_area_stats">Statistics & Data Analysis</option>
+                <option value="Diplomacy & Alliances" data-i18n="r4_area_diplomacy">Diplomacy & Alliances</option>
+                <option value="Internal Alliance Management" data-i18n="r4_area_internal">Internal Alliance Management</option>
+                <option value="War Strategy & War Master" data-i18n="r4_area_warmaster">War Strategy & War Master</option>
+              </select>
+            </div>
+
+            <!-- 8. Play Duration -->
+            <div class="space-y-1.5">
+              <label for="play-duration" data-i18n="r4_lbl_8" class="field-label block">8. How long have you been playing the game?</label>
+              <input id="play-duration" name="playDuration" type="text" required data-i18n="r4_ph_8" placeholder="e.g. 1 year, 8 months, since launch" class="form-field w-full px-4 py-3 rounded-lg text-[15px] font-medium" />
+            </div>
+
+            <!-- 9. Previous Servers -->
+            <div class="space-y-1.5">
+              <label for="previous-servers" data-i18n="r4_lbl_9" class="field-label block">9. Which servers have you played on before?</label>
+              <input id="previous-servers" name="previousServers" type="text" required data-i18n="r4_ph_9" placeholder="e.g. Server 12, Server 48, Server 105" class="form-field w-full px-4 py-3 rounded-lg text-[15px] font-medium" />
+            </div>
+
+            <p id="form-error" class="form-error hidden rounded-lg px-4 py-3 text-sm font-medium"></p>
+
+            <button type="submit" id="transmit-btn" data-i18n="btn_submit_r4" class="transmit-btn w-full mt-3 py-4 sm:py-5 rounded-xl font-display font-black text-xs sm:text-sm tracking-[0.14em] sm:tracking-[0.18em] uppercase">
+              Submit Application for R4 Officer
+            </button>
+          </form>
+        </div>
+      </section>
+      <footer class="text-center pt-2"><span class="font-display text-[10px] tracking-[0.4em] uppercase text-purple-500/25">RSX · Call of Dragons</span></footer>
+    </div>
+  </div>
+
+  <div id="success-overlay" class="success-overlay hidden">
+    <div class="success-card">
+      <div class="inline-flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 rounded-full mb-7 mx-auto" style="background: rgba(6, 78, 59, 0.45); border: 2px solid rgba(52, 211, 153, 0.8); box-shadow: 0 0 30px rgba(16, 185, 129, 0.4);">
+        <svg class="w-10 h-10 sm:w-12 sm:h-12 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+      </div>
+      <p data-i18n="msg_success_sub" class="font-display text-[10px] sm:text-xs tracking-[0.4em] uppercase text-emerald-400/75 mb-4">Secure Uplink Confirmed</p>
+      <h2 data-i18n="msg_success_title" class="font-display font-black text-base sm:text-xl md:text-2xl tracking-[0.1em] uppercase text-emerald-300 leading-relaxed">
+        Transmission Successful.<br />Profile Logged.<br />Awaiting Officer Review.
+      </h2>
+      <p data-i18n="msg_success_desc" class="text-purple-300/55 mt-5 text-sm sm:text-base max-w-sm mx-auto leading-relaxed">
+        Your application has been received. An RSX officer will contact you via in-game mail or Discord.
+      </p>
+      <a href="index.html" class="back-system-btn inline-flex items-center gap-2 mt-8 px-6 py-3 rounded-lg font-display text-xs tracking-[0.14em] uppercase font-semibold">
+        ← <span data-i18n="btn_success_back">Return to System</span>
+      </a>
+    </div>
+  </div>
+</body>
+
+  <script>
+const i18nTokens = {
+  en: {
+    lbl_back: "Back to System",
+    r4_title_sub: "Secure Channel",
+    r4_title_main: "R4 Application Terminal",
+    r4_desc_main: "Complete all fields below. Your dossier will be transmitted directly to RSX High Command for officer review.",
+    r4_lbl_1: "1. Player Name",
+    r4_ph_1: "Enter your in-game nickname",
+    r4_lbl_2: "2. Player ID",
+    r4_ph_2: "e.g. 23483165",
+    r4_lbl_3: "3. How many hours are you online per day?",
+    r4_ph_3: "e.g. 6",
+    r4_lbl_4: "4. What times are you usually online?",
+    r4_ph_4: "e.g. 14:00 - 20:00 UTC / Evenings",
+    r4_lbl_5: "5. Do you have any previous R4 experience?",
+    r4_opt_yes: "Yes",
+    r4_opt_no: "No",
+    r4_lbl_6: "6. If yes, what were your responsibilities?",
+    r4_resp_behemoth: "Behemoth Manager",
+    r4_resp_event: "Event Manager",
+    r4_resp_discord: "Discord Manager",
+    r4_resp_row: "R4 / Roster Manager",
+    r4_resp_statistician: "Statistician",
+    r4_resp_diplomat: "Diplomat",
+    r4_resp_internal: "Internal Manager",
+    r4_resp_warmaster: "War Master",
+    r4_lbl_7: "7. Which area of R4 management are you most interested in?",
+    r4_opt_7_def: "Select area of interest...",
+    r4_area_behemoth: "Behemoth Management",
+    r4_area_event: "Event Management",
+    r4_area_discord: "Discord & Community",
+    r4_area_row: "Row / Roster Management",
+    r4_area_stats: "Statistics & Data Analysis",
+    r4_area_diplomacy: "Diplomacy & Alliances",
+    r4_area_internal: "Internal Alliance Management",
+    r4_area_warmaster: "War Strategy & War Master",
+    r4_lbl_8: "8. How long have you been playing the game?",
+    r4_ph_8: "e.g. 1 year, 8 months, since launch",
+    r4_lbl_9: "9. Which servers have you played on before?",
+    r4_ph_9: "e.g. Server 12, Server 48, Server 105",
+    btn_submit_r4: "Submit Application for R4 Officer",
+    btn_loading: "Transmitting...",
+    msg_success_sub: "Secure Uplink Confirmed",
+    msg_success_title: "Transmission Successful. Profile Logged. Awaiting Officer Review.",
+    msg_success_desc: "Thank you for your application! In case of a positive review, R5 will contact you within 24 hours.",
+    btn_success_back: "Return to System"
+  },
+  ru: {
+    lbl_back: "Вернуться в систему",
+    r4_title_sub: "Защищенный канал",
+    r4_title_main: "Терминал заявки на R4",
+    r4_desc_main: "Заполните все поля ниже. Ваше досье будет передано напрямую Командованию RSX для рассмотрения офицерами.",
+    r4_lbl_1: "1. Имя игрока / Ник",
+    r4_ph_1: "Введите ваш никнейм в игре",
+    r4_lbl_2: "2. Внутриигровой ID",
+    r4_ph_2: "напр. 23483165",
+    r4_lbl_3: "3. Сколько часов в день вы в онлайне?",
+    r4_ph_3: "напр. 6",
+    r4_lbl_4: "4. В какое время вы обычно в сети?",
+    r4_ph_4: "напр. 14:00 - 20:00 UTC / По вечерам",
+    r4_lbl_5: "5. Был ли у вас ранее опыт R4?",
+    r4_opt_yes: "Да",
+    r4_opt_no: "Нет",
+    r4_lbl_6: "6. Если да, то какие обязанности вы выполняли?",
+    r4_resp_behemoth: "Менеджер Бегемотов",
+    r4_resp_event: "Ивент-менеджер",
+    r4_resp_discord: "Менеджер Discord",
+    r4_resp_row: "R4 / Менеджер состава",
+    r4_resp_statistician: "Статист",
+    r4_resp_diplomat: "Дипломат",
+    r4_resp_internal: "Внутренний менеджер",
+    r4_resp_warmaster: "Вармастер / Военком",
+    r4_lbl_7: "7. Какое направление в R4 вам наиболее интересно?",
+    r4_opt_7_def: "Выберите интересующую сферу...",
+    r4_area_behemoth: "Управление Бегемотами",
+    r4_area_event: "Организация ивентов",
+    r4_area_discord: "Discord и Сообщество",
+    r4_area_row: "Работа с составом / Ростер",
+    r4_area_stats: "Статистика и аналитика",
+    r4_area_diplomacy: "Дипломатия и альянсы",
+    r4_area_internal: "Внутреннее управление",
+    r4_area_warmaster: "Военная стратегия / Вармастер",
+    r4_lbl_8: "8. Как долго вы играете в игру?",
+    r4_ph_8: "напр. 1 год, 8 месяцев, со старта",
+    r4_lbl_9: "9. На каких серверах вы играли ранее?",
+    r4_ph_9: "напр. Сервер 12, Сервер 48, Сервер 105",
+    btn_submit_r4: "Отправить заявку на офицера R4",
+    btn_loading: "Отправка...",
+    msg_success_sub: "Связь подтверждена",
+    msg_success_title: "Передача успешна. Профиль сохранен. Ожидайте решения.",
+    msg_success_desc: "Спасибо за заявку! В случае положительного рассмотрения в течение 24 часов с вами свяжется R5.",
+    btn_success_back: "Вернуться в систему"
+  },
+  tr: {
+    lbl_back: "Sisteme Dön",
+    r4_title_sub: "Güvenli Kanal",
+    r4_title_main: "R4 Başvuru Terminali",
+    r4_desc_main: "Aşağıdaki tüm alanları doldurun. Dosyanız subay incelemesi için doğrudan RSX Yüksek Komutanlığına iletilecektir.",
+    r4_lbl_1: "1. Oyuncu Adı",
+    r4_ph_1: "Oyun içi takma adınızı girin",
+    r4_lbl_2: "2. Oyuncu ID'si",
+    r4_ph_2: "örn. 23483165",
+    r4_lbl_3: "3. Günde kaç saat çevrimiçisiniz?",
+    r4_ph_3: "örn. 6",
+    r4_lbl_4: "4. Genellikle hangi saatlerde çevrimiçisiniz?",
+    r4_ph_4: "örn. 14:00 - 20:00 UTC / Akşamları",
+    r4_lbl_5: "5. Daha önce R4 deneyiminiz oldu mu?",
+    r4_opt_yes: "Evet",
+    r4_opt_no: "Hayır",
+    r4_lbl_6: "6. Evet ise, sorumluluklarınız nelerdi?",
+    r4_resp_behemoth: "Behemoth Yöneticisi",
+    r4_resp_event: "Etkinlik Yöneticisi",
+    r4_resp_discord: "Discord Yöneticisi",
+    r4_resp_row: "R4 / Kadro Yöneticisi",
+    r4_resp_statistician: "İstatistikçi",
+    r4_resp_diplomat: "Diplomat",
+    r4_resp_internal: "İç Yönetim Sorumlusu",
+    r4_resp_warmaster: "Savaş Ustası (War Master)",
+    r4_lbl_7: "7. R4 yönetiminin en çok hangi alanıyla ilgileniyorsunuz?",
+    r4_opt_7_def: "İlgi alanınızı seçin...",
+    r4_area_behemoth: "Behemoth Yönetimi",
+    r4_area_event: "Etkinlik Yönetimi",
+    r4_area_discord: "Discord ve Topluluk",
+    r4_area_row: "Kadro ve Üye Yönetimi",
+    r4_area_stats: "İstatistik ve Veri Analizi",
+    r4_area_diplomacy: "Diplomasi ve İttifaklar",
+    r4_area_internal: "İç İttifak Yönetimi",
+    r4_area_warmaster: "Savaş Stratejisi ve Savaş Ustası",
+    r4_lbl_8: "8. Ne kadar süredir bu oyunu oynuyorsunuz?",
+    r4_ph_8: "örn. 1 yıl, 8 ay, açılıştan beri",
+    r4_lbl_9: "9. Daha önce hangi sunucularda oynadınız?",
+    r4_ph_9: "örn. Sunucu 12, Sunucu 48, Sunucu 105",
+    btn_submit_r4: "R4 Subaylığı İçin Başvuruyu İlet",
+    btn_loading: "İletiliyor...",
+    msg_success_sub: "Güvenli Bağlantı Doğrulandı",
+    msg_success_title: "İletim Başarılı. Profil Kaydedildi. Subay İncelemesi Bekleniyor.",
+    msg_success_desc: "Başvurunuz için teşekkür ederiz! Olumlu değerlendirme durumunda, 24 saat içinde R5 sizinle iletişime geçecektir.",
+    btn_success_back: "Sisteme Dön"
+  },
+  vi: {
+    lbl_back: "Quay Lại Hệ Thống",
+    r4_title_sub: "Kênh Bảo Mật",
+    r4_title_main: "Trạm Gửi Đơn R4",
+    r4_desc_main: "Hoàn thành tất cả các trường dưới đây. Hồ sơ của bạn sẽ được gửi đến Bộ Chỉ Huy Tối Cao RSX để xem xét.",
+    r4_lbl_1: "1. Tên Người Chơi",
+    r4_ph_1: "Nhập tên trong game của bạn",
+    r4_lbl_2: "2. ID Người Chơi",
+    r4_ph_2: "vd: 23483165",
+    r4_lbl_3: "3. Bạn online bao nhiêu giờ mỗi ngày?",
+    r4_ph_3: "vd: 6",
+    r4_lbl_4: "4. Bạn thường online vào khung giờ nào?",
+    r4_ph_4: "vd: 14:00 - 20:00 UTC / Buổi tối",
+    r4_lbl_5: "5. Bạn đã có kinh nghiệm làm R4 chưa?",
+    r4_opt_yes: "Có",
+    r4_opt_no: "Chưa",
+    r4_lbl_6: "6. Nếu có, trách nhiệm của bạn là gì?",
+    r4_resp_behemoth: "Quản lý Behemoth",
+    r4_resp_event: "Quản lý Sự kiện",
+    r4_resp_discord: "Quản lý Discord",
+    r4_resp_row: "R4 / Quản lý Nhân sự",
+    r4_resp_statistician: "Thống kê dữ liệu",
+    r4_resp_diplomat: "Ngoại giao",
+    r4_resp_internal: "Quản lý Nội bộ",
+    r4_resp_warmaster: "Bậc thầy Chiến tranh (War Master)",
+    r4_lbl_7: "7. Bạn quan tâm nhất đến lĩnh vực quản lý R4 nào?",
+    r4_opt_7_def: "Chọn lĩnh vực quan tâm...",
+    r4_area_behemoth: "Quản lý Behemoth",
+    r4_area_event: "Quản lý Sự kiện",
+    r4_area_discord: "Discord & Cộng đồng",
+    r4_area_row: "Quản lý Danh sách & Nhân sự",
+    r4_area_stats: "Thống kê & Phân tích Dữ liệu",
+    r4_area_diplomacy: "Ngoại giao & Liên minh",
+    r4_area_internal: "Quản lý Liên minh Nội bộ",
+    r4_area_warmaster: "Chiến lược & Bậc thầy Chiến tranh",
+    r4_lbl_8: "8. Bạn đã chơi game được bao lâu?",
+    r4_ph_8: "vd: 1 năm, 8 tháng, từ khi ra mắt",
+    r4_lbl_9: "9. Bạn đã từng chơi ở những server nào?",
+    r4_ph_9: "vd: Server 12, Server 48, Server 105",
+    btn_submit_r4: "Gửi Đơn Ứng Tuyển R4",
+    btn_loading: "Đang gửi...",
+    msg_success_sub: "Xác Nhận Kết Nối",
+    msg_success_title: "Gửi Thành Công. Đã Ghi Nhận Hồ Sơ. Đang Chờ Duyệt.",
+    msg_success_desc: "Cảm ơn bạn đã gửi đơn! Trong trường hợp được chấp thuận, R5 sẽ liên hệ với bạn trong vòng 24 giờ.",
+    btn_success_back: "Quay Lại Hệ Thống"
+  },
+  de: {
+    lbl_back: "Zurück zum System",
+    r4_title_sub: "Sicherer Kanal",
+    r4_title_main: "R4-Bewerbungsterminal",
+    r4_desc_main: "Füllen Sie alle untenstehenden Felder aus. Ihr Dossier wird direkt an das RSX-Oberkommando zur Überprüfung weitergeleitet.",
+    r4_lbl_1: "1. Spielername",
+    r4_ph_1: "Geben Sie Ihren In-Game-Namen ein",
+    r4_lbl_2: "2. Spieler-ID",
+    r4_ph_2: "z.B. 23483165",
+    r4_lbl_3: "3. Wie viele Stunden sind Sie pro Tag online?",
+    r4_ph_3: "z.B. 6",
+    r4_lbl_4: "4. Zu welchen Zeiten sind Sie normalerweise online?",
+    r4_ph_4: "z.B. 14:00 - 20:00 UTC / Abends",
+    r4_lbl_5: "5. Haben Sie bereits R4-Erfahrung?",
+    r4_opt_yes: "Ja",
+    r4_opt_no: "Nein",
+    r4_lbl_6: "6. Wenn ja, was waren Ihre Aufgaben?",
+    r4_resp_behemoth: "Behemoth-Manager",
+    r4_resp_event: "Event-Manager",
+    r4_resp_discord: "Discord-Manager",
+    r4_resp_row: "R4 / Roster-Manager",
+    r4_resp_statistician: "Statistiker",
+    r4_resp_diplomat: "Diplomat",
+    r4_resp_internal: "Interner Manager",
+    r4_resp_warmaster: "Kriegsmeister (War Master)",
+    r4_lbl_7: "7. Für welchen R4-Bereich interessieren Sie sich am meisten?",
+    r4_opt_7_def: "Interessengebiet auswählen...",
+    r4_area_behemoth: "Behemoth-Management",
+    r4_area_event: "Event-Management",
+    r4_area_discord: "Discord & Community",
+    r4_area_row: "Roster- & Mitgliederverwaltung",
+    r4_area_stats: "Statistik & Datenanalyse",
+    r4_area_diplomacy: "Diplomatie & Allianzen",
+    r4_area_internal: "Interne Allianzverwaltung",
+    r4_area_warmaster: "Kriegsstrategie & Kriegsmeister",
+    r4_lbl_8: "8. Wie lange spielen Sie das Spiel schon?",
+    r4_ph_8: "z.B. 1 Jahr, 8 Monate, seit Release",
+    r4_lbl_9: "9. Auf welchen Servern haben Sie zuvor gespielt?",
+    r4_ph_9: "z.B. Server 12, Server 48, Server 105",
+    btn_submit_r4: "Bewerbung als R4-Offizier absenden",
+    btn_loading: "Wird übermittelt...",
+    msg_success_sub: "Sichere Verbindung bestätigt",
+    msg_success_title: "Übermittlung erfolgreich. Profil erfasst. Warten auf Offiziersprüfung.",
+    msg_success_desc: "Vielen Dank für Ihre Bewerbung! Im Falle einer positiven Prüfung wird sich R5 innerhalb von 24 Stunden mit Ihnen in Verbindung setzen.",
+    btn_success_back: "Zurück zum System"
+  },
+  it: {
+    lbl_back: "Torna al Sistema",
+    r4_title_sub: "Canale Sicuro",
+    r4_title_main: "Terminale Candidatura R4",
+    r4_desc_main: "Compila tutti i campi sottostanti. Il tuo dossier sarà trasmesso all'Alto Comando RSX per la valutazione.",
+    r4_lbl_1: "1. Nome Giocatore",
+    r4_ph_1: "Inserisci il tuo nome in-game",
+    r4_lbl_2: "2. ID Giocatore",
+    r4_ph_2: "es. 23483165",
+    r4_lbl_3: "3. Quante ore sei online al giorno?",
+    r4_ph_3: "es. 6",
+    r4_lbl_4: "4. In quali orari sei di solito online?",
+    r4_ph_4: "es. 14:00 - 20:00 UTC / Sera",
+    r4_lbl_5: "5. Hai precedente esperienza come R4?",
+    r4_opt_yes: "Sì",
+    r4_opt_no: "No",
+    r4_lbl_6: "6. Se sì, quali erano le tue responsabilità?",
+    r4_resp_behemoth: "Gestore Behemoth",
+    r4_resp_event: "Gestore Eventi",
+    r4_resp_discord: "Gestore Discord",
+    r4_resp_row: "Gestore R4 / Roster",
+    r4_resp_statistician: "Statistico",
+    r4_resp_diplomat: "Diplomatico",
+    r4_resp_internal: "Gestore Interno",
+    r4_resp_warmaster: "Maestro di Guerra",
+    r4_lbl_7: "7. Quale area di gestione R4 ti interessa di più?",
+    r4_opt_7_def: "Seleziona area di interesse...",
+    r4_area_behemoth: "Gestione Behemoth",
+    r4_area_event: "Gestione Eventi",
+    r4_area_discord: "Discord e Community",
+    r4_area_row: "Gestione Roster e Membri",
+    r4_area_stats: "Statistiche e Analisi Dati",
+    r4_area_diplomacy: "Diplomazia e Alleanze",
+    r4_area_internal: "Gestione Interna dell'Alleanza",
+    r4_area_warmaster: "Strategia di Guerra e War Master",
+    r4_lbl_8: "8. Da quanto tempo giochi a questo gioco?",
+    r4_ph_8: "es. 1 anno, 8 mesi, dal lancio",
+    r4_lbl_9: "9. In quali server hai giocato in precedenza?",
+    r4_ph_9: "es. Server 12, Server 48, Server 105",
+    btn_submit_r4: "Invia Candidatura Ufficiale R4",
+    btn_loading: "Trasmissione in corso...",
+    msg_success_sub: "Connessione Sicura Confermata",
+    msg_success_title: "Trasmissione Riuscita. Profilo Registrato. In Attesa di Revisione.",
+    msg_success_desc: "Grazie per la tua candidatura! In caso di valutazione positiva, R5 ti contatterà entro 24 ore.",
+    btn_success_back: "Torna al Sistema"
+  },
+  es: {
+    lbl_back: "Volver al Sistema",
+    r4_title_sub: "Canal Seguro",
+    r4_title_main: "Terminal de Solicitud R4",
+    r4_desc_main: "Complete todos los campos a continuación. Su expediente será transmitido al Alto Mando de RSX para revisión de los oficiales.",
+    r4_lbl_1: "1. Nombre de Jugador",
+    r4_ph_1: "Ingrese su apodo en el juego",
+    r4_lbl_2: "2. ID de Jugador",
+    r4_ph_2: "ej. 23483165",
+    r4_lbl_3: "3. ¿Cuántas horas estás en línea al día?",
+    r4_ph_3: "ej. 6",
+    r4_lbl_4: "4. ¿En qué horarios sueles estar en línea?",
+    r4_ph_4: "ej. 14:00 - 20:00 UTC / Tardes-Noches",
+    r4_lbl_5: "5. ¿Tienes experiencia previa como R4?",
+    r4_opt_yes: "Sí",
+    r4_opt_no: "No",
+    r4_lbl_6: "6. Si es así, ¿cuáles eran tus responsabilidades?",
+    r4_resp_behemoth: "Gestor de Behemoths",
+    r4_resp_event: "Gestor de Eventos",
+    r4_resp_discord: "Gestor de Discord",
+    r4_resp_row: "Gestor R4 / Roster",
+    r4_resp_statistician: "Estadístico",
+    r4_resp_diplomat: "Diplomático",
+    r4_resp_internal: "Gestor Interno",
+    r4_resp_warmaster: "Maestro de Guerra",
+    r4_lbl_7: "7. ¿En qué área de gestión R4 estás más interesado?",
+    r4_opt_7_def: "Seleccione área de interés...",
+    r4_area_behemoth: "Gestión de Behemoths",
+    r4_area_event: "Gestión de Eventos",
+    r4_area_discord: "Discord y Comunidad",
+    r4_area_row: "Gestión de Miembros y Roster",
+    r4_area_stats: "Estadísticas y Análisis de Datos",
+    r4_area_diplomacy: "Diplomacia y Alianzas",
+    r4_area_internal: "Gestión Interna de la Alianza",
+    r4_area_warmaster: "Estrategia de Guerra y Maestro de Guerra",
+    r4_lbl_8: "8. ¿Cuánto tiempo llevas jugando al juego?",
+    r4_ph_8: "ej. 1 año, 8 meses, desde el lanzamiento",
+    r4_lbl_9: "9. ¿En qué servidores has jugado antes?",
+    r4_ph_9: "ej. Servidor 12, Servidor 48, Servidor 105",
+    btn_submit_r4: "Enviar Solicitud para Oficial R4",
+    btn_loading: "Transmitiendo...",
+    msg_success_sub: "Conexión Segura Confirmada",
+    msg_success_title: "Transmisión Exitosa. Perfil Registrado. Esperando Revisión.",
+    msg_success_desc: "¡Gracias por tu solicitud! En caso de una revisión positiva, R5 se pondrá en contacto contigo en un plazo de 24 horas.",
+    btn_success_back: "Volver al Sistema"
+  },
+  ko: {
+    lbl_back: "시스템으로 돌아가기",
+    r4_title_sub: "보안 채널",
+    r4_title_main: "R4 신청 터미널",
+    r4_desc_main: "아래 모든 필드를 작성하십시오. 귀하의 서류는 장교 검토를 위해 RSX 최고 사령부로 직접 전송됩니다.",
+    r4_lbl_1: "1. 플레이어 이름",
+    r4_ph_1: "게임 내 닉네임을 입력하세요",
+    r4_lbl_2: "2. 플레이어 ID",
+    r4_ph_2: "예: 23483165",
+    r4_lbl_3: "3. 하루에 몇 시간 정도 접속하시나요?",
+    r4_ph_3: "예: 6",
+    r4_lbl_4: "4. 주로 어느 시간대에 접속하시나요?",
+    r4_ph_4: "예: 14:00 - 20:00 UTC / 저녁 시간",
+    r4_lbl_5: "5. 이전 R4 경험이 있으신가요?",
+    r4_opt_yes: "예",
+    r4_opt_no: "아니오",
+    r4_lbl_6: "6. 경험이 있다면 어떤 담당 업무를 하셨나요?",
+    r4_resp_behemoth: "베헤모스 관리자",
+    r4_resp_event: "이벤트 관리자",
+    r4_resp_discord: "디스코드 관리자",
+    r4_resp_row: "R4 / 로스터 관리자",
+    r4_resp_statistician: "통계 담당자",
+    r4_resp_diplomat: "외교관",
+    r4_resp_internal: "내부 관리자",
+    r4_resp_warmaster: "전쟁 담당자 (War Master)",
+    r4_lbl_7: "7. R4 관리 중 가장 관심 있는 분야는 어디인가요?",
+    r4_opt_7_def: "관심 분야를 선택하세요...",
+    r4_area_behemoth: "베헤모스 관리",
+    r4_area_event: "이벤트 관리",
+    r4_area_discord: "디스코드 및 커뮤니티",
+    r4_area_row: "로스터 및 명단 관리",
+    r4_area_stats: "통계 및 데이터 분석",
+    r4_area_diplomacy: "외교 및 연맹 관리",
+    r4_area_internal: "연맹 내부 관리",
+    r4_area_warmaster: "전쟁 전략 및 War Master",
+    r4_lbl_8: "8. 게임을 플레이한 지 얼마나 되셨나요?",
+    r4_ph_8: "예: 1년, 8개월, 출시 이후부터",
+    r4_lbl_9: "9. 이전에 플레이했던 서버는 어디인가요?",
+    r4_ph_9: "예: 12서버, 48서버, 105서버",
+    btn_submit_r4: "R4 장교 신청서 제출",
+    btn_loading: "전송 중...",
+    msg_success_sub: "보안 업링크 확인됨",
+    msg_success_title: "전송 성공. 프로필 기록됨. 장교 검토 대기 중.",
+    msg_success_desc: "신청해 주셔서 감사합니다! 긍정적으로 검토될 경우 24시간 이내에 R5가 연락드릴 예정입니다.",
+    btn_success_back: "시스템으로 돌아가기"
+  }
+};
+
+   <script>
+  function switchLanguage(lang) {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const token = el.getAttribute('data-i18n');
+      
+      if (i18nTokens[lang] && i18nTokens[lang][token]) {
+        // Если это input или textarea, меняем placeholder. Иначе меняем текст.
+        if (el.hasAttribute('placeholder')) {
+          el.setAttribute('placeholder', i18nTokens[lang][token]);
+        } else {
+          el.innerHTML = i18nTokens[lang][token];
+        }
+      }
+    });
+  }
+
+  // Запускается сразу при загрузке страницы
+  document.addEventListener('DOMContentLoaded', () => {
+    const savedLang = localStorage.getItem('selected_lang') || 'en';
+    switchLanguage(savedLang);
+  });
+
+  <script>
+  (function () {
+    'use strict';
+
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz7P25FPuQuGlt-AxB8rlCvAlTfPDxC-QhYolr7w7H19BZcc2hMN07TY8NIdOV3OJkr1Q/exec';
+
+    const form = document.getElementById('r4-form') || document.getElementById('migration-form');
+    const formSection = document.getElementById('form-section');
+    const successOverlay = document.getElementById('success-overlay');
+    const transmitBtn = document.getElementById('transmit-btn');
+    const errorEl = document.getElementById('form-error');
+    const formFields = form.querySelectorAll('.form-field, input[type="radio"], input[type="checkbox"], select, textarea, button');
+
+    function showError(message) {
+      if (errorEl) {
+        errorEl.textContent = message;
+        errorEl.classList.remove('hidden');
+      }
+    }
+
+    function hideError() {
+      if (errorEl) {
+        errorEl.textContent = '';
+        errorEl.classList.add('hidden');
+      }
+    }
+
+    function getI18nText(key, fallback) {
+      const lang = localStorage.getItem('selected_lang') || 'en';
+      return (i18nTokens[lang] && i18nTokens[lang][key]) || fallback;
+    }
+
+    // Состояние загрузки: блокируем форму и меняем текст на кнопке
+    function setFormLocked(isLocked) {
+      formFields.forEach(function (field) { field.disabled = isLocked; });
+      transmitBtn.disabled = isLocked;
+      
+      const submitText = getI18nText('btn_submit_r4', 'Submit Application for R4 Officer');
+      const loadingText = getI18nText('btn_loading', 'Transmitting…');
+      
+      // Меняем текст кнопки на "Отправка..." / "Transmitting..."
+      transmitBtn.textContent = isLocked ? loadingText : submitText;
+      
+      if (isLocked) {
+        transmitBtn.classList.add('opacity-75', 'cursor-not-allowed');
+      } else {
+        transmitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+      }
+    }
+
+    function collectPayload() {
+      var checkedResponsibilities = [];
+      form.querySelectorAll('input[name="r4Responsibilities"]:checked').forEach(function (cb) {
+        checkedResponsibilities.push(cb.value);
+      });
+
+      var r4Exp = form.querySelector('input[name="r4Experience"]:checked');
+
+      return {
+        playerName: (document.getElementById('r4-player-name')?.value || '').trim(),
+        playerId: (document.getElementById('r4-player-id')?.value || '').trim(),
+        onlineHours: (document.getElementById('r4-online-hours')?.value || '').trim(),
+        onlineTimes: (document.getElementById('r4-online-times')?.value || '').trim(),
+        hasR4Experience: r4Exp ? r4Exp.value : '',
+        responsibilities: checkedResponsibilities.join(', '),
+        interestArea: document.getElementById('r4-interest-area')?.value || '',
+        playDuration: (document.getElementById('r4-play-duration')?.value || '').trim(),
+        previousServers: (document.getElementById('r4-previous-servers')?.value || '').trim(),
+        submittedAt: new Date().toISOString()
+      };
+    }
+
+    function validatePayload(data) {
+      if (!data.playerName) return 'Player Name / Nickname is required.';
+      if (!data.playerId) return 'Player ID is required.';
+      if (!data.onlineHours) return 'Daily online hours are required.';
+      if (!data.onlineTimes) return 'Usual online times are required.';
+      if (!data.hasR4Experience) return 'Please select whether you have R4 experience.';
+      if (!data.interestArea) return 'Please select your preferred R4 management area.';
+      if (!data.playDuration) return 'Game play duration is required.';
+      if (!data.previousServers) return 'Previous servers list is required.';
+      return null;
+    }
+
+    // Показываем всплывающее окно успеха с переведенным текстом
+    function showSuccess() {
+      // Принудительно обновляем переводы в модальном окне перед показом
+      const lang = localStorage.getItem('selected_lang') || 'en';
+      if (typeof switchLanguage === 'function') {
+        switchLanguage(lang);
+      }
+
+      if (formSection) formSection.classList.add('hidden');
+      if (successOverlay) {
+        successOverlay.classList.remove('hidden');
+        successOverlay.classList.add('flex'); // Показываем флекс-контейнер модалки
+      }
+      document.body.style.overflow = 'hidden';
+    }
+
+    async function submitApplication(payload) {
+      return fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+    }
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      hideError();
+
+      const payload = collectPayload();
+      const validationError = validatePayload(payload);
+      if (validationError) {
+        showError(validationError);
+        return;
+      }
+
+      // 1. Включаем загрузку
+      setFormLocked(true);
+
+      try {
+        if (APPS_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+          // Имитация задержки сети (2 секунды) для демонстрации
+          await new Promise(function (resolve) { setTimeout(resolve, 2000); });
+        } else {
+          await submitApplication(payload);
+        }
+        
+        // 2. Показываем окно успеха
+        showSuccess();
+      } catch (err) {
+        console.error('Transmission failed:', err);
+        showError('Transmission failed. Check your connection and try again.');
+        setFormLocked(false);
+      }
+    });
+  })();
+</script>
+</body>
+</html>
