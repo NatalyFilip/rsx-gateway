@@ -147,107 +147,127 @@
 
       <section id="form-section" class="terminal-glass rounded-2xl overflow-hidden animate-terminal-in">
         <div class="terminal-header-bar px-5 sm:px-7 py-4">
-          <p data-i18n="title_sub" class="font-display text-[10px] tracking-[0.35em] uppercase text-amber-400/65">Secure Channel</p>
-          <h2 data-i18n="title_main" class="font-display text-sm sm:text-base tracking-[0.14em] uppercase text-purple-100 mt-1">R4 Application Terminal</h2>
+          <p data-i18n="r4_title_sub" class="font-display text-[10px] tracking-[0.35em] uppercase text-amber-400/65">Secure Channel</p>
+          <h2 data-i18n="r4_title_main" class="font-display text-sm sm:text-base tracking-[0.14em] uppercase text-purple-100 mt-1">R4 Application Terminal</h2>
         </div>
 
         <div class="px-5 sm:px-7 py-6 sm:py-8">
-          <p data-i18n="desc_main" class="text-sm text-purple-400/50 mb-6 leading-relaxed">
+          <p data-i18n="r4_desc_main" class="text-sm text-purple-400/50 mb-6 leading-relaxed">
             Complete all fields below. Your dossier will be transmitted directly to RSX High Command for officer review.
           </p>
 
-          <form id="migration-form" class="space-y-6 max-w-4xl mx-auto" novalidate>
+          <form id="r4-form" class="space-y-6 max-w-4xl mx-auto" novalidate>
             
+            <!-- 1. Player Name -->
             <div class="space-y-1.5">
-              <label for="player-id" data-i18n="lbl_1" class="field-label block">1. In-Game Player ID</label>
-              <input id="player-id" name="playerId" type="number" required inputmode="numeric" data-i18n="ph_1" placeholder="e.g. 23483165" class="form-field w-full px-4 py-3 rounded-lg text-[15px] font-medium tabular-nums" />
+              <label for="player-name" data-i18n="r4_lbl_1" class="field-label block">1. Player Name</label>
+              <input id="player-name" name="playerName" type="text" required data-i18n="r4_ph_1" placeholder="Enter your in-game nickname" class="form-field w-full px-4 py-3 rounded-lg text-[15px] font-medium" />
             </div>
 
+            <!-- 2. Player ID -->
             <div class="space-y-1.5">
-              <label for="character-name" data-i18n="lbl_2" class="field-label block">2. Character Name / Nickname</label>
-              <input id="character-name" name="characterName" type="text" required autocomplete="nickname" data-i18n="ph_2" placeholder="Enter your current in-game name" class="form-field w-full px-4 py-3 rounded-lg text-[15px] font-medium" />
+              <label for="player-id" data-i18n="r4_lbl_2" class="field-label block">2. Player ID</label>
+              <input id="player-id" name="playerId" type="number" required inputmode="numeric" data-i18n="r4_ph_2" placeholder="e.g. 23483165" class="form-field w-full px-4 py-3 rounded-lg text-[15px] font-medium tabular-nums" />
             </div>
 
+            <!-- 3. Hours Online -->
             <div class="space-y-1.5">
-              <label for="last-server" data-i18n="lbl_3" class="field-label block">3. Last Server Number Played On</label>
-              <input id="last-server" name="lastServer" type="number" required inputmode="numeric" data-i18n="ph_3" placeholder="The most recent server number where you active" class="form-field w-full px-4 py-3 rounded-lg text-[15px] font-medium" />
+              <label for="hours-online" data-i18n="r4_lbl_3" class="field-label block">3. How many hours are you online per day?</label>
+              <input id="hours-online" name="hoursOnline" type="number" required min="1" max="24" data-i18n="r4_ph_3" placeholder="e.g. 6" class="form-field w-full px-4 py-3 rounded-lg text-[15px] font-medium" />
             </div>
 
+            <!-- 4. Usual Online Times -->
             <div class="space-y-1.5">
-              <label for="max-power" data-i18n="lbl_4" class="field-label block">4. Maximum Power Reached</label>
-              <input id="max-power" name="maxPower" type="number" required inputmode="numeric" data-i18n="ph_4" placeholder="Your peak power stat level" class="form-field w-full px-4 py-3 rounded-lg text-[15px] font-medium" />
+              <label for="online-times" data-i18n="r4_lbl_4" class="field-label block">4. What times are you usually online?</label>
+              <input id="online-times" name="onlineTimes" type="text" required data-i18n="r4_ph_4" placeholder="e.g. 14:00 - 20:00 UTC / Evenings" class="form-field w-full px-4 py-3 rounded-lg text-[15px] font-medium" />
             </div>
 
+            <!-- 5. Previous R4 Experience -->
             <div class="space-y-1.5">
-              <label for="war-merits" data-i18n="lbl_5" class="field-label block">5. Previous Season War Merits</label>
-              <input id="war-merits" name="previousWarMerits" type="number" required min="0" inputmode="numeric" data-i18n="ph_5" placeholder="Total historical combat achievements and war merits" class="form-field w-full px-4 py-3 rounded-lg text-[15px] font-medium tabular-nums" />
-            </div>
-
-            <div class="space-y-1.5">
-              <label for="utc-offset" data-i18n="lbl_6" class="field-label block">6. Local Time Zone Difference from UTC</label>
-              <select id="utc-offset" name="utcOffset" required class="form-field w-full px-4 py-3 rounded-lg text-[15px] font-medium">
-                <option value="" disabled selected data-i18n="opt_6_def">Select your UTC time offset...</option>
-                <option value="UTC-11">UTC -11</option><option value="UTC-10">UTC -10</option>
-                <option value="UTC-9">UTC -9</option><option value="UTC-8">UTC -8</option>
-                <option value="UTC-7">UTC -7</option><option value="UTC-6">UTC -6</option>
-                <option value="UTC-5">UTC -5</option><option value="UTC-4">UTC -4</option>
-                <option value="UTC-3">UTC -3</option><option value="UTC-2">UTC -2</option>
-                <option value="UTC-1">UTC -1</option><option value="UTC+0">UTC +0</option>
-                <option value="UTC+1">UTC +1</option><option value="UTC+2">UTC +2</option>
-                <option value="UTC+3">UTC +3</option><option value="UTC+4">UTC +4</option>
-                <option value="UTC+5">UTC +5</option><option value="UTC+6">UTC +6</option>
-                <option value="UTC+7">UTC +7</option><option value="UTC+8">UTC +8</option>
-                <option value="UTC+9">UTC +9</option><option value="UTC+10">UTC +10</option>
-                <option value="UTC+11">UTC +11</option><option value="UTC+12">UTC +12</option>
-              </select>
-            </div>
-
-            <div class="space-y-1.5">
-              <label for="playtime" data-i18n="lbl_7" class="field-label block">7. Estimated Daily Playtime Availability (Hours)</label>
-              <input id="playtime" name="playtime" type="number" required min="1" max="24" data-i18n="ph_7" placeholder="How many hours can you commit to active gameplay per day" class="form-field w-full px-4 py-3 rounded-lg text-[15px] font-medium" />
-            </div>
-
-            <div class="space-y-1.5">
-              <label for="discord" data-i18n="lbl_9" class="field-label block">9. Discord Username</label>
-              <input id="discord" name="discord" type="text" required data-i18n="ph_9" placeholder="e.g. username (Required for coordination)" class="form-field w-full px-4 py-3 rounded-lg text-[15px] font-medium" />
-            </div>
-
-            <div class="space-y-1.5">
-              <label for="dead-units" data-i18n="lbl_10" class="field-label block">10. Dead Units Accumulated</label>
-              <input id="dead-units" name="deadUnits" type="number" required min="0" data-i18n="ph_10" placeholder="Total number of permanently lost forces" class="form-field w-full px-4 py-3 rounded-lg text-[15px] font-medium" />
-            </div>
-
-            <div class="space-y-1.5">
-              <label for="unit-type" data-i18n="lbl_11" class="field-label block">11. Primary Specialized Unit Type</label>
-              <select id="unit-type" name="unitType" required class="form-field w-full px-4 py-3 rounded-lg text-[15px] font-medium">
-                <option value="" disabled selected data-i18n="opt_11_def">Select your main combat army type...</option>
-                <option value="Cavalry" data-i18n="opt_11_cav">Cavalry</option>
-                <option value="Mages" data-i18n="opt_11_mag">Mages</option>
-                <option value="Infantry" data-i18n="opt_11_inf">Infantry</option>
-                <option value="Marksmen" data-i18n="opt_11_mrk">Marksmen</option>
-              </select>
-            </div>
-
-            <div class="space-y-1.5">
-              <label data-i18n="lbl_12" class="field-label block">12. Active March Queues Available</label>
-              <div class="form-field w-full px-4 py-2.5 rounded-lg flex items-center justify-around gap-2">
-                <label class="flex items-center gap-1.5 cursor-pointer text-sm font-medium text-purple-100"><input type="radio" name="marchQueues" value="1" required class="accent-purple-500"> 1</label>
-                <label class="flex items-center gap-1.5 cursor-pointer text-sm font-medium text-purple-100"><input type="radio" name="marchQueues" value="2" class="accent-purple-500"> 2</label>
-                <label class="flex items-center gap-1.5 cursor-pointer text-sm font-medium text-purple-100"><input type="radio" name="marchQueues" value="3" class="accent-purple-500"> 3</label>
-                <label class="flex items-center gap-1.5 cursor-pointer text-sm font-medium text-purple-100"><input type="radio" name="marchQueues" value="4" class="accent-purple-500"> 4</label>
-                <label class="flex items-center gap-1.5 cursor-pointer text-sm font-medium text-purple-100"><input type="radio" name="marchQueues" value="5" class="accent-purple-500"> 5</label>
+              <label data-i18n="r4_lbl_5" class="field-label block">5. Do you have any previous R4 experience?</label>
+              <div class="form-field w-full px-4 py-3 rounded-lg flex items-center gap-6">
+                <label class="flex items-center gap-2 cursor-pointer text-sm font-medium text-purple-100">
+                  <input type="radio" name="r4Experience" value="Yes" required class="accent-amber-500">
+                  <span data-i18n="r4_opt_yes">Yes</span>
+                </label>
+                <label class="flex items-center gap-2 cursor-pointer text-sm font-medium text-purple-100">
+                  <input type="radio" name="r4Experience" value="No" class="accent-amber-500">
+                  <span data-i18n="r4_opt_no">No</span>
+                </label>
               </div>
             </div>
 
+            <!-- 6. Responsibilities (Checkboxes) -->
             <div class="space-y-1.5">
-              <label for="decor-attack" data-i18n="lbl_13" class="field-label block">13. City Decoration Total Bonus (%)</label>
-              <input id="decor-attack" name="decorAttack" type="number" required min="0" step="0.1" data-i18n="ph_13" placeholder="Enter your total city layout decoration offensive bonus percentage" class="form-field w-full px-4 py-3 rounded-lg text-[15px] font-medium" />
+              <label data-i18n="r4_lbl_6" class="field-label block">6. If yes, what were your responsibilities?</label>
+              <div class="form-field w-full p-4 rounded-lg grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-purple-100">
+                <label class="flex items-center gap-2.5 cursor-pointer hover:text-amber-300 transition-colors">
+                  <input type="checkbox" name="responsibilities" value="Behemoth Manager" class="accent-amber-500 rounded">
+                  <span data-i18n="r4_resp_behemoth">Behemoth Manager</span>
+                </label>
+                <label class="flex items-center gap-2.5 cursor-pointer hover:text-amber-300 transition-colors">
+                  <input type="checkbox" name="responsibilities" value="Event Manager" class="accent-amber-500 rounded">
+                  <span data-i18n="r4_resp_event">Event Manager</span>
+                </label>
+                <label class="flex items-center gap-2.5 cursor-pointer hover:text-amber-300 transition-colors">
+                  <input type="checkbox" name="responsibilities" value="Discord Manager" class="accent-amber-500 rounded">
+                  <span data-i18n="r4_resp_discord">Discord Manager</span>
+                </label>
+                <label class="flex items-center gap-2.5 cursor-pointer hover:text-amber-300 transition-colors">
+                  <input type="checkbox" name="responsibilities" value="R4 / Roster Manager" class="accent-amber-500 rounded">
+                  <span data-i18n="r4_resp_row">R4 / Roster Manager</span>
+                </label>
+                <label class="flex items-center gap-2.5 cursor-pointer hover:text-amber-300 transition-colors">
+                  <input type="checkbox" name="responsibilities" value="Statistician" class="accent-amber-500 rounded">
+                  <span data-i18n="r4_resp_statistician">Statistician</span>
+                </label>
+                <label class="flex items-center gap-2.5 cursor-pointer hover:text-amber-300 transition-colors">
+                  <input type="checkbox" name="responsibilities" value="Diplomat" class="accent-amber-500 rounded">
+                  <span data-i18n="r4_resp_diplomat">Diplomat</span>
+                </label>
+                <label class="flex items-center gap-2.5 cursor-pointer hover:text-amber-300 transition-colors">
+                  <input type="checkbox" name="responsibilities" value="Internal Manager" class="accent-amber-500 rounded">
+                  <span data-i18n="r4_resp_internal">Internal Manager</span>
+                </label>
+                <label class="flex items-center gap-2.5 cursor-pointer hover:text-amber-300 transition-colors">
+                  <input type="checkbox" name="responsibilities" value="War Master" class="accent-amber-500 rounded">
+                  <span data-i18n="r4_resp_warmaster">War Master</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- 7. Interested Area -->
+            <div class="space-y-1.5">
+              <label for="interested-area" data-i18n="r4_lbl_7" class="field-label block">7. Which area of R4 management are you most interested in?</label>
+              <select id="interested-area" name="interestedArea" required class="form-field w-full px-4 py-3 rounded-lg text-[15px] font-medium">
+                <option value="" disabled selected data-i18n="r4_opt_7_def">Select area of interest...</option>
+                <option value="Behemoth Management" data-i18n="r4_area_behemoth">Behemoth Management</option>
+                <option value="Event Management" data-i18n="r4_area_event">Event Management</option>
+                <option value="Discord & Community" data-i18n="r4_area_discord">Discord & Community</option>
+                <option value="Row / Roster Management" data-i18n="r4_area_row">Row / Roster Management</option>
+                <option value="Statistics & Data Analysis" data-i18n="r4_area_stats">Statistics & Data Analysis</option>
+                <option value="Diplomacy & Alliances" data-i18n="r4_area_diplomacy">Diplomacy & Alliances</option>
+                <option value="Internal Alliance Management" data-i18n="r4_area_internal">Internal Alliance Management</option>
+                <option value="War Strategy & War Master" data-i18n="r4_area_warmaster">War Strategy & War Master</option>
+              </select>
+            </div>
+
+            <!-- 8. Play Duration -->
+            <div class="space-y-1.5">
+              <label for="play-duration" data-i18n="r4_lbl_8" class="field-label block">8. How long have you been playing the game?</label>
+              <input id="play-duration" name="playDuration" type="text" required data-i18n="r4_ph_8" placeholder="e.g. 1 year, 8 months, since launch" class="form-field w-full px-4 py-3 rounded-lg text-[15px] font-medium" />
+            </div>
+
+            <!-- 9. Previous Servers -->
+            <div class="space-y-1.5">
+              <label for="previous-servers" data-i18n="r4_lbl_9" class="field-label block">9. Which servers have you played on before?</label>
+              <input id="previous-servers" name="previousServers" type="text" required data-i18n="r4_ph_9" placeholder="e.g. Server 12, Server 48, Server 105" class="form-field w-full px-4 py-3 rounded-lg text-[15px] font-medium" />
             </div>
 
             <p id="form-error" class="form-error hidden rounded-lg px-4 py-3 text-sm font-medium"></p>
 
-            <button type="submit" id="transmit-btn" data-i18n="btn_submit" class="transmit-btn w-full mt-3 py-4 sm:py-5 rounded-xl font-display font-black text-xs sm:text-sm tracking-[0.14em] sm:tracking-[0.18em] uppercase">
-              Transmit Application to High Command
+            <button type="submit" id="transmit-btn" data-i18n="btn_submit_r4" class="transmit-btn w-full mt-3 py-4 sm:py-5 rounded-xl font-display font-black text-xs sm:text-sm tracking-[0.14em] sm:tracking-[0.18em] uppercase">
+              Submit Application for R4 Officer
             </button>
           </form>
         </div>
@@ -273,215 +293,516 @@
       </a>
     </div>
   </div>
+</body>
 
   <script>
-   const i18nTokens = {
+const i18nTokens = {
   en: {
-    lbl_back: "Back to System", title_sub: "Secure Channel", title_main: "Migration Application Terminal", desc_main: "Complete all fields below. Your dossier will be transmitted directly to RSX High Command for officer review.",
-    lbl_1: "1. In-Game Player ID", ph_1: "e.g. 23483165", lbl_2: "2. Character Name / Nickname", ph_2: "Enter your current in-game name", lbl_3: "3. Last Server Number Played On", ph_3: "The most recent server number where you active", lbl_4: "4. Maximum Power Reached", ph_4: "Your peak power stat level", lbl_5: "5. Previous Season War Merits", ph_5: "Total historical combat achievements and war merits", lbl_6: "6. Local Time Zone Difference from UTC", opt_6_def: "Select your UTC time offset...", lbl_7: "7. Estimated Daily Playtime Availability (Hours)", ph_7: "How many hours can you commit to active gameplay per day", lbl_8: "8. Preferred Daily Activity Windows", cb_morn: "Morning", cb_aft: "Afternoon", cb_eve: "Evening", cb_any: "Anytime", lbl_9: "9. Discord Username", ph_9: "e.g. username (Required for coordination)", lbl_10: "10. Dead Units Accumulated", ph_10: "Total number of permanently lost forces", lbl_11: "11. Primary Specialized Unit Type", opt_11_def: "Select your main combat army type...", opt_11_cav: "Cavalry", opt_11_mag: "Mages", opt_11_inf: "Infantry", opt_11_mrk: "Marksmen", lbl_12: "12. Active March Queues Available", lbl_13: "13. City Decoration Attack Bonus (%)", ph_13: "Enter your total city layout decoration offensive bonus percentage",
-    btn_submit: "Transmit Application to High Command", btn_loading: "Transmitting...", msg_success_sub: "Secure Uplink Confirmed", msg_success_title: "Transmission Successful. Profile Logged. Awaiting Officer Review.", 
-    msg_success_desc: "If you don't get a positive answer in 24h, know that our response is negative. Since we get too many applications, there are times when we are unable to get back to players. We are so sorry for this, we hope you will understand.", 
+    lbl_back: "Back to System",
+    r4_title_sub: "Secure Channel",
+    r4_title_main: "R4 Application Terminal",
+    r4_desc_main: "Complete all fields below. Your dossier will be transmitted directly to RSX High Command for officer review.",
+    r4_lbl_1: "1. Player Name",
+    r4_ph_1: "Enter your in-game nickname",
+    r4_lbl_2: "2. Player ID",
+    r4_ph_2: "e.g. 23483165",
+    r4_lbl_3: "3. How many hours are you online per day?",
+    r4_ph_3: "e.g. 6",
+    r4_lbl_4: "4. What times are you usually online?",
+    r4_ph_4: "e.g. 14:00 - 20:00 UTC / Evenings",
+    r4_lbl_5: "5. Do you have any previous R4 experience?",
+    r4_opt_yes: "Yes",
+    r4_opt_no: "No",
+    r4_lbl_6: "6. If yes, what were your responsibilities?",
+    r4_resp_behemoth: "Behemoth Manager",
+    r4_resp_event: "Event Manager",
+    r4_resp_discord: "Discord Manager",
+    r4_resp_row: "R4 / Roster Manager",
+    r4_resp_statistician: "Statistician",
+    r4_resp_diplomat: "Diplomat",
+    r4_resp_internal: "Internal Manager",
+    r4_resp_warmaster: "War Master",
+    r4_lbl_7: "7. Which area of R4 management are you most interested in?",
+    r4_opt_7_def: "Select area of interest...",
+    r4_area_behemoth: "Behemoth Management",
+    r4_area_event: "Event Management",
+    r4_area_discord: "Discord & Community",
+    r4_area_row: "Row / Roster Management",
+    r4_area_stats: "Statistics & Data Analysis",
+    r4_area_diplomacy: "Diplomacy & Alliances",
+    r4_area_internal: "Internal Alliance Management",
+    r4_area_warmaster: "War Strategy & War Master",
+    r4_lbl_8: "8. How long have you been playing the game?",
+    r4_ph_8: "e.g. 1 year, 8 months, since launch",
+    r4_lbl_9: "9. Which servers have you played on before?",
+    r4_ph_9: "e.g. Server 12, Server 48, Server 105",
+    btn_submit_r4: "Submit Application for R4 Officer",
+    btn_loading: "Transmitting...",
+    msg_success_sub: "Secure Uplink Confirmed",
+    msg_success_title: "Transmission Successful. Profile Logged. Awaiting Officer Review.",
+    msg_success_desc: "Your application has been received. An RSX officer will contact you via in-game mail or Discord.",
     btn_success_back: "Return to System"
   },
   ru: {
-    lbl_back: "Вернуться в систему", title_sub: "Защищенный канал", title_main: "Терминал заявки на миграцию", desc_main: "Заполните все поля ниже. Ваше досье будет передано напрямую Командованию RSX.",
-    lbl_1: "1. Внутриигровой ID", ph_1: "напр. 23483165", lbl_2: "2. Имя персонажа / Никнейм", ph_2: "Введите ваше текущее имя в игре", lbl_3: "3. Номер последнего сервера", ph_3: "Последний сервер, на котором вы играли", lbl_4: "4. Максимальная мощь", ph_4: "Ваш максимальный уровень мощи", lbl_5: "5. Военные заслуги за прошлый сезон", ph_5: "Общее количество заслуг (War Merits)", lbl_6: "6. Ваш часовой пояс (от UTC)", opt_6_def: "Выберите смещение от UTC...", lbl_7: "7. Ежедневный онлайн (в часах)", ph_7: "Сколько часов в день вы готовы играть", lbl_8: "8. Предпочтительное время активности", cb_morn: "Утро", cb_aft: "День", cb_eve: "Вечер", cb_any: "Любое", lbl_9: "9. Имя пользователя в Discord", ph_9: "напр. ваш_ник (Обязательно для связи)", lbl_10: "10. Количество мертвых войск", ph_10: "Количество безвозвратно потерянных войск", lbl_11: "11. Основной тип войск", opt_11_def: "Выберите ваш основной тип войск...", opt_11_cav: "Кавалерия", opt_11_mag: "Маги", opt_11_inf: "Пехота", opt_11_mrk: "Стрелки", lbl_12: "12. Количество боевых очередей", lbl_13: "13. Бонус атаки от декораций (%)", ph_13: "Введите процент бонуса атаки",
-    btn_submit: "Отправить заявку в Командование", btn_loading: "Отправка...", msg_success_sub: "Связь подтверждена", msg_success_title: "Передача успешна. Профиль сохранен. Ожидайте решения.", 
-    msg_success_desc: "Если вы не получите положительный ответ в течение 24 часов, значит заявка отклонена. Из-за большого количества заявок мы не всегда успеваем ответить каждому игроку. Приносим извинения и надеемся на понимание.", 
+    lbl_back: "Вернуться в систему",
+    r4_title_sub: "Защищенный канал",
+    r4_title_main: "Терминал заявки на R4",
+    r4_desc_main: "Заполните все поля ниже. Ваше досье будет передано напрямую Командованию RSX для рассмотрения офицерами.",
+    r4_lbl_1: "1. Имя игрока / Ник",
+    r4_ph_1: "Введите ваш никнейм в игре",
+    r4_lbl_2: "2. Внутриигровой ID",
+    r4_ph_2: "напр. 23483165",
+    r4_lbl_3: "3. Сколько часов в день вы в онлайне?",
+    r4_ph_3: "напр. 6",
+    r4_lbl_4: "4. В какое время вы обычно в сети?",
+    r4_ph_4: "напр. 14:00 - 20:00 UTC / По вечерам",
+    r4_lbl_5: "5. Был ли у вас ранее опыт R4?",
+    r4_opt_yes: "Да",
+    r4_opt_no: "Нет",
+    r4_lbl_6: "6. Если да, то какие обязанности вы выполняли?",
+    r4_resp_behemoth: "Менеджер Бегемотов",
+    r4_resp_event: "Ивент-менеджер",
+    r4_resp_discord: "Менеджер Discord",
+    r4_resp_row: "R4 / Менеджер состава",
+    r4_resp_statistician: "Статист",
+    r4_resp_diplomat: "Дипломат",
+    r4_resp_internal: "Внутренний менеджер",
+    r4_resp_warmaster: "Вармастер / Военком",
+    r4_lbl_7: "7. Какое направление в R4 вам наиболее интересно?",
+    r4_opt_7_def: "Выберите интересующую сферу...",
+    r4_area_behemoth: "Управление Бегемотами",
+    r4_area_event: "Организация ивентов",
+    r4_area_discord: "Discord и Сообщество",
+    r4_area_row: "Работа с составом / Ростер",
+    r4_area_stats: "Статистика и аналитика",
+    r4_area_diplomacy: "Дипломатия и альянсы",
+    r4_area_internal: "Внутреннее управление",
+    r4_area_warmaster: "Военная стратегия / Вармастер",
+    r4_lbl_8: "8. Как долго вы играете в игру?",
+    r4_ph_8: "напр. 1 год, 8 месяцев, со старта",
+    r4_lbl_9: "9. На каких серверах вы играли ранее?",
+    r4_ph_9: "напр. Сервер 12, Сервер 48, Сервер 105",
+    btn_submit_r4: "Отправить заявку на офицера R4",
+    btn_loading: "Отправка...",
+    msg_success_sub: "Связь подтверждена",
+    msg_success_title: "Передача успешна. Профиль сохранен. Ожидайте решения.",
+    msg_success_desc: "Ваша заявка принята. Офицер RSX свяжется с вами через внутриигровую почту или Discord.",
     btn_success_back: "Вернуться в систему"
   },
   tr: {
-    lbl_back: "Sisteme Dön", title_sub: "Güvenli Kanal", title_main: "Göç Başvuru Terminali", desc_main: "Aşağıdaki tüm alanları doldurun. Dosyanız subay incelemesi için doğrudan RSX Yüksek Komutanlığına iletilecektir.",
-    lbl_1: "1. Oyun İçi Oyuncu ID'si", ph_1: "örn. 23483165", lbl_2: "2. Karakter Adı / Takma Ad", ph_2: "Mevcut oyun içi adınızı girin", lbl_3: "3. Oynanan Son Sunucu Numarası", ph_3: "Aktif olduğunuz en son sunucu", lbl_4: "4. Ulaşılan Maksimum Güç", ph_4: "En yüksek güç seviyeniz", lbl_5: "5. Önceki Sezon Savaş Liyakatleri", ph_5: "Toplam geçmiş savaş başarıları", lbl_6: "6. UTC'den Yerel Saat Dilimi Farkı", opt_6_def: "UTC saat farkınızı seçin...", lbl_7: "7. Tahmini Günlük Oynama Süresi (Saat)", ph_7: "Günde kaç saat aktif oynayabilirsiniz", lbl_8: "8. Tercih Edilen Günlük Aktivite Saatleri", cb_morn: "Sabah", cb_aft: "Öğleden Sonra", cb_eve: "Akşam", cb_any: "Her Zaman", lbl_9: "9. Discord Kullanıcı Adı", ph_9: "örn. kullanıcı adınız", lbl_10: "10. Biriken Ölü Birimler", ph_10: "Kalıcı olarak kaybedilen kuvvetler", lbl_11: "11. Birincil Uzmanlaşmış Birim Türü", opt_11_def: "Ana savaş ordusu türünüzü seçin...", opt_11_cav: "Süvari", opt_11_mag: "Büyücü", opt_11_inf: "Piyade", opt_11_mrk: "Nişancı", lbl_12: "12. Kullanılabilir Aktif İntikal Kuyrukları", lbl_13: "13. Şehir Dekorasyonu Saldırı Bonusu (%)", ph_13: "Saldırı bonusu yüzdenizi girin",
-    btn_submit: "Başvuruyu İlet", btn_loading: "İletiliyor...", msg_success_sub: "Güvenli Bağlantı", msg_success_title: "İletim Başarılı. İnceleme Bekleniyor.", 
-    msg_success_desc: "24 saat içinde olumlu bir yanıt alamazsanız, başvurunuzun olumsuz değerlendirildiğini bilin. Çok fazla başvuru aldığımız için bazen oyunculara dönüş yapamıyoruz. Bu durum için özür diler, anlayışınızı rica ederiz.", 
+    lbl_back: "Sisteme Dön",
+    r4_title_sub: "Güvenli Kanal",
+    r4_title_main: "R4 Başvuru Terminali",
+    r4_desc_main: "Aşağıdaki tüm alanları doldurun. Dosyanız subay incelemesi için doğrudan RSX Yüksek Komutanlığına iletilecektir.",
+    r4_lbl_1: "1. Oyuncu Adı",
+    r4_ph_1: "Oyun içi takma adınızı girin",
+    r4_lbl_2: "2. Oyuncu ID'si",
+    r4_ph_2: "örn. 23483165",
+    r4_lbl_3: "3. Günde kaç saat çevrimiçisiniz?",
+    r4_ph_3: "örn. 6",
+    r4_lbl_4: "4. Genellikle hangi saatlerde çevrimiçisiniz?",
+    r4_ph_4: "örn. 14:00 - 20:00 UTC / Akşamları",
+    r4_lbl_5: "5. Daha önce R4 deneyiminiz oldu mu?",
+    r4_opt_yes: "Evet",
+    r4_opt_no: "Hayır",
+    r4_lbl_6: "6. Evet ise, sorumluluklarınız nelerdi?",
+    r4_resp_behemoth: "Behemoth Yöneticisi",
+    r4_resp_event: "Etkinlik Yöneticisi",
+    r4_resp_discord: "Discord Yöneticisi",
+    r4_resp_row: "R4 / Kadro Yöneticisi",
+    r4_resp_statistician: "İstatistikçi",
+    r4_resp_diplomat: "Diplomat",
+    r4_resp_internal: "İç Yönetim Sorumlusu",
+    r4_resp_warmaster: "Savaş Ustası (War Master)",
+    r4_lbl_7: "7. R4 yönetiminin en çok hangi alanıyla ilgileniyorsunuz?",
+    r4_opt_7_def: "İlgi alanınızı seçin...",
+    r4_area_behemoth: "Behemoth Yönetimi",
+    r4_area_event: "Etkinlik Yönetimi",
+    r4_area_discord: "Discord ve Topluluk",
+    r4_area_row: "Kadro ve Üye Yönetimi",
+    r4_area_stats: "İstatistik ve Veri Analizi",
+    r4_area_diplomacy: "Diplomasi ve İttifaklar",
+    r4_area_internal: "İç İttifak Yönetimi",
+    r4_area_warmaster: "Savaş Stratejisi ve Savaş Ustası",
+    r4_lbl_8: "8. Ne kadar süredir bu oyunu oynuyorsunuz?",
+    r4_ph_8: "örn. 1 yıl, 8 ay, açılıştan beri",
+    r4_lbl_9: "9. Daha önce hangi sunucularda oynadınız?",
+    r4_ph_9: "örn. Sunucu 12, Sunucu 48, Sunucu 105",
+    btn_submit_r4: "R4 Subaylığı İçin Başvuruyu İlet",
+    btn_loading: "İletiliyor...",
+    msg_success_sub: "Güvenli Bağlantı Doğrulandı",
+    msg_success_title: "İletim Başarılı. Profil Kaydedildi. Subay İncelemesi Bekleniyor.",
+    msg_success_desc: "Başvurunuz alındı. Bir RSX subayı sizinle oyun içi posta veya Discord üzerinden iletişime geçecektir.",
     btn_success_back: "Sisteme Dön"
   },
   vi: {
-    lbl_back: "Quay Lại Hệ Thống", title_sub: "Kênh Bảo Mật", title_main: "Trạm Gửi Đơn Di Cư", desc_main: "Hoàn thành tất cả các trường dưới đây. Hồ sơ của bạn sẽ được gửi đến Bộ Chỉ Huy Tối Cao RSX.",
-    lbl_1: "1. ID Người Chơi Trong Game", ph_1: "vd: 23483165", lbl_2: "2. Tên Nhân Vật / Biệt Danh", ph_2: "Nhập tên trong game của bạn", lbl_3: "3. Số Server Chơi Gần Nhất", ph_3: "Số server gần nhất bạn hoạt động", lbl_4: "4. Sức Mạnh Tối Đa Đạt Được", ph_4: "Mức sức mạnh cao nhất của bạn", lbl_5: "5. Công Huân Mùa Trước", ph_5: "Tổng thành tích chiến đấu", lbl_6: "6. Chênh Lệch Múi Giờ (UTC)", opt_6_def: "Chọn múi giờ UTC của bạn...", lbl_7: "7. Thời Gian Chơi Ước Tính (Giờ)", ph_7: "Bạn có thể chơi bao nhiêu giờ mỗi ngày", lbl_8: "8. Thời Gian Hoạt Động Ưa Thích", cb_morn: "Sáng", cb_aft: "Chiều", cb_eve: "Tối", cb_any: "Bất cứ lúc nào", lbl_9: "9. Tên Discord", ph_9: "vd: username", lbl_10: "10. Số Lính Chết Tích Lũy", ph_10: "Tổng số lính bị mất vĩnh viễn", lbl_11: "11. Loại Lính Chính", opt_11_def: "Chọn loại quân chiến đấu chính...", opt_11_cav: "Kỵ binh", opt_11_mag: "Pháp sư", opt_11_inf: "Bộ binh", opt_11_mrk: "Xạ thủ", lbl_12: "12. Số Đội Hình Tối Đa", lbl_13: "13. Buff Tấn Công Từ Trang Trí (%)", ph_13: "Nhập phần trăm buff tấn công",
-    btn_submit: "Gửi Đơn Lên Bộ Chỉ Huy", btn_loading: "Đang gửi...", msg_success_sub: "Xác Nhận Kết Nối", msg_success_title: "Gửi Thành Công. Đang Chờ Xét Duyệt.", 
-    msg_success_desc: "Nếu không nhận được phản hồi tích cực trong vòng 24 giờ, điều đó có nghĩa là đơn của bạn đã bị từ chối. Do số lượng đơn quá lớn, đôi khi chúng tôi không thể phản hồi hết cho từng người chơi. Chúng tôi rất tiếc và mong bạn thông cảm.", 
+    lbl_back: "Quay Lại Hệ Thống",
+    r4_title_sub: "Kênh Bảo Mật",
+    r4_title_main: "Trạm Gửi Đơn R4",
+    r4_desc_main: "Hoàn thành tất cả các trường dưới đây. Hồ sơ của bạn sẽ được gửi đến Bộ Chỉ Huy Tối Cao RSX để xem xét.",
+    r4_lbl_1: "1. Tên Người Chơi",
+    r4_ph_1: "Nhập tên trong game của bạn",
+    r4_lbl_2: "2. ID Người Chơi",
+    r4_ph_2: "vd: 23483165",
+    r4_lbl_3: "3. Bạn online bao nhiêu giờ mỗi ngày?",
+    r4_ph_3: "vd: 6",
+    r4_lbl_4: "4. Bạn thường online vào khung giờ nào?",
+    r4_ph_4: "vd: 14:00 - 20:00 UTC / Buổi tối",
+    r4_lbl_5: "5. Bạn đã có kinh nghiệm làm R4 chưa?",
+    r4_opt_yes: "Có",
+    r4_opt_no: "Chưa",
+    r4_lbl_6: "6. Nếu có, trách nhiệm của bạn là gì?",
+    r4_resp_behemoth: "Quản lý Behemoth",
+    r4_resp_event: "Quản lý Sự kiện",
+    r4_resp_discord: "Quản lý Discord",
+    r4_resp_row: "R4 / Quản lý Nhân sự",
+    r4_resp_statistician: "Thống kê dữ liệu",
+    r4_resp_diplomat: "Ngoại giao",
+    r4_resp_internal: "Quản lý Nội bộ",
+    r4_resp_warmaster: "Bậc thầy Chiến tranh (War Master)",
+    r4_lbl_7: "7. Bạn quan tâm nhất đến lĩnh vực quản lý R4 nào?",
+    r4_opt_7_def: "Chọn lĩnh vực quan tâm...",
+    r4_area_behemoth: "Quản lý Behemoth",
+    r4_area_event: "Quản lý Sự kiện",
+    r4_area_discord: "Discord & Cộng đồng",
+    r4_area_row: "Quản lý Danh sách & Nhân sự",
+    r4_area_stats: "Thống kê & Phân tích Dữ liệu",
+    r4_area_diplomacy: "Ngoại giao & Liên minh",
+    r4_area_internal: "Quản lý Liên minh Nội bộ",
+    r4_area_warmaster: "Chiến lược & Bậc thầy Chiến tranh",
+    r4_lbl_8: "8. Bạn đã chơi game được bao lâu?",
+    r4_ph_8: "vd: 1 năm, 8 tháng, từ khi ra mắt",
+    r4_lbl_9: "9. Bạn đã từng chơi ở những server nào?",
+    r4_ph_9: "vd: Server 12, Server 48, Server 105",
+    btn_submit_r4: "Gửi Đơn Ứng Tuyển R4",
+    btn_loading: "Đang gửi...",
+    msg_success_sub: "Xác Nhận Kết Nối",
+    msg_success_title: "Gửi Thành Công. Đã Ghi Nhận Hồ Sơ. Đang Chờ Duyệt.",
+    msg_success_desc: "Đơn của bạn đã được nhận. Sĩ quan RSX sẽ liên hệ với bạn qua thư trong game hoặc Discord.",
     btn_success_back: "Quay Lại Hệ Thống"
   },
   de: {
-    lbl_back: "Zurück zum System", title_sub: "Sicherer Kanal", title_main: "Migrationsantrags-Terminal", desc_main: "Füllen Sie alle untenstehenden Felder aus. Ihr Dossier wird an das RSX-Oberkommando weitergeleitet.",
-    lbl_1: "1. In-Game Spieler-ID", ph_1: "z.B. 23483165", lbl_2: "2. Charaktername / Spitzname", ph_2: "Geben Sie Ihren Namen ein", lbl_3: "3. Letzter Server", ph_3: "Ihre aktuellste Servernummer", lbl_4: "4. Maximale Macht", ph_4: "Ihre höchste Machtstufe", lbl_5: "5. Kriegsverdienste", ph_5: "Gesamte Kampferfolge", lbl_6: "6. Zeitzonendifferenz (UTC)", opt_6_def: "Wählen Sie Ihre UTC-Zeit...", lbl_7: "7. Tägliche Spielzeit (Stunden)", ph_7: "Wie viele Stunden pro Tag spielen Sie", lbl_8: "8. Bevorzugte Aktivitätszeit", cb_morn: "Morgen", cb_aft: "Nachmittag", cb_eve: "Abend", cb_any: "Jederzeit", lbl_9: "9. Discord-Benutzername", ph_9: "z.B. benutzername", lbl_10: "10. Tote Einheiten", ph_10: "Dauerhaft verlorene Truppen", lbl_11: "11. Haupttruppentyp", opt_11_def: "Wählen Sie Ihren Truppentyp...", opt_11_cav: "Kavallerie", opt_11_mag: "Magier", opt_11_inf: "Infanterie", opt_11_mrk: "Schützen", lbl_12: "12. Aktive Marsch-Warteschlangen", lbl_13: "13. Stadtdekorations-Bonus (%)", ph_13: "Angriffsbonus eingeben",
-    btn_submit: "Antrag übermitteln", btn_loading: "Wird übermittelt...", msg_success_sub: "Verbindung bestätigt", msg_success_title: "Erfolgreich. Warten auf Überprüfung.", 
-    msg_success_desc: "Wenn Sie innerhalb von 24 Stunden keine positive Antwort erhalten, gilt Ihre Bewerbung als abgelehnt. Aufgrund des hohen Bewerbungsaufkommens können wir leider nicht jedem Antworten. Wir bitten um Entschuldigung und hoffen auf Ihr Verständnis.", 
+    lbl_back: "Zurück zum System",
+    r4_title_sub: "Sicherer Kanal",
+    r4_title_main: "R4-Bewerbungsterminal",
+    r4_desc_main: "Füllen Sie alle untenstehenden Felder aus. Ihr Dossier wird direkt an das RSX-Oberkommando zur Überprüfung weitergeleitet.",
+    r4_lbl_1: "1. Spielername",
+    r4_ph_1: "Geben Sie Ihren In-Game-Namen ein",
+    r4_lbl_2: "2. Spieler-ID",
+    r4_ph_2: "z.B. 23483165",
+    r4_lbl_3: "3. Wie viele Stunden sind Sie pro Tag online?",
+    r4_ph_3: "z.B. 6",
+    r4_lbl_4: "4. Zu welchen Zeiten sind Sie normalerweise online?",
+    r4_ph_4: "z.B. 14:00 - 20:00 UTC / Abends",
+    r4_lbl_5: "5. Haben Sie bereits R4-Erfahrung?",
+    r4_opt_yes: "Ja",
+    r4_opt_no: "Nein",
+    r4_lbl_6: "6. Wenn ja, was waren Ihre Aufgaben?",
+    r4_resp_behemoth: "Behemoth-Manager",
+    r4_resp_event: "Event-Manager",
+    r4_resp_discord: "Discord-Manager",
+    r4_resp_row: "R4 / Roster-Manager",
+    r4_resp_statistician: "Statistiker",
+    r4_resp_diplomat: "Diplomat",
+    r4_resp_internal: "Interner Manager",
+    r4_resp_warmaster: "Kriegsmeister (War Master)",
+    r4_lbl_7: "7. Für welchen R4-Bereich interessieren Sie sich am meisten?",
+    r4_opt_7_def: "Interessengebiet auswählen...",
+    r4_area_behemoth: "Behemoth-Management",
+    r4_area_event: "Event-Management",
+    r4_area_discord: "Discord & Community",
+    r4_area_row: "Roster- & Mitgliederverwaltung",
+    r4_area_stats: "Statistik & Datenanalyse",
+    r4_area_diplomacy: "Diplomatie & Allianzen",
+    r4_area_internal: "Interne Allianzverwaltung",
+    r4_area_warmaster: "Kriegsstrategie & Kriegsmeister",
+    r4_lbl_8: "8. Wie lange spielen Sie das Spiel schon?",
+    r4_ph_8: "z.B. 1 Jahr, 8 Monate, seit Release",
+    r4_lbl_9: "9. Auf welchen Servern haben Sie zuvor gespielt?",
+    r4_ph_9: "z.B. Server 12, Server 48, Server 105",
+    btn_submit_r4: "Bewerbung als R4-Offizier absenden",
+    btn_loading: "Wird übermittelt...",
+    msg_success_sub: "Sichere Verbindung bestätigt",
+    msg_success_title: "Übermittlung erfolgreich. Profil erfasst. Warten auf Offiziersprüfung.",
+    msg_success_desc: "Ihre Bewerbung ist eingegangen. Ein RSX-Offizier wird Sie per In-Game-Post oder Discord kontaktieren.",
     btn_success_back: "Zurück zum System"
   },
   it: {
-    lbl_back: "Torna al Sistema", title_sub: "Canale Sicuro", title_main: "Terminale di Migrazione", desc_main: "Compila tutti i campi. Il tuo dossier sarà trasmesso all'Alto Comando RSX.",
-    lbl_1: "1. ID Giocatore", ph_1: "es. 23483165", lbl_2: "2. Nome Personaggio", ph_2: "Inserisci il tuo nome in-game", lbl_3: "3. Ultimo Server", ph_3: "Il server più recente", lbl_4: "4. Potere Massimo", ph_4: "Il tuo livello massimo di potere", lbl_5: "5. Meriti di Guerra", ph_5: "Totale dei successi in combattimento", lbl_6: "6. Fuso Orario (UTC)", opt_6_def: "Seleziona il tuo fuso orario...", lbl_7: "7. Tempo di Gioco (Ore)", ph_7: "Quante ore al giorno puoi giocare", lbl_8: "8. Orario Preferito", cb_morn: "Mattina", cb_aft: "Pomeriggio", cb_eve: "Sera", cb_any: "Sempre", lbl_9: "9. Discord Username", ph_9: "es. username", lbl_10: "10. Unità Morte", ph_10: "Forze perse permanentemente", lbl_11: "11. Tipo di Truppa Principale", opt_11_def: "Seleziona il tuo tipo di truppa...", opt_11_cav: "Cavalleria", opt_11_mag: "Maghi", opt_11_inf: "Fanteria", opt_11_mrk: "Tiratori", lbl_12: "12. Code di Marcia", lbl_13: "13. Bonus Decorazione (%)", ph_13: "Inserisci il bonus di attacco",
-    btn_submit: "Trasmetti Richiesta", btn_loading: "Trasmissione...", msg_success_sub: "Connessione Confermata", msg_success_title: "Trasmissione Avvenuta. In Attesa.", 
-    msg_success_desc: "Se non ricevi una risposta positiva entro 24 ore, considera la tua richiesta respinta. A causa dell'elevato numero di candidature, a volte non riusciamo a rispondere a tutti i giocatori. Ci scusiamo per questo e speriamo nella tua comprensione.", 
+    lbl_back: "Torna al Sistema",
+    r4_title_sub: "Canale Sicuro",
+    r4_title_main: "Terminale Candidatura R4",
+    r4_desc_main: "Compila tutti i campi sottostanti. Il tuo dossier sarà trasmesso all'Alto Comando RSX per la valutazione.",
+    r4_lbl_1: "1. Nome Giocatore",
+    r4_ph_1: "Inserisci il tuo nome in-game",
+    r4_lbl_2: "2. ID Giocatore",
+    r4_ph_2: "es. 23483165",
+    r4_lbl_3: "3. Quante ore sei online al giorno?",
+    r4_ph_3: "es. 6",
+    r4_lbl_4: "4. In quali orari sei di solito online?",
+    r4_ph_4: "es. 14:00 - 20:00 UTC / Sera",
+    r4_lbl_5: "5. Hai precedente esperienza come R4?",
+    r4_opt_yes: "Sì",
+    r4_opt_no: "No",
+    r4_lbl_6: "6. Se sì, quali erano le tue responsabilità?",
+    r4_resp_behemoth: "Gestore Behemoth",
+    r4_resp_event: "Gestore Eventi",
+    r4_resp_discord: "Gestore Discord",
+    r4_resp_row: "Gestore R4 / Roster",
+    r4_resp_statistician: "Statistico",
+    r4_resp_diplomat: "Diplomatico",
+    r4_resp_internal: "Gestore Interno",
+    r4_resp_warmaster: "Maestro di Guerra",
+    r4_lbl_7: "7. Quale area di gestione R4 ti interessa di più?",
+    r4_opt_7_def: "Seleziona area di interesse...",
+    r4_area_behemoth: "Gestione Behemoth",
+    r4_area_event: "Gestione Eventi",
+    r4_area_discord: "Discord e Community",
+    r4_area_row: "Gestione Roster e Membri",
+    r4_area_stats: "Statistiche e Analisi Dati",
+    r4_area_diplomacy: "Diplomazia e Alleanze",
+    r4_area_internal: "Gestione Interna dell'Alleanza",
+    r4_area_warmaster: "Strategia di Guerra e War Master",
+    r4_lbl_8: "8. Da quanto tempo giochi a questo gioco?",
+    r4_ph_8: "es. 1 anno, 8 mesi, dal lancio",
+    r4_lbl_9: "9. In quali server hai giocato in precedenza?",
+    r4_ph_9: "es. Server 12, Server 48, Server 105",
+    btn_submit_r4: "Invia Candidatura Ufficiale R4",
+    btn_loading: "Trasmissione in corso...",
+    msg_success_sub: "Connessione Sicura Confermata",
+    msg_success_title: "Trasmissione Riuscita. Profilo Registrato. In Attesa di Revisione.",
+    msg_success_desc: "La tua candidatura è stata ricevuta. Un ufficiale RSX ti contatterà via posta di gioco o Discord.",
     btn_success_back: "Torna al Sistema"
   },
   es: {
-    lbl_back: "Volver al Sistema", title_sub: "Canal Seguro", title_main: "Terminal de Migración", desc_main: "Complete todos los campos a continuación. Su expediente será transmitido al Alto Mando de RSX.",
-    lbl_1: "1. ID de Jugador", ph_1: "ej. 23483165", lbl_2: "2. Nombre del Personaje", ph_2: "Ingrese su nombre en el juego", lbl_3: "3. Último Servidor", ph_3: "El servidor más reciente", lbl_4: "4. Poder Máximo", ph_4: "Su nivel máximo de poder", lbl_5: "5. Méritos de Guerra", ph_5: "Total de logros de combate", lbl_6: "6. Zona Horaria (UTC)", opt_6_def: "Seleccione su zona horaria...", lbl_7: "7. Tiempo de Juego Diario (Horas)", ph_7: "Cuántas horas diarias puede dedicar al juego", lbl_8: "8. Horario Preferido", cb_morn: "Mañana", cb_aft: "Tarde", cb_eve: "Noche", cb_any: "Siempre", lbl_9: "9. Usuario de Discord", ph_9: "ej. username", lbl_10: "10. Unidades Muertas", ph_10: "Fuerzas perdidas permanentemente", lbl_11: "11. Tipo de Tropa Principal", opt_11_def: "Seleccione su tipo de tropa...", opt_11_cav: "Caballería", opt_11_mag: "Magos", opt_11_inf: "Infantería", opt_11_mrk: "Tiradores", lbl_12: "12. Colas de Marcha", lbl_13: "13. Bono de Decoración (%)", ph_13: "Ingrese el bono de ataque",
-    btn_submit: "Transmitir Solicitud", btn_loading: "Transmitiendo...", msg_success_sub: "Conexión Confirmada", msg_success_title: "Transmisión Exitosa. En Espera.", 
-    msg_success_desc: "Si no recibe una respuesta positiva en 24 horas, considere que su solicitud ha sido rechazada. Debido al alto volumen de solicitudes, a veces no podemos responder a todos los jugadores. Pedimos disculpas por esto y esperamos su comprensión.", 
+    lbl_back: "Volver al Sistema",
+    r4_title_sub: "Canal Seguro",
+    r4_title_main: "Terminal de Solicitud R4",
+    r4_desc_main: "Complete todos los campos a continuación. Su expediente será transmitido al Alto Mando de RSX para revisión de los oficiales.",
+    r4_lbl_1: "1. Nombre de Jugador",
+    r4_ph_1: "Ingrese su apodo en el juego",
+    r4_lbl_2: "2. ID de Jugador",
+    r4_ph_2: "ej. 23483165",
+    r4_lbl_3: "3. ¿Cuántas horas estás en línea al día?",
+    r4_ph_3: "ej. 6",
+    r4_lbl_4: "4. ¿En qué horarios sueles estar en línea?",
+    r4_ph_4: "ej. 14:00 - 20:00 UTC / Tardes-Noches",
+    r4_lbl_5: "5. ¿Tienes experiencia previa como R4?",
+    r4_opt_yes: "Sí",
+    r4_opt_no: "No",
+    r4_lbl_6: "6. Si es así, ¿cuáles eran tus responsabilidades?",
+    r4_resp_behemoth: "Gestor de Behemoths",
+    r4_resp_event: "Gestor de Eventos",
+    r4_resp_discord: "Gestor de Discord",
+    r4_resp_row: "Gestor R4 / Roster",
+    r4_resp_statistician: "Estadístico",
+    r4_resp_diplomat: "Diplomático",
+    r4_resp_internal: "Gestor Interno",
+    r4_resp_warmaster: "Maestro de Guerra",
+    r4_lbl_7: "7. ¿En qué área de gestión R4 estás más interesado?",
+    r4_opt_7_def: "Seleccione área de interés...",
+    r4_area_behemoth: "Gestión de Behemoths",
+    r4_area_event: "Gestión de Eventos",
+    r4_area_discord: "Discord y Comunidad",
+    r4_area_row: "Gestión de Miembros y Roster",
+    r4_area_stats: "Estadísticas y Análisis de Datos",
+    r4_area_diplomacy: "Diplomacia y Alianzas",
+    r4_area_internal: "Gestión Interna de la Alianza",
+    r4_area_warmaster: "Estrategia de Guerra y Maestro de Guerra",
+    r4_lbl_8: "8. ¿Cuánto tiempo llevas jugando al juego?",
+    r4_ph_8: "ej. 1 año, 8 meses, desde el lanzamiento",
+    r4_lbl_9: "9. ¿En qué servidores has jugado antes?",
+    r4_ph_9: "ej. Servidor 12, Servidor 48, Servidor 105",
+    btn_submit_r4: "Enviar Solicitud para Oficial R4",
+    btn_loading: "Transmitiendo...",
+    msg_success_sub: "Conexión Segura Confirmada",
+    msg_success_title: "Transmisión Exitosa. Perfil Registrado. Esperando Revisión.",
+    msg_success_desc: "Su solicitud ha sido recibida. Un oficial de RSX se pondrá en contacto con usted por correo del juego o Discord.",
     btn_success_back: "Volver al Sistema"
   },
-  fr: {
-    lbl_back: "Retour au Système", title_sub: "Canal Sécurisé", title_main: "Terminal de Demande de Migration", desc_main: "Remplissez tous les champs ci-dessous. Votre dossier sera transmis directement au Haut Commandement RSX.",
-    lbl_1: "1. ID Joueur en Jeu", ph_1: "ex. 23483165", lbl_2: "2. Nom de Personnage / Pseudo", ph_2: "Entrez votre nom en jeu", lbl_3: "3. Dernier Serveur Joué", ph_3: "Le serveur le plus récent", lbl_4: "4. Puissance Maximale Atteinte", ph_4: "Votre niveau de puissance maximal", lbl_5: "5. Mérites de Guerre Saison Précédente", ph_5: "Total des mérites de guerre", lbl_6: "6. Décalage Horaire (UTC)", opt_6_def: "Sélectionnez votre fuseau horaire...", lbl_7: "7. Temps de Jeu Quotidien (Heures)", ph_7: "Heures consacrées au jeu par jour", lbl_8: "8. Plage Horaire Préférée", cb_morn: "Matin", cb_aft: "Après-midi", cb_eve: "Soir", cb_any: "À tout moment", lbl_9: "9. Nom d'utilisateur Discord", ph_9: "ex. pseudo", lbl_10: "10. Unités Mortes Cumulées", ph_10: "Troupes perdues définitivement", lbl_11: "11. Type d'Unité Principale", opt_11_def: "Sélectionnez votre type d'armée...", opt_11_cav: "Cavalerie", opt_11_mag: "Mages", opt_11_inf: "Infanterie", opt_11_mrk: "Tireurs", lbl_12: "12. Files de Marche Actives", lbl_13: "13. Bonus d'Attaque de Décoration (%)", ph_13: "Entrez le pourcentage de bonus",
-    btn_submit: "Transmettre la Demande", btn_loading: "Transmission...", msg_success_sub: "Liaison Sécurisée Confirmée", msg_success_title: "Transmission Réussie. Profil Enregistré.", 
-    msg_success_desc: "Si vous ne recevez pas de réponse positive dans les 24 heures, veuillez considérer que votre demande est refusée. En raison du grand nombre de candidatures, nous ne sommes parfois pas en mesure de répondre à tout le monde. Nous nous en excusons et comptons sur votre compréhension.", 
-    btn_success_back: "Retour au Système"
-  },
   ko: {
-    lbl_back: "시스템으로 돌아가기", title_sub: "보안 채널", title_main: "이주 신청 터미널", desc_main: "아래 모든 필드를 작성하십시오. 귀하의 서류는 RSX 최고 사령부로 직접 전송됩니다.",
-    lbl_1: "1. 게임 내 플레이어 ID", ph_1: "예: 23483165", lbl_2: "2. 캐릭터 이름 / 닉네임", ph_2: "현재 게임 내 이름을 입력하세요", lbl_3: "3. 마지막으로 플레이한 서버", ph_3: "가장 최근에 활동한 서버 번호", lbl_4: "4. 도달한 최대 전투력", ph_4: "최대 전투력 레벨", lbl_5: "5. 이전 시즌 전쟁 공로", ph_5: "총 전투 업적 및 전쟁 공로", lbl_6: "6. UTC 기준 시간대 차이", opt_6_def: "UTC 시간대를 선택하세요...", lbl_7: "7. 예상 일일 플레이 시간(시간)", ph_7: "하루에 몇 시간 플레이할 수 있습니까", lbl_8: "8. 선호하는 활동 시간", cb_morn: "아침", cb_aft: "오후", cb_eve: "저녁", cb_any: "언제든지", lbl_9: "9. Discord 사용자 이름", ph_9: "예: username (필수)", lbl_10: "10. 누적 사망 유닛", ph_10: "영구적으로 손실된 총 병력", lbl_11: "11. 주력 특수 유닛", opt_11_def: "주력 부대 유형을 선택하세요...", opt_11_cav: "기병", opt_11_mag: "마법사", opt_11_inf: "보병", opt_11_mrk: "사수", lbl_12: "12. 사용 가능한 활성 부대 대기열", lbl_13: "13. 도시 장식 공격력 보너스 (%)", ph_13: "도시 장식 공격력 보너스 비율 입력",
-    btn_submit: "최고 사령부에 신청서 전송", btn_loading: "전송 중...", msg_success_sub: "보안 업링크 확인됨", msg_success_title: "전송 성공. 프로필 기록됨. 대기 중.", 
-    msg_success_desc: "24시간 이내에 긍정적인 답변을 받지 못하시면 신청이 거절된 것으로 간주해 주시기 바랍니다. 신청서가 너무 많이 접수되어 모든 플레이어에게 답신을 드리지 못하는 경우가 있습니다. 이 점 양해해 주시기 바라며 죄송합니다.", 
+    lbl_back: "시스템으로 돌아가기",
+    r4_title_sub: "보안 채널",
+    r4_title_main: "R4 신청 터미널",
+    r4_desc_main: "아래 모든 필드를 작성하십시오. 귀하의 서류는 장교 검토를 위해 RSX 최고 사령부로 직접 전송됩니다.",
+    r4_lbl_1: "1. 플레이어 이름",
+    r4_ph_1: "게임 내 닉네임을 입력하세요",
+    r4_lbl_2: "2. 플레이어 ID",
+    r4_ph_2: "예: 23483165",
+    r4_lbl_3: "3. 하루에 몇 시간 정도 접속하시나요?",
+    r4_ph_3: "예: 6",
+    r4_lbl_4: "4. 주로 어느 시간대에 접속하시나요?",
+    r4_ph_4: "예: 14:00 - 20:00 UTC / 저녁 시간",
+    r4_lbl_5: "5. 이전 R4 경험이 있으신가요?",
+    r4_opt_yes: "예",
+    r4_opt_no: "아니오",
+    r4_lbl_6: "6. 경험이 있다면 어떤 담당 업무를 하셨나요?",
+    r4_resp_behemoth: "베헤모스 관리자",
+    r4_resp_event: "이벤트 관리자",
+    r4_resp_discord: "디스코드 관리자",
+    r4_resp_row: "R4 / 로스터 관리자",
+    r4_resp_statistician: "통계 담당자",
+    r4_resp_diplomat: "외교관",
+    r4_resp_internal: "내부 관리자",
+    r4_resp_warmaster: "전쟁 담당자 (War Master)",
+    r4_lbl_7: "7. R4 관리 중 가장 관심 있는 분야는 어디인가요?",
+    r4_opt_7_def: "관심 분야를 선택하세요...",
+    r4_area_behemoth: "베헤모스 관리",
+    r4_area_event: "이벤트 관리",
+    r4_area_discord: "디스코드 및 커뮤니티",
+    r4_area_row: "로스터 및 명단 관리",
+    r4_area_stats: "통계 및 데이터 분석",
+    r4_area_diplomacy: "외교 및 연맹 관리",
+    r4_area_internal: "연맹 내부 관리",
+    r4_area_warmaster: "전쟁 전략 및 War Master",
+    r4_lbl_8: "8. 게임을 플레이한 지 얼마나 되셨나요?",
+    r4_ph_8: "예: 1년, 8개월, 출시 이후부터",
+    r4_lbl_9: "9. 이전에 플레이했던 서버는 어디인가요?",
+    r4_ph_9: "예: 12서버, 48서버, 105서버",
+    btn_submit_r4: "R4 장교 신청서 제출",
+    btn_loading: "전송 중...",
+    msg_success_sub: "보안 업링크 확인됨",
+    msg_success_title: "전송 성공. 프로필 기록됨. 장교 검토 대기 중.",
+    msg_success_desc: "신청서가 접수되었습니다. RSX 장교가 게임 내 우편 또는 디스코드를 통해 연락드릴 예정입니다.",
     btn_success_back: "시스템으로 돌아가기"
   }
 };
 
-    function switchLanguage(lang) {
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const token = el.getAttribute('data-i18n');
-        
-        if (i18nTokens[lang] && i18nTokens[lang][token]) {
-          // Если это input, меняем placeholder. Иначе меняем сам текст.
-          if (el.hasAttribute('placeholder')) {
-            el.setAttribute('placeholder', i18nTokens[lang][token]);
-          } else {
-            el.innerHTML = i18nTokens[lang][token];
-          }
+   <script>
+  function switchLanguage(lang) {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const token = el.getAttribute('data-i18n');
+      
+      if (i18nTokens[lang] && i18nTokens[lang][token]) {
+        // Если это input или textarea, меняем placeholder. Иначе меняем текст.
+        if (el.hasAttribute('placeholder')) {
+          el.setAttribute('placeholder', i18nTokens[lang][token]);
+        } else {
+          el.innerHTML = i18nTokens[lang][token];
         }
+      }
+    });
+  }
+
+  // Запускается сразу при загрузке страницы
+  document.addEventListener('DOMContentLoaded', () => {
+    const savedLang = localStorage.getItem('selected_lang') || 'en';
+    switchLanguage(savedLang);
+  });
+
+  (function () {
+    'use strict';
+
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz7P25FPuQuGlt-AxB8rlCvAlTfPDxC-QhYolr7w7H19BZcc2hMN07TY8NIdOV3OJkr1Q/exec';
+
+    const form = document.getElementById('r4-form') || document.getElementById('migration-form');
+    const formSection = document.getElementById('form-section');
+    const successOverlay = document.getElementById('success-overlay');
+    const transmitBtn = document.getElementById('transmit-btn');
+    const errorEl = document.getElementById('form-error');
+    const formFields = form.querySelectorAll('.form-field, input[name="r4Experience"], input[name="r4Responsibilities"]');
+
+    function showError(message) {
+      errorEl.textContent = message;
+      errorEl.classList.remove('hidden');
+    }
+
+    function hideError() {
+      errorEl.textContent = '';
+      errorEl.classList.add('hidden');
+    }
+
+    function getI18nText(key, fallback) {
+      const lang = localStorage.getItem('selected_lang') || 'en';
+      return (i18nTokens[lang] && i18nTokens[lang][key]) || fallback;
+    }
+
+    function setFormLocked(isLocked) {
+      formFields.forEach(function (field) { field.disabled = isLocked; });
+      transmitBtn.disabled = isLocked;
+      
+      const submitText = getI18nText('btn_submit_r4', 'Submit Application for R4 Officer');
+      const loadingText = getI18nText('btn_loading', 'Transmitting…');
+      
+      transmitBtn.textContent = isLocked ? loadingText : submitText;
+    }
+
+    function collectPayload() {
+      var checkedResponsibilities = [];
+      form.querySelectorAll('input[name="r4Responsibilities"]:checked').forEach(function (cb) {
+        checkedResponsibilities.push(cb.value);
+      });
+
+      var r4Exp = form.querySelector('input[name="r4Experience"]:checked');
+
+      return {
+        playerName: document.getElementById('r4-player-name').value.trim(),
+        playerId: document.getElementById('r4-player-id').value.trim(),
+        onlineHours: document.getElementById('r4-online-hours').value.trim(),
+        onlineTimes: document.getElementById('r4-online-times').value.trim(),
+        hasR4Experience: r4Exp ? r4Exp.value : '',
+        responsibilities: checkedResponsibilities.join(', '),
+        interestArea: document.getElementById('r4-interest-area').value,
+        playDuration: document.getElementById('r4-play-duration').value.trim(),
+        previousServers: document.getElementById('r4-previous-servers').value.trim(),
+        submittedAt: new Date().toISOString()
+      };
+    }
+
+    function validatePayload(data) {
+      if (!data.playerName) return 'Player Name / Nickname is required.';
+      if (!data.playerId) return 'Player ID is required.';
+      if (!data.onlineHours) return 'Daily online hours are required.';
+      if (!data.onlineTimes) return 'Usual online times are required.';
+      if (!data.hasR4Experience) return 'Please select whether you have R4 experience.';
+      if (!data.interestArea) return 'Please select your preferred R4 management area.';
+      if (!data.playDuration) return 'Game play duration is required.';
+      if (!data.previousServers) return 'Previous servers list is required.';
+      return null;
+    }
+
+    function showSuccess() {
+      formSection.classList.add('hidden');
+      successOverlay.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    async function submitApplication(payload) {
+      return fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
       });
     }
 
-    // Запускается сразу при загрузке страницы
-    document.addEventListener('DOMContentLoaded', () => {
-      // Достаем язык из localStorage. Если пусто, по умолчанию ставим 'en'
-      const savedLang = localStorage.getItem('selected_lang') || 'en';
-      
-      // Применяем переводы
-      switchLanguage(savedLang);
-      
-      // Здесь можно добавить логику обработки отправки формы (submit), если нужно
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      hideError();
+
+      const payload = collectPayload();
+      const validationError = validatePayload(payload);
+      if (validationError) {
+        showError(validationError);
+        return;
+      }
+
+      setFormLocked(true);
+
+      try {
+        if (APPS_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+          console.warn('APPS_SCRIPT_URL not configured — simulating transmission for demo.');
+          await new Promise(function (resolve) { setTimeout(resolve, 2000); });
+        } else {
+          await submitApplication(payload);
+        }
+        showSuccess();
+      } catch (err) {
+        console.error('Transmission failed:', err);
+        showError('Transmission failed. Check your connection and try again.');
+        setFormLocked(false);
+      }
     });
-    (function () {
-      'use strict';
-
-      const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz7P25FPuQuGlt-AxB8rlCvAlTfPDxC-QhYolr7w7H19BZcc2hMN07TY8NIdOV3OJkr1Q/exec';
-
-      const form = document.getElementById('migration-form');
-      const formSection = document.getElementById('form-section');
-      const successOverlay = document.getElementById('success-overlay');
-      const transmitBtn = document.getElementById('transmit-btn');
-      const errorEl = document.getElementById('form-error');
-      const formFields = form.querySelectorAll('.form-field, input[name="marchQueues"], input[name="activityWindows"]');
-
-      const SUBMIT_LABEL = 'Transmit Application to High Command';
-      const LOADING_LABEL = 'Transmitting…';
-
-      function showError(message) {
-        errorEl.textContent = message;
-        errorEl.classList.remove('hidden');
-      }
-
-      function hideError() {
-        errorEl.textContent = '';
-        errorEl.classList.add('hidden');
-      }
-
-      function setFormLocked(isLocked) {
-        formFields.forEach(function (field) { field.disabled = isLocked; });
-        transmitBtn.disabled = isLocked;
-        transmitBtn.textContent = isLocked ? LOADING_LABEL : SUBMIT_LABEL;
-      }
-
-      function collectPayload() {
-        var checkedActivities = [];
-        form.querySelectorAll('input[name="activityWindows"]:checked').forEach(function (cb) {
-          checkedActivities.push(cb.value);
-        });
-
-        var selectedMarch = form.querySelector('input[name="marchQueues"]:checked');
-
-        return {
-          playerId: document.getElementById('player-id').value.trim(),
-          characterName: document.getElementById('character-name').value.trim(),
-          lastServer: document.getElementById('last-server').value.trim(),
-          maxPower: document.getElementById('max-power').value.trim(),
-          previousWarMerits: document.getElementById('war-merits').value.trim(),
-          utcOffset: document.getElementById('utc-offset').value,
-          playtime: document.getElementById('playtime').value.trim(),
-          activityWindows: checkedActivities.join(', '),
-          discord: document.getElementById('discord').value.trim(),
-          deadUnits: document.getElementById('dead-units').value.trim(),
-          unitType: document.getElementById('unit-type').value,
-          marchQueues: selectedMarch ? selectedMarch.value : '',
-          decorAttack: document.getElementById('decor-attack').value.trim(),
-          submittedAt: new Date().toISOString(),
-        };
-      }
-
-      function validatePayload(data) {
-        if (!data.playerId) return 'In-game player ID is required.';
-        if (!data.characterName) return 'Character name is required.';
-        if (!data.lastServer) return 'Last server number is required.';
-        if (!data.maxPower) return 'Maximum power is required.';
-        if (data.previousWarMerits === '') return 'Previous season war merits are required.';
-        if (!data.utcOffset) return 'Please select your UTC time offset.';
-        if (!data.playtime) return 'Please enter your daily playtime hours.';
-        if (!data.discord) return 'Discord username is required.';
-        if (!data.deadUnits) return 'Dead units count is required.';
-        if (!data.unitType) return 'Please select your main unit type.';
-        if (!data.marchQueues) return 'Please select your amount of march queues.';
-        if (!data.decorAttack) return 'City decoration attack bonus is required.';
-        return null;
-      }
-
-      function showSuccess() {
-        formSection.classList.add('hidden');
-        successOverlay.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-      }
-
-      async function submitApplication(payload) {
-        return fetch(APPS_SCRIPT_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
-      }
-
-      form.addEventListener('submit', async function (e) {
-        e.preventDefault();
-        hideError();
-
-        const payload = collectPayload();
-        const validationError = validatePayload(payload);
-        if (validationError) {
-          showError(validationError);
-          return;
-        }
-
-        setFormLocked(true);
-
-        try {
-          if (APPS_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
-            console.warn('APPS_SCRIPT_URL not configured — simulating transmission for demo.');
-            await new Promise(function (resolve) { setTimeout(resolve, 2000); });
-          } else {
-            await submitApplication(payload);
-          }
-          showSuccess();
-        } catch (err) {
-          console.error('Transmission failed:', err);
-          showError('Transmission failed. Check your connection and try again.');
-          setFormLocked(false);
-        }
-      });
-    })();
-  </script>
+  })();
+</script>
 </body>
 </html>
