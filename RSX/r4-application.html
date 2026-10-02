@@ -667,28 +667,6 @@ const i18nTokens = {
   }
 };
 
-   <script>
-  function switchLanguage(lang) {
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const token = el.getAttribute('data-i18n');
-      
-      if (i18nTokens[lang] && i18nTokens[lang][token]) {
-        // Если это input или textarea, меняем placeholder. Иначе меняем текст.
-        if (el.hasAttribute('placeholder')) {
-          el.setAttribute('placeholder', i18nTokens[lang][token]);
-        } else {
-          el.innerHTML = i18nTokens[lang][token];
-        }
-      }
-    });
-  }
-
-  // Запускается сразу при загрузке страницы
-  document.addEventListener('DOMContentLoaded', () => {
-    const savedLang = localStorage.getItem('selected_lang') || 'en';
-    switchLanguage(savedLang);
-  });
-
   <script>
   (function () {
     'use strict';
