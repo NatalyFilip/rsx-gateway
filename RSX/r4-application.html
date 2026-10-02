@@ -768,18 +768,6 @@ const i18nTokens = {
           submittedAt: new Date().toISOString()
         };
       }
-
-      function validatePayload(data) {
-                if (!data.playerId) return 'Player ID is required.';
-        if (!data.onlineHours) return 'Daily online hours are required.';
-        if (!data.onlineTimes) return 'Usual online times are required.';
-        if (!data.hasR4Experience) return 'Please select whether you have R4 experience.';
-        if (!data.interestArea) return 'Please select your preferred R4 management area.';
-        if (!data.playDuration) return 'Game play duration is required.';
-        if (!data.previousServers) return 'Previous servers list is required.';
-        return null;
-      }
-
       function showSuccess() {
         const lang = localStorage.getItem('selected_lang') || 'en';
         if (typeof switchLanguage === 'function') {
