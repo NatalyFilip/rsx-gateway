@@ -667,12 +667,35 @@ const i18nTokens = {
   }
 };
 
-  <script>
-  (function () {
-    'use strict';
+ function switchLanguage(lang) {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const token = el.getAttribute('data-i18n');
+        
+        if (i18nTokens[lang] && i18nTokens[lang][token]) {
+          // Если это input, меняем placeholder. Иначе меняем сам текст.
+          if (el.hasAttribute('placeholder')) {
+            el.setAttribute('placeholder', i18nTokens[lang][token]);
+          } else {
+            el.innerHTML = i18nTokens[lang][token];
+          }
+        }
+      });
+    }
 
-    // Новая ссылка на Web App Google Apps Script
-    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbylqhD17WZfQ-0dIznsK7RgRbrWrLz8etZ1S2hId0jWzqMKmVj6qZiadvs-Y-UVwyXr/exec';
+    // Запускается сразу при загрузке страницы
+    document.addEventListener('DOMContentLoaded', () => {
+      // Достаем язык из localStorage. Если пусто, по умолчанию ставим 'en'
+      const savedLang = localStorage.getItem('selected_lang') || 'en';
+      
+      // Применяем переводы
+      switchLanguage(savedLang);
+      
+      // Здесь можно добавить логику обработки отправки формы (submit), если нужно
+    });
+    (function () {
+      'use strict';
+
+      const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbylqhD17WZfQ-0dIznsK7RgRbrWrLz8etZ1S2hId0jWzqMKmVj6qZiadvs-Y-UVwyXr/exec';
 
     document.addEventListener('DOMContentLoaded', function () {
       const form = document.getElementById('r4-form') || document.getElementById('migration-form');
