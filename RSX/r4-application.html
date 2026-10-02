@@ -340,7 +340,7 @@ const i18nTokens = {
     btn_loading: "Transmitting...",
     msg_success_sub: "Secure Uplink Confirmed",
     msg_success_title: "Transmission Successful. Profile Logged. Awaiting Officer Review.",
-    msg_success_desc: "Your application has been received. An RSX officer will contact you via in-game mail or Discord.",
+    msg_success_desc: "Thank you for your application! In case of a positive review, R5 will contact you within 24 hours.",
     btn_success_back: "Return to System"
   },
   ru: {
@@ -386,7 +386,7 @@ const i18nTokens = {
     btn_loading: "Отправка...",
     msg_success_sub: "Связь подтверждена",
     msg_success_title: "Передача успешна. Профиль сохранен. Ожидайте решения.",
-    msg_success_desc: "Ваша заявка принята. Офицер RSX свяжется с вами через внутриигровую почту или Discord.",
+    msg_success_desc: "Спасибо за заявку! В случае положительного рассмотрения в течение 24 часов с вами свяжется R5.",
     btn_success_back: "Вернуться в систему"
   },
   tr: {
@@ -432,7 +432,7 @@ const i18nTokens = {
     btn_loading: "İletiliyor...",
     msg_success_sub: "Güvenli Bağlantı Doğrulandı",
     msg_success_title: "İletim Başarılı. Profil Kaydedildi. Subay İncelemesi Bekleniyor.",
-    msg_success_desc: "Başvurunuz alındı. Bir RSX subayı sizinle oyun içi posta veya Discord üzerinden iletişime geçecektir.",
+    msg_success_desc: "Başvurunuz için teşekkür ederiz! Olumlu değerlendirme durumunda, 24 saat içinde R5 sizinle iletişime geçecektir.",
     btn_success_back: "Sisteme Dön"
   },
   vi: {
@@ -478,7 +478,7 @@ const i18nTokens = {
     btn_loading: "Đang gửi...",
     msg_success_sub: "Xác Nhận Kết Nối",
     msg_success_title: "Gửi Thành Công. Đã Ghi Nhận Hồ Sơ. Đang Chờ Duyệt.",
-    msg_success_desc: "Đơn của bạn đã được nhận. Sĩ quan RSX sẽ liên hệ với bạn qua thư trong game hoặc Discord.",
+    msg_success_desc: "Cảm ơn bạn đã gửi đơn! Trong trường hợp được chấp thuận, R5 sẽ liên hệ với bạn trong vòng 24 giờ.",
     btn_success_back: "Quay Lại Hệ Thống"
   },
   de: {
@@ -524,7 +524,7 @@ const i18nTokens = {
     btn_loading: "Wird übermittelt...",
     msg_success_sub: "Sichere Verbindung bestätigt",
     msg_success_title: "Übermittlung erfolgreich. Profil erfasst. Warten auf Offiziersprüfung.",
-    msg_success_desc: "Ihre Bewerbung ist eingegangen. Ein RSX-Offizier wird Sie per In-Game-Post oder Discord kontaktieren.",
+    msg_success_desc: "Vielen Dank für Ihre Bewerbung! Im Falle einer positiven Prüfung wird sich R5 innerhalb von 24 Stunden mit Ihnen in Verbindung setzen.",
     btn_success_back: "Zurück zum System"
   },
   it: {
@@ -570,7 +570,7 @@ const i18nTokens = {
     btn_loading: "Trasmissione in corso...",
     msg_success_sub: "Connessione Sicura Confermata",
     msg_success_title: "Trasmissione Riuscita. Profilo Registrato. In Attesa di Revisione.",
-    msg_success_desc: "La tua candidatura è stata ricevuta. Un ufficiale RSX ti contatterà via posta di gioco o Discord.",
+    msg_success_desc: "Grazie per la tua candidatura! In caso di valutazione positiva, R5 ti contatterà entro 24 ore.",
     btn_success_back: "Torna al Sistema"
   },
   es: {
@@ -616,7 +616,7 @@ const i18nTokens = {
     btn_loading: "Transmitiendo...",
     msg_success_sub: "Conexión Segura Confirmada",
     msg_success_title: "Transmisión Exitosa. Perfil Registrado. Esperando Revisión.",
-    msg_success_desc: "Su solicitud ha sido recibida. Un oficial de RSX se pondrá en contacto con usted por correo del juego o Discord.",
+    msg_success_desc: "¡Gracias por tu solicitud! En caso de una revisión positiva, R5 se pondrá en contacto contigo en un plazo de 24 horas.",
     btn_success_back: "Volver al Sistema"
   },
   ko: {
@@ -662,7 +662,7 @@ const i18nTokens = {
     btn_loading: "전송 중...",
     msg_success_sub: "보안 업링크 확인됨",
     msg_success_title: "전송 성공. 프로필 기록됨. 장교 검토 대기 중.",
-    msg_success_desc: "신청서가 접수되었습니다. RSX 장교가 게임 내 우편 또는 디스코드를 통해 연락드릴 예정입니다.",
+    msg_success_desc: "신청해 주셔서 감사합니다! 긍정적으로 검토될 경우 24시간 이내에 R5가 연락드릴 예정입니다.",
     btn_success_back: "시스템으로 돌아가기"
   }
 };
@@ -689,26 +689,31 @@ const i18nTokens = {
     switchLanguage(savedLang);
   });
 
+  <script>
   (function () {
     'use strict';
 
-    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbylqhD17WZfQ-0dIznsK7RgRbrWrLz8etZ1S2hId0jWzqMKmVj6qZiadvs-Y-UVwyXr/exec';
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz7P25FPuQuGlt-AxB8rlCvAlTfPDxC-QhYolr7w7H19BZcc2hMN07TY8NIdOV3OJkr1Q/exec';
 
     const form = document.getElementById('r4-form') || document.getElementById('migration-form');
     const formSection = document.getElementById('form-section');
     const successOverlay = document.getElementById('success-overlay');
     const transmitBtn = document.getElementById('transmit-btn');
     const errorEl = document.getElementById('form-error');
-    const formFields = form.querySelectorAll('.form-field, input[name="r4Experience"], input[name="r4Responsibilities"]');
+    const formFields = form.querySelectorAll('.form-field, input[type="radio"], input[type="checkbox"], select, textarea, button');
 
     function showError(message) {
-      errorEl.textContent = message;
-      errorEl.classList.remove('hidden');
+      if (errorEl) {
+        errorEl.textContent = message;
+        errorEl.classList.remove('hidden');
+      }
     }
 
     function hideError() {
-      errorEl.textContent = '';
-      errorEl.classList.add('hidden');
+      if (errorEl) {
+        errorEl.textContent = '';
+        errorEl.classList.add('hidden');
+      }
     }
 
     function getI18nText(key, fallback) {
@@ -716,6 +721,7 @@ const i18nTokens = {
       return (i18nTokens[lang] && i18nTokens[lang][key]) || fallback;
     }
 
+    // Состояние загрузки: блокируем форму и меняем текст на кнопке
     function setFormLocked(isLocked) {
       formFields.forEach(function (field) { field.disabled = isLocked; });
       transmitBtn.disabled = isLocked;
@@ -723,7 +729,14 @@ const i18nTokens = {
       const submitText = getI18nText('btn_submit_r4', 'Submit Application for R4 Officer');
       const loadingText = getI18nText('btn_loading', 'Transmitting…');
       
+      // Меняем текст кнопки на "Отправка..." / "Transmitting..."
       transmitBtn.textContent = isLocked ? loadingText : submitText;
+      
+      if (isLocked) {
+        transmitBtn.classList.add('opacity-75', 'cursor-not-allowed');
+      } else {
+        transmitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+      }
     }
 
     function collectPayload() {
@@ -735,15 +748,15 @@ const i18nTokens = {
       var r4Exp = form.querySelector('input[name="r4Experience"]:checked');
 
       return {
-        playerName: document.getElementById('r4-player-name').value.trim(),
-        playerId: document.getElementById('r4-player-id').value.trim(),
-        onlineHours: document.getElementById('r4-online-hours').value.trim(),
-        onlineTimes: document.getElementById('r4-online-times').value.trim(),
+        playerName: (document.getElementById('r4-player-name')?.value || '').trim(),
+        playerId: (document.getElementById('r4-player-id')?.value || '').trim(),
+        onlineHours: (document.getElementById('r4-online-hours')?.value || '').trim(),
+        onlineTimes: (document.getElementById('r4-online-times')?.value || '').trim(),
         hasR4Experience: r4Exp ? r4Exp.value : '',
         responsibilities: checkedResponsibilities.join(', '),
-        interestArea: document.getElementById('r4-interest-area').value,
-        playDuration: document.getElementById('r4-play-duration').value.trim(),
-        previousServers: document.getElementById('r4-previous-servers').value.trim(),
+        interestArea: document.getElementById('r4-interest-area')?.value || '',
+        playDuration: (document.getElementById('r4-play-duration')?.value || '').trim(),
+        previousServers: (document.getElementById('r4-previous-servers')?.value || '').trim(),
         submittedAt: new Date().toISOString()
       };
     }
@@ -760,9 +773,19 @@ const i18nTokens = {
       return null;
     }
 
+    // Показываем всплывающее окно успеха с переведенным текстом
     function showSuccess() {
-      formSection.classList.add('hidden');
-      successOverlay.classList.remove('hidden');
+      // Принудительно обновляем переводы в модальном окне перед показом
+      const lang = localStorage.getItem('selected_lang') || 'en';
+      if (typeof switchLanguage === 'function') {
+        switchLanguage(lang);
+      }
+
+      if (formSection) formSection.classList.add('hidden');
+      if (successOverlay) {
+        successOverlay.classList.remove('hidden');
+        successOverlay.classList.add('flex'); // Показываем флекс-контейнер модалки
+      }
       document.body.style.overflow = 'hidden';
     }
 
@@ -786,15 +809,18 @@ const i18nTokens = {
         return;
       }
 
+      // 1. Включаем загрузку
       setFormLocked(true);
 
       try {
-        if (APPS_SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbylqhD17WZfQ-0dIznsK7RgRbrWrLz8etZ1S2hId0jWzqMKmVj6qZiadvs-Y-UVwyXr/exec') {
-          console.warn('APPS_SCRIPT_URL not configured — simulating transmission for demo.');
+        if (APPS_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+          // Имитация задержки сети (2 секунды) для демонстрации
           await new Promise(function (resolve) { setTimeout(resolve, 2000); });
         } else {
           await submitApplication(payload);
         }
+        
+        // 2. Показываем окно успеха
         showSuccess();
       } catch (err) {
         console.error('Transmission failed:', err);
