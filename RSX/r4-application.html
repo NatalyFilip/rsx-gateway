@@ -770,8 +770,7 @@ const i18nTokens = {
       }
 
       function validatePayload(data) {
-        if (!data.playerName) return 'Player Name / Nickname is required.';
-        if (!data.playerId) return 'Player ID is required.';
+                if (!data.playerId) return 'Player ID is required.';
         if (!data.onlineHours) return 'Daily online hours are required.';
         if (!data.onlineTimes) return 'Usual online times are required.';
         if (!data.hasR4Experience) return 'Please select whether you have R4 experience.';
