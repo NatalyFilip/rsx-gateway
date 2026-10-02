@@ -28,7 +28,7 @@
       position: relative;
     }
 
-    /* Верхняя панель переключения языков */
+    /* Переключатель языков в правом верхнем углу */
     .top-bar {
       position: absolute;
       top: 20px;
@@ -99,11 +99,11 @@
       }
     }
 
-    /* Прямоугольная плашка (карточка) */
+    /* Карточка плашки */
     .center-card {
       position: relative;
-      background: rgba(18, 16, 31, 0.85);
-      border: 1px solid rgba(224, 169, 56, 0.25);
+      background: rgba(18, 16, 31, 0.7);
+      border: 1px solid rgba(224, 169, 56, 0.3);
       border-radius: 14px;
       padding: 30px 24px;
       min-height: 280px;
@@ -112,12 +112,12 @@
       justify-content: space-between;
       overflow: hidden;
       cursor: pointer;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(8px);
       transition: all 0.35s ease;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
     }
 
-    /* Фоновое изображение плашки */
+    /* Фоновое изображение плашки — прозрачность увеличена (стала ярче) */
     .card-bg-image {
       position: absolute;
       top: 0;
@@ -125,23 +125,25 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.15;
+      opacity: 0.55; /* Увеличено с 0.15 до 0.55 */
       pointer-events: none;
       transition: opacity 0.4s ease, transform 0.4s ease;
       z-index: 1;
     }
 
+    /* Оверлей затемнения стал более прозрачным */
     .card-overlay {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(180deg, rgba(18, 16, 31, 0.3) 0%, rgba(18, 16, 31, 0.9) 100%);
+      background: linear-gradient(180deg, rgba(18, 16, 31, 0.15) 0%, rgba(18, 16, 31, 0.75) 100%);
       z-index: 2;
       pointer-events: none;
     }
 
+    /* Контент внутри плашки */
     .card-content {
       position: relative;
       z-index: 3;
@@ -155,6 +157,7 @@
       text-transform: uppercase;
       color: #ff9d00;
       margin-bottom: 10px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
     }
 
     .card-title {
@@ -164,12 +167,14 @@
       color: #ffffff;
       margin-bottom: 12px;
       text-transform: uppercase;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
     }
 
     .card-desc {
       font-size: 0.9rem;
-      color: #a39ebc;
+      color: #d1cde8;
       line-height: 1.5;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
     }
 
     /* Кнопка внизу плашки */
@@ -182,8 +187,8 @@
     .card-btn {
       width: 100%;
       padding: 12px 18px;
-      background: rgba(255, 157, 0, 0.08);
-      border: 1px solid rgba(255, 157, 0, 0.4);
+      background: rgba(11, 10, 18, 0.85);
+      border: 1px solid rgba(255, 157, 0, 0.5);
       border-radius: 8px;
       color: #ffbd59;
       font-weight: 700;
@@ -195,20 +200,20 @@
       justify-content: center;
       gap: 8px;
       transition: all 0.3s ease;
+      backdrop-filter: blur(4px);
     }
 
-    /* ЭФФЕКТ НАВЕДЕНИЯ - Подсветка плашки как кнопки */
+    /* Эффект наведения */
     .center-card:hover {
       transform: translateY(-5px);
       border-color: #ff9d00;
-      background: rgba(28, 24, 48, 0.95);
       box-shadow: 
-        0 0 25px rgba(255, 157, 0, 0.4),
-        inset 0 0 15px rgba(255, 157, 0, 0.15);
+        0 0 30px rgba(255, 157, 0, 0.4),
+        inset 0 0 15px rgba(255, 157, 0, 0.2);
     }
 
     .center-card:hover .card-bg-image {
-      opacity: 0.35;
+      opacity: 0.85; /* Почти полная видимость картинки при наведении */
       transform: scale(1.05);
     }
 
@@ -244,7 +249,7 @@
   <div class="player-center-grid">
 
     <!-- Плашка 1: WAR MERITS -->
-    <div class="center-card" onclick="location.href='#war-merits'">
+    <div class="center-card" onclick="location.href='dashboard.html'">
       <img src="image1.jpg" alt="War Merits" class="card-bg-image">
       <div class="card-overlay"></div>
 
@@ -262,7 +267,7 @@
     </div>
 
     <!-- Плашка 2: R4 APPLICATIONS -->
-    <div class="center-card" onclick="location.href='#r4-applications'">
+    <div class="center-card" onclick="location.href='r4-application.html'">
       <img src="image2.jpg" alt="R4 Applications" class="card-bg-image">
       <div class="card-overlay"></div>
 
@@ -280,14 +285,14 @@
     </div>
 
     <!-- Плашка 3: ROW LEGACY -->
-    <div class="center-card" onclick="location.href='#row-legacy'">
+    <div class="center-card" onclick="location.href='ROW_LEGACY.html'">
       <img src="image3.jpg" alt="ROW Legacy" class="card-bg-image">
       <div class="card-overlay"></div>
 
       <div class="card-content">
         <span class="card-badge" data-i18n="pc_row_badge">Турнир</span>
         <h2 class="card-title" data-i18n="pc_row_title">ROW LEGACY</h2>
-        <p class="card-desc" data-i18n="pc_row_desc">Подайте заявку на участие в ивенте ROW LEGACY. Подтвердите свою готовность к сражениям и внесите вклад в историю союза.</p>
+        <p class="card-desc" data-i18n="pc_row_desc">Подайте заявку на участие в ивенте ROW LEGACY. Подтвердите свою готовность к сражениям.</p>
       </div>
 
       <div class="card-button-wrapper">
@@ -305,104 +310,55 @@
         pc_title: "PLAYER COMMAND CENTER", pc_sub: "RSX Alliance Central Operations & Applications",
         pc_war_badge: "Combat Stats", pc_war_title: "WAR MERITS", pc_war_desc: "Track your progress in war merits, analyze combat records, and view achievements.", pc_war_btn: "View Progress",
         pc_r4_badge: "High Command", pc_r4_title: "R4 APPLICATIONS", pc_r4_desc: "Apply for RSX Officer status. Join the command team to coordinate alliance warfare.", pc_r4_btn: "Apply Now",
-        pc_row_badge: "Tournament Portal", pc_row_title: "ROW LEGACY", pc_row_desc: "Apply to participate in ROW LEGACY. Prove your tactical combat skills.", pc_row_btn: "Join Event",
-
-        lbl_back: "Back to System", title_sub: "Secure Channel", title_main: "Migration Application Terminal", desc_main: "Complete all fields below. Your dossier will be transmitted directly to RSX High Command for officer review.",
-        lbl_1: "1. In-Game Player ID", ph_1: "e.g. 23483165", lbl_2: "2. Character Name / Nickname", ph_2: "Enter your current in-game name", lbl_3: "3. Last Server Number Played On", ph_3: "The most recent server number where you active", lbl_4: "4. Maximum Power Reached", ph_4: "Your peak power stat level", lbl_5: "5. Previous Season War Merits", ph_5: "Total historical combat achievements and war merits", lbl_6: "6. Local Time Zone Difference from UTC", opt_6_def: "Select your UTC time offset...", lbl_7: "7. Estimated Daily Playtime Availability (Hours)", ph_7: "How many hours can you commit to active gameplay per day", lbl_8: "8. Preferred Daily Activity Windows", cb_morn: "Morning", cb_aft: "Afternoon", cb_eve: "Evening", cb_any: "Anytime", lbl_9: "9. Discord Username", ph_9: "e.g. username (Required for coordination)", lbl_10: "10. Dead Units Accumulated", ph_10: "Total number of permanently lost forces", lbl_11: "11. Primary Specialized Unit Type", opt_11_def: "Select your main combat army type...", opt_11_cav: "Cavalry", opt_11_mag: "Mages", opt_11_inf: "Infantry", opt_11_mrk: "Marksmen", lbl_12: "12. Active March Queues Available", lbl_13: "13. City Decoration Attack Bonus (%)", ph_13: "Enter your total city layout decoration offensive bonus percentage",
-        btn_submit: "Transmit Application to High Command", btn_loading: "Transmitting...", msg_success_sub: "Secure Uplink Confirmed", msg_success_title: "Transmission Successful. Profile Logged. Awaiting Officer Review.", 
-        msg_success_desc: "If you don't get a positive answer in 24h, know that our response is negative. Since we get too many applications, there are times when we are unable to get back to players. We are so sorry for this, we hope you will understand.", 
-        btn_success_back: "Return to System"
+        pc_row_badge: "Tournament Portal", pc_row_title: "ROW LEGACY", pc_row_desc: "Apply to participate in ROW LEGACY. Prove your tactical combat skills.", pc_row_btn: "Join Event"
       },
       ru: {
         pc_title: "ЦЕНТР УПРАВЛЕНИЯ ИГРОКА", pc_sub: "Центральный терминал операций и заявок RSX",
         pc_war_badge: "Статистика", pc_war_title: "WAR MERITS", pc_war_desc: "Следите за своим прогрессом в получении боевых заслуг, анализируйте военную активность и проверяйте награды.", pc_war_btn: "Смотреть прогресс",
         pc_r4_badge: "Офицеры", pc_r4_title: "R4 APPLICATIONS", pc_r4_desc: "Подайте заявку на получение звания офицера (R4). Примите участие в управлении альянсом и координации боевых действий.", pc_r4_btn: "Подать заявку",
-        pc_row_badge: "Турнир", pc_row_title: "ROW LEGACY", pc_row_desc: "Подайте заявку на участие в ивенте ROW LEGACY. Подтвердите свою готовность к сражениям.", pc_row_btn: "Участвовать",
-
-        lbl_back: "Вернуться в систему", title_sub: "Защищенный канал", title_main: "Терминал заявки на миграцию", desc_main: "Заполните все поля ниже. Ваше досье будет передано напрямую Командованию RSX.",
-        lbl_1: "1. Внутриигровой ID", ph_1: "напр. 23483165", lbl_2: "2. Имя персонажа / Никнейм", ph_2: "Введите ваше текущее имя в игре", lbl_3: "3. Номер последнего сервера", ph_3: "Последний сервер, на котором вы играли", lbl_4: "4. Максимальная мощь", ph_4: "Ваш максимальный уровень мощи", lbl_5: "5. Военные заслуги за прошлый сезон", ph_5: "Общее количество заслуг (War Merits)", lbl_6: "6. Ваш часовой пояс (от UTC)", opt_6_def: "Выберите смещение от UTC...", lbl_7: "7. Ежедневный онлайн (в часах)", ph_7: "Сколько часов в день вы готовы играть", lbl_8: "8. Предпочтительное время активности", cb_morn: "Утро", cb_aft: "День", cb_eve: "Вечер", cb_any: "Любое", lbl_9: "9. Имя пользователя в Discord", ph_9: "напр. ваш_ник (Обязательно для связи)", lbl_10: "10. Количество мертвых войск", ph_10: "Количество безвозвратно потерянных войск", lbl_11: "11. Основной тип войск", opt_11_def: "Выберите ваш основной тип войск...", opt_11_cav: "Кавалерия", opt_11_mag: "Маги", opt_11_inf: "Пехота", opt_11_mrk: "Стрелки", lbl_12: "12. Количество боевых очередей", lbl_13: "13. Бонус атаки от декораций (%)", ph_13: "Введите процент бонуса атаки",
-        btn_submit: "Отправить заявку в Командование", btn_loading: "Отправка...", msg_success_sub: "Связь подтверждена", msg_success_title: "Передача успешна. Профиль сохранен. Ожидайте решения.", 
-        msg_success_desc: "Если вы не получите положительный ответ в течение 24 часов, значит заявка отклонена. Из-за большого количества заявок мы не всегда успеваем ответить каждому игроку. Приносим извинения и надеемся на понимание.", 
-        btn_success_back: "Вернуться в систему"
+        pc_row_badge: "Турнир", pc_row_title: "ROW LEGACY", pc_row_desc: "Подайте заявку на участие в ивенте ROW LEGACY. Подтвердите свою готовность к сражениям.", pc_row_btn: "Участвовать"
       },
       tr: {
         pc_title: "OYUNCU KOMUTA MERKEZİ", pc_sub: "RSX İttifakı Merkezi Operasyonlar ve Başvurular",
         pc_war_badge: "Savaş İstatistikleri", pc_war_title: "WAR MERITS", pc_war_desc: "Savaş liyakatlerindeki ilerlemenizi takip edin, savaş istatistiklerinizi analiz edin.", pc_war_btn: "İlerlemeyi Gör",
         pc_r4_badge: "Yüksek Komuta", pc_r4_title: "R4 APPLICATIONS", pc_r4_desc: "R4 Subay unvanı için başvurun. İttifak yönetimine ve savaş koordinasyonuna katılın.", pc_r4_btn: "Başvuru Yap",
-        pc_row_badge: "Turnuva Portalı", pc_row_title: "ROW LEGACY", pc_row_desc: "ROW LEGACY etkinliğine katılmak için başvurun. Savaş becerilerinizi kanıtlayın.", pc_row_btn: "Katıl",
-
-        lbl_back: "Sisteme Dön", title_sub: "Güvenli Kanal", title_main: "Göç Başvuru Terminali", desc_main: "Aşağıdaki tüm alanları doldurun. Dosyanız subay incelemesi için doğrudan RSX Yüksek Komutanlığına iletilecektir.",
-        lbl_1: "1. Oyun İçi Oyuncu ID'si", ph_1: "örn. 23483165", lbl_2: "2. Karakter Adı / Takma Ad", ph_2: "Mevcut oyun içi adınızı girin", lbl_3: "3. Oynanan Son Sunucu Numarası", ph_3: "Aktif olduğunuz en son sunucu", lbl_4: "4. Ulaşılan Maksimum Güç", ph_4: "En yüksek güç seviyeniz", lbl_5: "5. Önceki Sezon Savaş Liyakatleri", ph_5: "Toplam geçmiş savaş başarıları", lbl_6: "6. UTC'den Yerel Saat Dilimi Farkı", opt_6_def: "UTC saat farkınızı seçin...", lbl_7: "7. Tahmini Günlük Oynama Süresi (Saat)", ph_7: "Günde kaç saat aktif oynayabilirsiniz", lbl_8: "8. Tercih Edilen Günlük Aktivite Saatleri", cb_morn: "Sabah", cb_aft: "Öğleden Sonra", cb_eve: "Akşam", cb_any: "Her Zaman", lbl_9: "9. Discord Kullanıcı Adı", ph_9: "örn. kullanıcı adınız", lbl_10: "10. Biriken Ölü Birimler", ph_10: "Kalıcı olarak kaybedilen kuvvetler", lbl_11: "11. Birincil Uzmanlaşmış Birim Türü", opt_11_def: "Ana savaş ordusu türünüzü seçin...", opt_11_cav: "Süvari", opt_11_mag: "Büyücü", opt_11_inf: "Piyade", opt_11_mrk: "Nişancı", lbl_12: "12. Kullanılabilir Aktif İntikal Kuyrukları", lbl_13: "13. Şehir Dekorasyonu Saldırı Bonusu (%)", ph_13: "Saldırı bonusu yüzdenizi girin",
-        btn_submit: "Başvuruyu İlet", btn_loading: "İletiliyor...", msg_success_sub: "Güvenli Bağlantı", msg_success_title: "İletim Başarılı. İnceleme Bekleniyor.", 
-        msg_success_desc: "24 saat içinde olumlu bir yanıt alamazsanız, başvurunuzun olumsuz değerlendirildiğini bilin. Çok fazla başvuru aldığımız için bazen oyunculara dönüş yapamıyoruz. Bu durum için özür diler, anlayışınızı rica ederiz.", 
-        btn_success_back: "Sisteme Dön"
+        pc_row_badge: "Turnuva Portalı", pc_row_title: "ROW LEGACY", pc_row_desc: "ROW LEGACY etkinliğine katılmak için başvurun. Savaş becerilerinizi kanıtlayın.", pc_row_btn: "Katıl"
       },
       vi: {
         pc_title: "TRẠM CHỈ HUY NGƯỜI CHƠI", pc_sub: "Trung Tâm Vận Hành & Đơn Của Liên Minh RSX",
         pc_war_badge: "Thống Kê Chiến Đấu", pc_war_title: "WAR MERITS", pc_war_desc: "Theo dõi tiến trình công huân chiến đấu, phân tích thành tích và phần thưởng.", pc_war_btn: "Xem Tiến Trình",
         pc_r4_badge: "Bộ Chỉ Huy", pc_r4_title: "R4 APPLICATIONS", pc_r4_desc: "Nộp đơn xin thành sĩ quan R4. Tham gia ban chỉ huy để điều hành liên minh.", pc_r4_btn: "Nộp Đơn",
-        pc_row_badge: "Cổng Giải Đấu", pc_row_title: "ROW LEGACY", pc_row_desc: "Nộp đơn tham gia sự kiện ROW LEGACY. Chứng minh kỹ năng chiến đấu của bạn.", pc_row_btn: "Tham Gia",
-
-        lbl_back: "Quay Lại Hệ Thống", title_sub: "Kênh Bảo Mật", title_main: "Trạm Gửi Đơn Di Cư", desc_main: "Hoàn thành tất cả các trường dưới đây. Hồ sơ của bạn sẽ được gửi đến Bộ Chỉ Huy Tối Cao RSX.",
-        lbl_1: "1. ID Người Chơi Trong Game", ph_1: "vd: 23483165", lbl_2: "2. Tên Nhân Vật / Biệt Danh", ph_2: "Nhập tên trong game của bạn", lbl_3: "3. Số Server Chơi Gần Nhất", ph_3: "Số server gần nhất bạn hoạt động", lbl_4: "4. Sức Mạnh Tối Đa Đạt Được", ph_4: "Mức sức mạnh cao nhất của bạn", lbl_5: "5. Công Huân Mùa Trước", ph_5: "Tổng thành tích chiến đấu", lbl_6: "6. Chênh Lệch Múi Giờ (UTC)", opt_6_def: "Chọn múi giờ UTC của bạn...", lbl_7: "7. Thời Gian Chơi Ước Tính (Giờ)", ph_7: "Bạn có thể chơi bao nhiêu giờ mỗi ngày", lbl_8: "8. Thời Gian Hoạt Động Ưa Thích", cb_morn: "Sáng", cb_aft: "Chiều", cb_eve: "Tối", cb_any: "Bất cứ lúc nào", lbl_9: "9. Tên Discord", ph_9: "vd: username", lbl_10: "10. Số Lính Chết Tích Lũy", ph_10: "Tổng số lính bị mất vĩnh viễn", lbl_11: "11. Loại Lính Chính", opt_11_def: "Chọn loại quân chiến đấu chính...", opt_11_cav: "Kỵ binh", opt_11_mag: "Pháp sư", opt_11_inf: "Bộ binh", opt_11_mrk: "Xạ thủ", lbl_12: "12. Số Đội Hình Tối Đa", lbl_13: "13. Buff Tấn Công Từ Trang Trí (%)", ph_13: "Nhập phần trăm buff tấn công",
-        btn_submit: "Gửi Đơn Lên Bộ Chỉ Huy", btn_loading: "Đang gửi...", msg_success_sub: "Xác Nhận Kết Nối", msg_success_title: "Gửi Thành Công. Đang Chờ Xét Duyệt.", 
-        msg_success_desc: "Nếu không nhận được phản hồi tích cực trong vòng 24 giờ, điều đó có nghĩa là đơn của bạn đã bị từ chối. Do số lượng đơn quá lớn, đôi khi chúng tôi không thể phản hồi hết cho từng người chơi. Chúng tôi rất tiếc và mong bạn thông cảm.", 
-        btn_success_back: "Quay Lại Hệ Thống"
+        pc_row_badge: "Cổng Giải Đấu", pc_row_title: "ROW LEGACY", pc_row_desc: "Nộp đơn tham gia sự kiện ROW LEGACY. Chứng minh kỹ năng chiến đấu của bạn.", pc_row_btn: "Tham Gia"
       },
       de: {
         pc_title: "SPIELER-KOMMANDOZENTRUM", pc_sub: "Zentrale Operationen & Anträge der RSX-Allianz",
         pc_war_badge: "Kampfstatistiken", pc_war_title: "WAR MERITS", pc_war_desc: "Verfolgen Sie Ihren Fortschritt bei den Kriegsverdiensten und analysieren Sie Kampferfolge.", pc_war_btn: "Fortschritt Ansehen",
         pc_r4_badge: "Oberkommando", pc_r4_title: "R4 APPLICATIONS", pc_r4_desc: "Bewerben Sie sich als R4-Offizier. Werden Sie Teil der Allianzführung.", pc_r4_btn: "Jetzt Bewerben",
-        pc_row_badge: "Turnier-Portal", pc_row_title: "ROW LEGACY", pc_row_desc: "Bewerben Sie sich für das ROW LEGACY Event. Beweisen Sie Ihre Kampffähigkeiten.", pc_row_btn: "Teilnehmen",
-
-        lbl_back: "Zurück zum System", title_sub: "Sicherer Kanal", title_main: "Migrationsantrags-Terminal", desc_main: "Füllen Sie alle untenstehenden Felder aus. Ihr Dossier wird an das RSX-Oberkommando weitergeleitet.",
-        lbl_1: "1. In-Game Spieler-ID", ph_1: "z.B. 23483165", lbl_2: "2. Charaktername / Spitzname", ph_2: "Geben Sie Ihren Namen ein", lbl_3: "3. Letzter Server", ph_3: "Ihre aktuellste Servernummer", lbl_4: "4. Maximale Macht", ph_4: "Ihre höchste Machtstufe", lbl_5: "5. Kriegsverdienste", ph_5: "Gesamte Kampferfolge", lbl_6: "6. Zeitzonendifferenz (UTC)", opt_6_def: "Wählen Sie Ihre UTC-Zeit...", lbl_7: "7. Tägliche Spielzeit (Stunden)", ph_7: "Wie viele Stunden pro Tag spielen Sie", lbl_8: "8. Bevorzugte Aktivitätszeit", cb_morn: "Morgen", cb_aft: "Nachmittag", cb_eve: "Abend", cb_any: "Jederzeit", lbl_9: "9. Discord-Benutzername", ph_9: "z.B. benutzername", lbl_10: "10. Tote Einheiten", ph_10: "Dauerhaft verlorene Truppen", lbl_11: "11. Haupttruppentyp", opt_11_def: "Wählen Sie Ihren Truppentyp...", opt_11_cav: "Kavallerie", opt_11_mag: "Magier", opt_11_inf: "Infanterie", opt_11_mrk: "Schützen", lbl_12: "12. Aktive Marsch-Warteschlangen", lbl_13: "13. Stadtdekorations-Bonus (%)", ph_13: "Angriffsbonus eingeben",
-        btn_submit: "Antrag übermitteln", btn_loading: "Wird übermittelt...", msg_success_sub: "Verbindung bestätigt", msg_success_title: "Erfolgreich. Warten auf Überprüfung.", 
-        msg_success_desc: "Wenn Sie innerhalb von 24 Stunden keine positive Antwort erhalten, gilt Ihre Bewerbung als abgelehnt. Aufgrund des hohen Bewerbungsaufkommens können wir leider nicht jedem Antworten. Wir bitten um Entschuldigung und hoffen auf Ihr Verständnis.", 
-        btn_success_back: "Zurück zum System"
+        pc_row_badge: "Turnier-Portal", pc_row_title: "ROW LEGACY", pc_row_desc: "Bewerben Sie sich für das ROW LEGACY Event. Beweisen Sie Ihre Kampffähigkeiten.", pc_row_btn: "Teilnehmen"
       },
       it: {
         pc_title: "CENTRO DI COMANDO GIOCATORE", pc_sub: "Operazioni Centrali e Richieste Alleanza RSX",
         pc_war_badge: "Statistiche", pc_war_title: "WAR MERITS", pc_war_desc: "Segui i tuoi progressi nei meriti di guerra e analizza le tue statistiche di battaglia.", pc_war_btn: "Vedi Progressi",
         pc_r4_badge: "Alto Comando", pc_r4_title: "R4 APPLICATIONS", pc_r4_desc: "Candidati per il grado di Ufficiale R4. Partecipa alla gestione dell'alleanza.", pc_r4_btn: "Invia Candidatura",
-        pc_row_badge: "Portale Torneo", pc_row_title: "ROW LEGACY", pc_row_desc: "Invia richiesta per il torneo ROW LEGACY. Dimostra le tue abilità in battaglia.", pc_row_btn: "Partecipa",
-
-        lbl_back: "Torna al Sistema", title_sub: "Canale Sicuro", title_main: "Terminale di Migrazione", desc_main: "Compila tutti i campi. Il tuo dossier sarà trasmesso all'Alto Comando RSX.",
-        lbl_1: "1. ID Giocatore", ph_1: "es. 23483165", lbl_2: "2. Nome Personaggio", ph_2: "Inserisci il tuo nome in-game", lbl_3: "3. Ultimo Server", ph_3: "Il server più recente", lbl_4: "4. Potere Massimo", ph_4: "Il tuo livello massimo di potere", lbl_5: "5. Meriti di Guerra", ph_5: "Totale dei successi in combattimento", lbl_6: "6. Fuso Orario (UTC)", opt_6_def: "Seleziona il tuo fuso orario...", lbl_7: "7. Tempo di Gioco (Ore)", ph_7: "Quante ore al giorno puoi giocare", lbl_8: "8. Orario Preferito", cb_morn: "Mattina", cb_aft: "Pomeriggio", cb_eve: "Sera", cb_any: "Sempre", lbl_9: "9. Discord Username", ph_9: "es. username", lbl_10: "10. Unità Morte", ph_10: "Forze perse permanentemente", lbl_11: "11. Tipo di Truppa Principale", opt_11_def: "Seleziona il tuo tipo di truppa...", opt_11_cav: "Cavalleria", opt_11_mag: "Maghi", opt_11_inf: "Fanteria", opt_11_mrk: "Tiratori", lbl_12: "12. Code di Marcia", lbl_13: "13. Bonus Decorazione (%)", ph_13: "Inserisci il bonus di attacco",
-        btn_submit: "Trasmetti Richiesta", btn_loading: "Trasmissione...", msg_success_sub: "Connessione Confermata", msg_success_title: "Trasmissione Avvenuta. In Attesa.", 
-        msg_success_desc: "Se non ricevi una risposta positiva entro 24 ore, considera la tua richiesta respinta. A causa dell'elevato numero di candidature, a volte non riusciamo a rispondere a tutti i giocatori. Ci scusiamo per questo e speriamo nella tua comprensione.", 
-        btn_success_back: "Torna al Sistema"
+        pc_row_badge: "Portale Torneo", pc_row_title: "ROW LEGACY", pc_row_desc: "Invia richiesta per il torneo ROW LEGACY. Dimostra le tue abilità in battaglia.", pc_row_btn: "Partecipa"
       },
       es: {
         pc_title: "CENTRO DE MANDO DEL JUGADOR", pc_sub: "Operaciones Centrales y Solicitudes de la Alianza RSX",
         pc_war_badge: "Estadísticas", pc_war_title: "WAR MERITS", pc_war_desc: "Siga su progreso en méritos de guerra y analice sus logros en batalla.", pc_war_btn: "Ver Progreso",
         pc_r4_badge: "Alto Mando", pc_r4_title: "R4 APPLICATIONS", pc_r4_desc: "Solicite el rango de Oficial R4. Únase al equipo de mando de la alianza.", pc_r4_btn: "Enviar Solicitud",
-        pc_row_badge: "Portal de Torneo", pc_row_title: "ROW LEGACY", pc_row_desc: "Solicite participar en el evento ROW LEGACY. Demuestre sus habilidades tácticas.", pc_row_btn: "Participar",
-
-        lbl_back: "Volver al Sistema", title_sub: "Canal Seguro", title_main: "Terminal de Migración", desc_main: "Complete todos los campos a continuación. Su expediente será transmitido al Alto Mando de RSX.",
-        lbl_1: "1. ID de Jugador", ph_1: "ej. 23483165", lbl_2: "2. Nombre del Personaje", ph_2: "Ingrese su nombre en el juego", lbl_3: "3. Último Servidor", ph_3: "El servidor más reciente", lbl_4: "4. Poder Máximo", ph_4: "Su nivel máximo de poder", lbl_5: "5. Méritos de Guerra", ph_5: "Total de logros de combate", lbl_6: "6. Zona Horaria (UTC)", opt_6_def: "Seleccione su zona horaria...", lbl_7: "7. Tiempo de Juego Diario (Horas)", ph_7: "Cuántas horas diarias puede dedicar al juego", lbl_8: "8. Horario Preferido", cb_morn: "Mañana", cb_aft: "Tarde", cb_eve: "Noche", cb_any: "Siempre", lbl_9: "9. Usuario de Discord", ph_9: "ej. username", lbl_10: "10. Unidades Muertas", ph_10: "Fuerzas perdidas permanentemente", lbl_11: "11. Tipo de Tropa Principal", opt_11_def: "Seleccione su tipo de tropa...", opt_11_cav: "Caballería", opt_11_mag: "Magos", opt_11_inf: "Infantería", opt_11_mrk: "Tiradores", lbl_12: "12. Colas de Marcha", lbl_13: "13. Bono de Decoración (%)", ph_13: "Ingrese el bono de ataque",
-        btn_submit: "Transmitir Solicitud", btn_loading: "Transmitiendo...", msg_success_sub: "Conexión Confirmada", msg_success_title: "Transmisión Exitosa. En Espera.", 
-        msg_success_desc: "Si no recibe una respuesta positiva en 24 horas, considere que su solicitud ha sido rechazada. Debido al alto volumen de solicitudes, a veces no podemos responder a todos los jugadores. Pedimos disculpas por esto y esperamos su comprensión.", 
-        btn_success_back: "Volver al Sistema"
+        pc_row_badge: "Portal de Torneo", pc_row_title: "ROW LEGACY", pc_row_desc: "Solicite participar en el evento ROW LEGACY. Demuestre sus habilidades tácticas.", pc_row_btn: "Participar"
       },
       ko: {
         pc_title: "플레이어 커맨드 센터", pc_sub: "RSX 연맹 중앙 작전 및 신청 터미널",
         pc_war_badge: "전투 통계", pc_war_title: "WAR MERITS", pc_war_desc: "전쟁 공로 진행 상황을 추적하고 전투 기록을 분석하세요.", pc_war_btn: "진행 상황 보기",
         pc_r4_badge: "최고 사령부", pc_r4_title: "R4 APPLICATIONS", pc_r4_desc: "R4 장교 직위에 신청하세요. 연맹 지휘팀에 합류하세요.", pc_r4_btn: "신청하기",
-        pc_row_badge: "토너먼트 포털", pc_row_title: "ROW LEGACY", pc_row_desc: "ROW LEGACY 이벤트 참여를 신청하세요. 전투 능력을 증명하세요.", pc_row_btn: "참여하기",
-
-        lbl_back: "시스템으로 돌아가기", title_sub: "보안 채널", title_main: "이주 신청 터미널", desc_main: "아래 모든 필드를 작성하십시오. 귀하의 서류는 RSX 최고 사령부로 직접 전송됩니다.",
-        lbl_1: "1. 게임 내 플레이어 ID", ph_1: "예: 23483165", lbl_2: "2. 캐릭터 이름 / 닉네임", ph_2: "현재 게임 내 이름을 입력하세요", lbl_3: "3. 마지막으로 플레이한 서버", ph_3: "가장 최근에 활동한 서버 번호", lbl_4: "4. 도달한 최대 전투력", ph_4: "최대 전투력 레벨", lbl_5: "5. 이전 시즌 전쟁 공로", ph_5: "총 전투 업적 및 전쟁 공로", lbl_6: "6. UTC 기준 시간대 차이", opt_6_def: "UTC 시간대를 선택하세요...", lbl_7: "7. 예상 일일 플레이 시간(시간)", ph_7: "하루에 몇 시간 플레이할 수 있습니까", lbl_8: "8. 선호하는 활동 시간", cb_morn: "아침", cb_aft: "오후", cb_eve: "저녁", cb_any: "언제든지", lbl_9: "9. Discord 사용자 이름", ph_9: "예: username (필수)", lbl_10: "10. 누적 사망 유닛", ph_10: "영구적으로 손실된 총 병력", lbl_11: "11. 주력 특수 유닛", opt_11_def: "주력 부대 유형을 선택하세요...", opt_11_cav: "기병", opt_11_mag: "마법사", opt_11_inf: "보병", opt_11_mrk: "사수", lbl_12: "12. 사용 가능한 활성 부대 대기열", lbl_13: "13. 도시 장식 공격력 보너스 (%)", ph_13: "도시 장식 공격력 보너스 비율 입력",
-        btn_submit: "최고 사령부에 신청서 전송", btn_loading: "전송 중...", msg_success_sub: "보안 업링크 확인됨", msg_success_title: "전송 성공. 프로필 기록됨. 대기 중.", 
-        msg_success_desc: "24시간 이내에 긍정적인 답변을 받지 못하시면 신청이 거절된 것으로 간주해 주시기 바랍니다. 신청서가 너무 많이 접수되어 모든 플레이어에게 답신을 드리지 못하는 경우가 있습니다. 이 점 양해해 주시기 바라며 죄송합니다.", 
-        btn_success_back: "시스템으로 돌아가기"
+        pc_row_badge: "토너먼트 포털", pc_row_title: "ROW LEGACY", pc_row_desc: "ROW LEGACY 이벤트 참여를 신청하세요. 전투 능력을 증명하세요.", pc_row_btn: "참여하기"
       }
     };
 
     function switchLanguage(lang) {
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const token = el.getAttribute('data-i18n');
-        
         if (i18nTokens[lang] && i18nTokens[lang][token]) {
           if (el.hasAttribute('placeholder')) {
             el.setAttribute('placeholder', i18nTokens[lang][token]);
@@ -418,15 +374,12 @@
       switchLanguage(lang);
     }
 
-    // Автозагрузка выбранного языка
     document.addEventListener('DOMContentLoaded', () => {
       const savedLang = localStorage.getItem('selected_lang') || 'en';
-      
       const langSelect = document.getElementById('langSelect');
       if (langSelect) {
         langSelect.value = savedLang;
       }
-      
       switchLanguage(savedLang);
     });
   </script>
