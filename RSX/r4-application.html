@@ -671,9 +671,9 @@ const i18nTokens = {
   (function () {
     'use strict';
 
-    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz7P25FPuQuGlt-AxB8rlCvAlTfPDxC-QhYolr7w7H19BZcc2hMN07TY8NIdOV3OJkr1Q/exec';
+    // Новая ссылка на Web App Google Apps Script
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbylqhD17WZfQ-0dIznsK7RgRbrWrLz8etZ1S2hId0jWzqMKmVj6qZiadvs-Y-UVwyXr/exec';
 
-    // Ожидаем полной загрузки DOM-дерева
     document.addEventListener('DOMContentLoaded', function () {
       const form = document.getElementById('r4-form') || document.getElementById('migration-form');
       const formSection = document.getElementById('form-section');
@@ -682,7 +682,7 @@ const i18nTokens = {
       const errorEl = document.getElementById('form-error');
 
       if (!form) {
-        console.error('Ошибка: форма r4-form или migration-form не найдена в DOM!');
+        console.error('Форма R4 не найдена на странице.');
         return;
       }
 
@@ -706,16 +706,16 @@ const i18nTokens = {
       }
 
       function setFormLocked(isLocked) {
-        const formFields = form.querySelectorAll('input, select, textarea, button');
-        formFields.forEach(function (field) { field.disabled = isLocked; });
-        
+        const fields = form.querySelectorAll('input, select, textarea, button');
+        fields.forEach(function (field) { field.disabled = isLocked; });
+
         if (transmitBtn) {
           transmitBtn.disabled = isLocked;
           const submitText = getI18nText('btn_submit_r4', 'Submit Application for R4 Officer');
           const loadingText = getI18nText('btn_loading', 'Transmitting…');
           
           transmitBtn.textContent = isLocked ? loadingText : submitText;
-          
+
           if (isLocked) {
             transmitBtn.classList.add('opacity-75', 'cursor-not-allowed');
           } else {
@@ -773,7 +773,7 @@ const i18nTokens = {
       }
 
       async function submitApplication(payload) {
-        // Для no-cors отправляем text/plain, чтобы избежать блокировки CORS браузером
+        // Для no-cors пересылаем text/plain, чтобы браузер не блокировал запрос из-за CORS
         return fetch(APPS_SCRIPT_URL, {
           method: 'POST',
           mode: 'no-cors',
